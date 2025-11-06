@@ -62,8 +62,21 @@ export function formatDate(date: Date): string {
  * @returns True if valid
  */
 export function isValidDate(dateString: string): boolean {
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/
+  if (!dateRegex.test(dateString)) {
+    return false
+  }
+  
   const date = new Date(dateString)
-  return !Number.isNaN(date.getTime())
+  if (Number.isNaN(date.getTime())) {
+    return false
+  }
+  
+  // Verify the date components match the input (no rollover)
+  const [year, month, day] = dateString.split('-').map(Number)
+  return date.getFullYear() === year && 
+         date.getMonth() === month - 1 && 
+         date.getUTCDate() === day
 }
 
 /**
