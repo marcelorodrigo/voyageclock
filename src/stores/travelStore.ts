@@ -37,7 +37,17 @@ export const useTravelStore = defineStore('travel', () => {
     if (!formData.value.homeTimezone || !formData.value.destinationTimezone) {
       return 0
     }
-    return calculateTimezoneOffset(formData.value.homeTimezone, formData.value.destinationTimezone)
+    let departureDateTime: Date
+    if (formData.value.departureDate && formData.value.departureTime) {
+      try {
+        departureDateTime = new Date(`${formData.value.departureDate}T${formData.value.departureTime}`)
+      } catch {
+        departureDateTime = new Date()
+      }
+    } else {
+      departureDateTime = new Date()
+    }
+    return calculateTimezoneOffset(formData.value.homeTimezone, formData.value.destinationTimezone, departureDateTime)
   })
 
   const travelDirection = computed(() => {
