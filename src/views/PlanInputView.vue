@@ -9,5 +9,3 @@
 <script setup lang="ts">
 import TravelInputForm from '@/components/forms/TravelInputForm.vue'
 </script>
-
-

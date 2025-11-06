@@ -113,17 +113,19 @@ function handleBlur() {
 .form-input {
   width: 100%;
   padding: 0.5rem 0.75rem; /* px-3 py-2 */
-  border: 1px solid #D1D5DB; /* gray-300 */
+  border: 1px solid #d1d5db; /* gray-300 */
   border-radius: 0.375rem; /* rounded-md */
-  box-shadow: 0 1px 2px rgba(0,0,0,0.03); /* shadow-sm */
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03); /* shadow-sm */
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
   background-color: #ffffff;
 }
 
 .form-input:focus {
   outline: none;
   border-color: #3b82f6; /* blue-500 */
-  box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08);
 }
 
 .form-input-error {
@@ -133,12 +135,12 @@ function handleBlur() {
 .form-error {
   margin-top: 0.5rem;
   font-size: 0.875rem;
-  color: #DC2626; /* red-600 */
+  color: #dc2626; /* red-600 */
 }
 
 .form-help {
   margin-top: 0.5rem;
   font-size: 0.875rem;
-  color: #6B7280; /* gray-500 */
+  color: #6b7280; /* gray-500 */
 }
 </style>

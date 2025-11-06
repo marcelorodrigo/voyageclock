@@ -37,10 +37,7 @@ export const useTravelStore = defineStore('travel', () => {
     if (!formData.value.homeTimezone || !formData.value.destinationTimezone) {
       return 0
     }
-    return calculateTimezoneOffset(
-      formData.value.homeTimezone,
-      formData.value.destinationTimezone,
-    )
+    return calculateTimezoneOffset(formData.value.homeTimezone, formData.value.destinationTimezone)
   })
 
   const travelDirection = computed(() => {
@@ -183,4 +180,3 @@ export const useTravelStore = defineStore('travel', () => {
     markFieldTouched,
   }
 })
-

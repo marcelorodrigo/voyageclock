@@ -117,4 +117,3 @@ export function combineDateTime(dateString: string, timeString: string): Date {
   date.setHours(hours, minutes, 0, 0)
   return date
 }
-

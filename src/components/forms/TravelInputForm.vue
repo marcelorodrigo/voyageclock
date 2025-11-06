@@ -28,7 +28,9 @@
         label="Your Destination"
         :model-value="travelStore.formData.destinationTimezone"
         placeholder="Select your destination timezone"
-        :error="showError('destinationTimezone') ? travelStore.errors.destinationTimezone : undefined"
+        :error="
+          showError('destinationTimezone') ? travelStore.errors.destinationTimezone : undefined
+        "
         help-text="Choose the timezone where you'll be spending most of your time."
         required
         @update:model-value="(value) => travelStore.updateField('destinationTimezone', value)"
@@ -93,9 +95,7 @@
         <p v-if="showError('daysAtDestination')" id="days-error" class="form-error">
           {{ travelStore.errors.daysAtDestination }}
         </p>
-        <p v-else class="form-help">
-          How many days will you spend at your destination?
-        </p>
+        <p v-else class="form-help">How many days will you spend at your destination?</p>
       </div>
     </section>
 
@@ -106,29 +106,22 @@
         :bedtime="travelStore.formData.currentBedtime"
         :wake-time="travelStore.formData.currentWakeTime"
         :bedtime-error="showError('currentBedtime') ? travelStore.errors.currentBedtime : undefined"
-        :wake-time-error="showError('currentWakeTime') ? travelStore.errors.currentWakeTime : undefined"
+        :wake-time-error="
+          showError('currentWakeTime') ? travelStore.errors.currentWakeTime : undefined
+        "
         @update:bedtime="(value) => travelStore.updateField('currentBedtime', value)"
         @update:wake-time="(value) => travelStore.updateField('currentWakeTime', value)"
-        @blur="(field) => travelStore.markFieldTouched(field === 'bedtime' ? 'currentBedtime' : 'currentWakeTime')"
+        @blur="
+          (field) =>
+            travelStore.markFieldTouched(field === 'bedtime' ? 'currentBedtime' : 'currentWakeTime')
+        "
       />
     </section>
 
     <!-- Form Actions -->
     <div class="form-actions">
-      <button
-        type="button"
-        @click="handleReset"
-        class="btn btn-secondary"
-      >
-        Reset Form
-      </button>
-      <button
-        type="submit"
-        class="btn btn-primary"
-        :disabled="!canSubmit"
-      >
-        Generate My Plan
-      </button>
+      <button type="button" @click="handleReset" class="btn btn-secondary">Reset Form</button>
+      <button type="submit" class="btn btn-primary" :disabled="!canSubmit">Generate My Plan</button>
     </div>
   </form>
 </template>
@@ -143,9 +136,12 @@ import SleepScheduleInput from './SleepScheduleInput.vue'
 const travelStore = useTravelStore()
 
 const showTimezoneInfo = computed(() => {
-  return travelStore.formData.homeTimezone &&
-         travelStore.formData.destinationTimezone &&
-         travelStore.formData.homeTimezone !== travelStore.formData.destinationTimezone
+  return (
+    travelStore.formData.homeTimezone &&
+    travelStore.formData.destinationTimezone &&
+    travelStore.formData.homeTimezone !== travelStore.formData.destinationTimezone &&
+    travelStore.timezoneOffset !== 0
+  )
 })
 
 const directionIcon = computed(() => {
@@ -169,10 +165,12 @@ const timeDifferenceText = computed(() => {
 })
 
 const canSubmit = computed(() => {
-  return travelStore.formData.homeTimezone !== '' &&
-         travelStore.formData.destinationTimezone !== '' &&
-         travelStore.formData.departureDate !== '' &&
-         Object.keys(travelStore.errors).length === 0
+  return (
+    travelStore.formData.homeTimezone !== '' &&
+    travelStore.formData.destinationTimezone !== '' &&
+    travelStore.formData.departureDate !== '' &&
+    Object.keys(travelStore.errors).length === 0
+  )
 })
 
 function showError(field: keyof typeof travelStore.formData): boolean {
@@ -226,7 +224,7 @@ function handleReset() {
 .form-subtitle {
   /* text-lg text-gray-600 */
   font-size: 1.125rem; /* 18px */
-  color: #4B5563;
+  color: #4b5563;
 }
 
 .form-section {
@@ -235,8 +233,8 @@ function handleReset() {
   padding: 1.5rem;
   background-color: #ffffff;
   border-radius: 0.5rem;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  border: 1px solid #E5E7EB;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
 }
 
 .section-title {
@@ -267,9 +265,9 @@ function handleReset() {
   align-items: center;
   gap: 0.75rem;
   padding: 1rem;
-  background-color: #EFF6FF; /* blue-50 */
+  background-color: #eff6ff; /* blue-50 */
   border-radius: 0.5rem;
-  border: 1px solid #BFDBFE; /* blue-200 */
+  border: 1px solid #bfdbfe; /* blue-200 */
 }
 
 .info-icon {
@@ -286,7 +284,7 @@ function handleReset() {
   /* text-sm font-medium text-gray-600 */
   font-size: 0.875rem;
   font-weight: 500;
-  color: #4B5563;
+  color: #4b5563;
 }
 
 .info-value {
@@ -314,17 +312,19 @@ function handleReset() {
   /* w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm; focus styles */
   width: 100%;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #D1D5DB; /* gray-300 */
+  border: 1px solid #d1d5db; /* gray-300 */
   border-radius: 0.375rem;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
   background-color: #ffffff;
 }
 
 .form-input:focus {
   outline: none;
   border-color: #3b82f6; /* blue-500 */
-  box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08);
 }
 
 .form-input-error {
@@ -333,21 +333,21 @@ function handleReset() {
 }
 
 .form-input-error:focus {
-  box-shadow: 0 0 0 4px rgba(239,68,68,0.08) !important;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.08) !important;
 }
 
 .form-error {
   /* mt-2 text-sm text-red-600 */
   margin-top: 0.5rem;
   font-size: 0.875rem;
-  color: #DC2626;
+  color: #dc2626;
 }
 
 .form-help {
   /* mt-2 text-sm text-gray-500 */
   margin-top: 0.5rem;
   font-size: 0.875rem;
-  color: #6B7280;
+  color: #6b7280;
 }
 
 .form-actions {
@@ -378,21 +378,21 @@ function handleReset() {
 
 .btn:focus {
   outline: none;
-  box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08);
 }
 
 .btn-primary {
   /* bg-blue-600 text-white hover:bg-blue-700; disabled styles */
-  background-color: #2563EB; /* blue-600 */
+  background-color: #2563eb; /* blue-600 */
   color: #ffffff;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: #1D4ED8; /* blue-700 */
+  background-color: #1d4ed8; /* blue-700 */
 }
 
 .btn-primary:disabled {
-  background-color: #D1D5DB;
+  background-color: #d1d5db;
   cursor: not-allowed;
 }
 
@@ -400,14 +400,14 @@ function handleReset() {
   /* bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 */
   background-color: #ffffff;
   color: #374151;
-  border: 1px solid #D1D5DB;
+  border: 1px solid #d1d5db;
 }
 
 .btn-secondary:hover {
-  background-color: #F9FAFB;
+  background-color: #f9fafb;
 }
 
 .btn-secondary:focus {
-  box-shadow: 0 0 0 4px rgba(107,114,128,0.08);
+  box-shadow: 0 0 0 4px rgba(107, 114, 128, 0.08);
 }
 </style>

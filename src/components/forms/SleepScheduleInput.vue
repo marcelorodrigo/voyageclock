@@ -143,7 +143,7 @@ function handleWakeTimeChange(event: Event) {
 
 .section-description {
   font-size: 0.875rem; /* text-sm */
-  color: #4B5563; /* gray-600 */
+  color: #4b5563; /* gray-600 */
 }
 
 .sleep-inputs {
@@ -173,17 +173,19 @@ function handleWakeTimeChange(event: Event) {
 .form-input {
   width: 100%;
   padding: 0.5rem 0.75rem; /* px-3 py-2 */
-  border: 1px solid #D1D5DB; /* gray-300 */
+  border: 1px solid #d1d5db; /* gray-300 */
   border-radius: 0.375rem; /* rounded-md */
-  box-shadow: 0 1px 2px rgba(0,0,0,0.03); /* shadow-sm */
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03); /* shadow-sm */
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
   background-color: #ffffff;
 }
 
 .form-input:focus {
   outline: none;
   border-color: #3b82f6; /* blue-500 */
-  box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08);
 }
 
 .form-input-error {
@@ -193,14 +195,14 @@ function handleWakeTimeChange(event: Event) {
 .form-error {
   margin-top: 0.5rem;
   font-size: 0.875rem;
-  color: #DC2626; /* red-600 */
+  color: #dc2626; /* red-600 */
 }
 
 .sleep-summary {
   margin-top: 1rem;
   padding: 1rem;
-  background-color: #EFF6FF; /* blue-50 */
-  border: 1px solid #BFDBFE; /* blue-200 */
+  background-color: #eff6ff; /* blue-50 */
+  border: 1px solid #bfdbfe; /* blue-200 */
   border-radius: 0.5rem;
 }
 
@@ -223,7 +225,7 @@ function handleWakeTimeChange(event: Event) {
 .sleep-summary-value {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #1D4ED8; /* blue-700 */
+  color: #1d4ed8; /* blue-700 */
 }
 
 .sleep-warning {

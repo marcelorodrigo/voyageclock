@@ -104,4 +104,3 @@ export interface TimezoneOption {
   offset: number // UTC offset in minutes
   region?: string // Geographic region for grouping
 }
-

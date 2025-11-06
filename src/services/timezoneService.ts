@@ -124,4 +124,3 @@ export function calculateTimezoneOffset(
 export function getTravelDirection(timezoneOffset: number): 'east' | 'west' {
   return timezoneOffset > 0 ? 'east' : 'west'
 }
-
