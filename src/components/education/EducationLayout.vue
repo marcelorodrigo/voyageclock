@@ -46,7 +46,7 @@
         </div>
 
         <!-- Article Content -->
-        <div class="bg-white rounded-xl shadow-md p-6 md:p-10 prose prose-lg max-w-none">
+        <div class="bg-white rounded-xl shadow-md p-6 md:p-10 max-w-none text-gray-700">
           <slot />
         </div>
 
@@ -122,64 +122,3 @@ withDefaults(defineProps<Props>(), {
   relatedTopics: () => [],
 })
 </script>
-
-<style scoped>
-.prose {
-  color: #374151;
-}
-
-.prose h2 {
-  color: #111827;
-  font-size: 1.875rem;
-  font-weight: 700;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-}
-
-.prose h3 {
-  color: #1f2937;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.prose p {
-  margin-bottom: 1.25rem;
-  line-height: 1.75;
-}
-
-.prose ul,
-.prose ol {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  padding-left: 1.5rem;
-}
-
-.prose li {
-  margin-bottom: 0.5rem;
-}
-
-.prose strong {
-  color: #111827;
-  font-weight: 600;
-}
-
-.prose a {
-  color: #2563eb;
-  text-decoration: underline;
-}
-
-.prose a:hover {
-  color: #1d4ed8;
-}
-
-.prose blockquote {
-  border-left: 4px solid #3b82f6;
-  padding-left: 1rem;
-  font-style: italic;
-  color: #4b5563;
-  margin: 1.5rem 0;
-}
-</style>
-
