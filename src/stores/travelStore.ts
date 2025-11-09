@@ -4,13 +4,14 @@
 
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { TravelFormData } from '@/types/travel'
+import type { TravelFormData, TravelPlan } from '@/types/travel'
 import {
   getCurrentTimezone,
   calculateTimezoneOffset,
   getTravelDirection,
 } from '@/services/timezoneService'
 import { calculateSleepDuration, getTodayDate } from '@/services/dateTimeUtils'
+import { generateTravelPlan } from '@/services/jetlagAlgorithm'
 
 export const useTravelStore = defineStore('travel', () => {
   // Form data
@@ -27,6 +28,11 @@ export const useTravelStore = defineStore('travel', () => {
   // Form validation state
   const errors = ref<Partial<Record<keyof TravelFormData, string>>>({})
   const touched = ref<Partial<Record<keyof TravelFormData, boolean>>>({})
+
+  // Generated travel plan
+  const travelPlan = ref<TravelPlan | null>(null)
+  const isGenerating = ref(false)
+  const generationError = ref<string | null>(null)
 
   // Computed values
   const sleepDuration = computed(() => {
@@ -170,11 +176,53 @@ export const useTravelStore = defineStore('travel', () => {
     validateField(field)
   }
 
+  /**
+   * Generate travel plan from form data
+   */
+  async function generatePlan(): Promise<boolean> {
+    // First validate the form
+    if (!validateForm()) {
+      return false
+    }
+
+    isGenerating.value = true
+    generationError.value = null
+
+    try {
+      // Generate the plan using the algorithm
+      const plan = generateTravelPlan(formData.value)
+
+      // Update the plan with actual timezone offset from computed value
+      plan.timezoneOffset = timezoneOffset.value
+      plan.travelDirection = travelDirection.value
+
+      travelPlan.value = plan
+      return true
+    } catch (error) {
+      generationError.value = error instanceof Error ? error.message : 'Failed to generate plan'
+      console.error('Error generating travel plan:', error)
+      return false
+    } finally {
+      isGenerating.value = false
+    }
+  }
+
+  /**
+   * Clear the generated plan
+   */
+  function clearPlan() {
+    travelPlan.value = null
+    generationError.value = null
+  }
+
   return {
     // State
     formData,
     errors,
     touched,
+    travelPlan,
+    isGenerating,
+    generationError,
 
     // Computed
     sleepDuration,
@@ -188,5 +236,7 @@ export const useTravelStore = defineStore('travel', () => {
     validateForm,
     resetForm,
     markFieldTouched,
+    generatePlan,
+    clearPlan,
   }
 })
