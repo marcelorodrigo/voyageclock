@@ -178,4 +178,23 @@
 
 <script setup lang="ts">
 // Home page - landing page for the application
+useSeoMeta({
+  title: 'Voyage Clock - Science-Based Jet Lag Prevention & Travel Planning',
+  description: 'Minimize jet lag with personalized, science-based travel recommendations. Get customized light exposure timing, sleep schedule adjustments, and evidence-based strategies for your trip.',
+  ogTitle: 'Voyage Clock - Beat Jet Lag with Science',
+  ogDescription: 'Get a personalized adaptation plan with light exposure timing, sleep adjustments, and proven strategies to feel your best when traveling across time zones.',
+  ogImage: 'https://voyageclock.com/og/home.png',
+  ogUrl: 'https://voyageclock.com',
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Voyage Clock - Science-Based Jet Lag Prevention',
+  twitterDescription: 'Minimize jet lag with personalized, evidence-based travel recommendations. Get your customized adaptation plan today.',
+  twitterImage: 'https://voyageclock.com/og/home.png',
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: 'https://voyageclock.com' }
+  ]
+})
 </script>

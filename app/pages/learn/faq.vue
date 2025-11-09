@@ -344,17 +344,21 @@ const relatedTopics: RelatedTopic[] = [
   },
 ]
 
-definePageMeta({
-  title: 'Frequently Asked Questions | Voyage Clock',
-  description: 'Quick answers to common questions about jet lag, circadian rhythms, and travel health. Get expert advice for your next trip.',
-  meta: [
-    { name: 'description', content: 'Quick answers to common questions about jet lag, circadian rhythms, and travel health. Get expert advice for your next trip.' },
-    { property: 'og:title', content: 'Frequently Asked Questions | Voyage Clock' },
-    { property: 'og:description', content: 'Quick answers to common questions about jet lag, circadian rhythms, and travel health.' },
-    { property: 'og:type', content: 'article' },
-    { property: 'og:url', content: 'https://voyageclock.com/learn/faq' },
-    { property: 'og:image', content: 'https://voyageclock.com/og/faq.png' }
-  ],
+useSeoMeta({
+  title: 'Jet Lag FAQ - Common Questions Answered | Voyage Clock',
+  description: 'Get answers to frequently asked questions about jet lag, circadian rhythms, and travel health. Learn about eastward vs westward travel, adjustment times, melatonin use, and evidence-based strategies.',
+  ogTitle: 'Frequently Asked Questions About Jet Lag | Voyage Clock',
+  ogDescription: 'Quick answers to common questions about jet lag severity, recovery time, prevention strategies, and circadian rhythm science.',
+  ogImage: 'https://voyageclock.com/og/faq.png',
+  ogUrl: 'https://voyageclock.com/learn/faq',
+  ogType: 'article',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Jet Lag FAQ - Your Questions Answered',
+  twitterDescription: 'Find answers to common jet lag questions about symptoms, recovery, prevention, and travel strategies.',
+  twitterImage: 'https://voyageclock.com/og/faq.png',
+})
+
+useHead({
   link: [
     { rel: 'canonical', href: 'https://voyageclock.com/learn/faq' }
   ]
