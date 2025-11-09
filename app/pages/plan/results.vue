@@ -52,6 +52,24 @@ function goBack() {
 }
 </script>
 
+<script setup>
+definePageMeta({
+  title: 'Your Jet Lag Plan Results | Voyage Clock',
+  description: 'View your personalized jet lag prevention plan, including sleep, light, and nutrition strategies for your trip.',
+  meta: [
+    { name: 'description', content: 'View your personalized jet lag prevention plan, including sleep, light, and nutrition strategies for your trip.' },
+    { property: 'og:title', content: 'Your Jet Lag Plan Results | Voyage Clock' },
+    { property: 'og:description', content: 'View your personalized jet lag prevention plan, including sleep, light, and nutrition strategies for your trip.' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: 'https://voyageclock.com/plan/results' },
+    { property: 'og:image', content: 'https://voyageclock.com/og/results.png' }
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://voyageclock.com/plan/results' }
+  ]
+})
+</script>
+
 <style scoped>
 .loading-container,
 .error-container,
@@ -126,4 +144,3 @@ function goBack() {
   background-color: #1d4ed8;
 }
 </style>
-

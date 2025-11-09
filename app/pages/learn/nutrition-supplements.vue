@@ -449,4 +449,20 @@ const relatedTopics: RelatedTopic[] = [
     description: 'Practical advice for eating and hydrating during your flight',
   },
 ]
+
+definePageMeta({
+  title: 'Nutrition & Supplements | Voyage Clock',
+  description: 'Meal timing, caffeine strategies, melatonin, and nutritional approaches to minimize jet lag. Evidence-based tips for travelers.',
+  meta: [
+    { name: 'description', content: 'Meal timing, caffeine strategies, melatonin, and nutritional approaches to minimize jet lag. Evidence-based tips for travelers.' },
+    { property: 'og:title', content: 'Nutrition & Supplements | Voyage Clock' },
+    { property: 'og:description', content: 'Meal timing, caffeine strategies, melatonin, and nutritional approaches to minimize jet lag.' },
+    { property: 'og:type', content: 'article' },
+    { property: 'og:url', content: 'https://voyageclock.com/learn/nutrition-supplements' },
+    { property: 'og:image', content: 'https://voyageclock.com/og/nutrition.png' }
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://voyageclock.com/learn/nutrition-supplements' }
+  ]
+})
 </script>

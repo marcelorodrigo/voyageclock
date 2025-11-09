@@ -159,4 +159,20 @@ const relatedTopics: RelatedTopic[] = [
     description: 'Learn how to use light strategically to shift your circadian rhythm',
   },
 ]
+
+definePageMeta({
+  title: 'Understanding Circadian Rhythms | Voyage Clock',
+  description: 'Learn how your body’s internal 24-hour clock regulates sleep, alertness, and health. Discover the science of circadian rhythms and their impact on travel.',
+  meta: [
+    { name: 'description', content: 'Learn how your body’s internal 24-hour clock regulates sleep, alertness, and health. Discover the science of circadian rhythms and their impact on travel.' },
+    { property: 'og:title', content: 'Understanding Circadian Rhythms | Voyage Clock' },
+    { property: 'og:description', content: 'Learn how your body’s internal 24-hour clock regulates sleep, alertness, and health.' },
+    { property: 'og:type', content: 'article' },
+    { property: 'og:url', content: 'https://voyageclock.com/learn/circadian-rhythms' },
+    { property: 'og:image', content: 'https://voyageclock.com/og/circadian.png' }
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://voyageclock.com/learn/circadian-rhythms' }
+  ]
+})
 </script>

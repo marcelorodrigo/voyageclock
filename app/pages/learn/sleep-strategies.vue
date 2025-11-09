@@ -305,4 +305,20 @@ const relatedTopics: RelatedTopic[] = [
     description: 'Practical advice for managing sleep during your flight',
   },
 ]
+
+definePageMeta({
+  title: 'Sleep Strategies for Jet Lag Prevention | Voyage Clock',
+  description: 'Optimize your sleep timing and quality before, during, and after travel. Learn effective sleep strategies to prevent jet lag.',
+  meta: [
+    { name: 'description', content: 'Optimize your sleep timing and quality before, during, and after travel. Learn effective sleep strategies to prevent jet lag.' },
+    { property: 'og:title', content: 'Sleep Strategies for Jet Lag Prevention | Voyage Clock' },
+    { property: 'og:description', content: 'Optimize your sleep timing and quality before, during, and after travel.' },
+    { property: 'og:type', content: 'article' },
+    { property: 'og:url', content: 'https://voyageclock.com/learn/sleep-strategies' },
+    { property: 'og:image', content: 'https://voyageclock.com/og/sleep.png' }
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://voyageclock.com/learn/sleep-strategies' }
+  ]
+})
 </script>

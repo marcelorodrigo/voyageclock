@@ -275,5 +275,19 @@
 
 <script setup lang="ts">
 // Education hub page - links to all educational content
+definePageMeta({
+  title: 'Learn About Jet Lag & Circadian Rhythms | Voyage Clock',
+  description: 'Explore educational resources on jet lag, circadian rhythms, and travel health. Start learning with Voyage Clock.',
+  meta: [
+    { name: 'description', content: 'Explore educational resources on jet lag, circadian rhythms, and travel health. Start learning with Voyage Clock.' },
+    { property: 'og:title', content: 'Learn About Jet Lag & Circadian Rhythms | Voyage Clock' },
+    { property: 'og:description', content: 'Explore educational resources on jet lag, circadian rhythms, and travel health.' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: 'https://voyageclock.com/learn/' },
+    { property: 'og:image', content: 'https://voyageclock.com/og/learn.png' }
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://voyageclock.com/learn/' }
+  ]
+})
 </script>
-

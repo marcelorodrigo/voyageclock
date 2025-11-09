@@ -222,4 +222,20 @@ const relatedTopics: RelatedTopic[] = [
     description: 'Discover how to use light to speed up adjustment',
   },
 ]
+
+definePageMeta({
+  title: 'How Jet Lag Works | Voyage Clock',
+  description: 'Understand the science behind jet lag and why traveling across time zones disrupts your body. Learn about symptoms and solutions.',
+  meta: [
+    { name: 'description', content: 'Understand the science behind jet lag and why traveling across time zones disrupts your body. Learn about symptoms and solutions.' },
+    { property: 'og:title', content: 'How Jet Lag Works | Voyage Clock' },
+    { property: 'og:description', content: 'Understand the science behind jet lag and why traveling across time zones disrupts your body.' },
+    { property: 'og:type', content: 'article' },
+    { property: 'og:url', content: 'https://voyageclock.com/learn/how-jet-lag-works' },
+    { property: 'og:image', content: 'https://voyageclock.com/og/jetlag.png' }
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://voyageclock.com/learn/how-jet-lag-works' }
+  ]
+})
 </script>

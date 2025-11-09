@@ -108,4 +108,20 @@ const relatedTopics: RelatedTopic[] = [
     description: 'Meal timing and hydration strategies for travel day',
   },
 ]
+
+definePageMeta({
+  title: 'Travel Day Tips | Voyage Clock',
+  description: 'Practical strategies for managing long flights and minimizing jet lag on your journey. Get expert tips for before, during, and after your travel day.',
+  meta: [
+    { name: 'description', content: 'Practical strategies for managing long flights and minimizing jet lag on your journey. Get expert tips for before, during, and after your travel day.' },
+    { property: 'og:title', content: 'Travel Day Tips | Voyage Clock' },
+    { property: 'og:description', content: 'Practical strategies for managing long flights and minimizing jet lag on your journey.' },
+    { property: 'og:type', content: 'article' },
+    { property: 'og:url', content: 'https://voyageclock.com/learn/travel-day-tips' },
+    { property: 'og:image', content: 'https://voyageclock.com/og/travel-tips.png' }
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://voyageclock.com/learn/travel-day-tips' }
+  ]
+})
 </script>

@@ -343,4 +343,20 @@ const relatedTopics: RelatedTopic[] = [
     description: 'Explore the research behind these recommendations',
   },
 ]
+
+definePageMeta({
+  title: 'Frequently Asked Questions | Voyage Clock',
+  description: 'Quick answers to common questions about jet lag, circadian rhythms, and travel health. Get expert advice for your next trip.',
+  meta: [
+    { name: 'description', content: 'Quick answers to common questions about jet lag, circadian rhythms, and travel health. Get expert advice for your next trip.' },
+    { property: 'og:title', content: 'Frequently Asked Questions | Voyage Clock' },
+    { property: 'og:description', content: 'Quick answers to common questions about jet lag, circadian rhythms, and travel health.' },
+    { property: 'og:type', content: 'article' },
+    { property: 'og:url', content: 'https://voyageclock.com/learn/faq' },
+    { property: 'og:image', content: 'https://voyageclock.com/og/faq.png' }
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://voyageclock.com/learn/faq' }
+  ]
+})
 </script>

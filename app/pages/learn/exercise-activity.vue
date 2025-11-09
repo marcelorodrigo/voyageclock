@@ -376,4 +376,20 @@ const relatedTopics: RelatedTopic[] = [
     description: 'Learn how exercise timing affects sleep quality',
   },
 ]
+
+definePageMeta({
+  title: 'Exercise & Physical Activity | Voyage Clock',
+  description: 'How movement and exercise timing can help shift your circadian rhythm and reduce jet lag. Learn the science and strategies for travelers.',
+  meta: [
+    { name: 'description', content: 'How movement and exercise timing can help shift your circadian rhythm and reduce jet lag. Learn the science and strategies for travelers.' },
+    { property: 'og:title', content: 'Exercise & Physical Activity | Voyage Clock' },
+    { property: 'og:description', content: 'How movement and exercise timing can help shift your circadian rhythm and reduce jet lag.' },
+    { property: 'og:type', content: 'article' },
+    { property: 'og:url', content: 'https://voyageclock.com/learn/exercise-activity' },
+    { property: 'og:image', content: 'https://voyageclock.com/og/exercise.png' }
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://voyageclock.com/learn/exercise-activity' }
+  ]
+})
 </script>

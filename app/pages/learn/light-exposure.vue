@@ -280,4 +280,20 @@ const relatedTopics: RelatedTopic[] = [
     description: 'Combine light with optimal sleep timing for best results',
   },
 ]
+
+definePageMeta({
+  title: 'Light Exposure Science | Voyage Clock',
+  description: 'How to use light—the most powerful circadian tool—to minimize jet lag. Learn about light exposure strategies for travelers.',
+  meta: [
+    { name: 'description', content: 'How to use light—the most powerful circadian tool—to minimize jet lag. Learn about light exposure strategies for travelers.' },
+    { property: 'og:title', content: 'Light Exposure Science | Voyage Clock' },
+    { property: 'og:description', content: 'How to use light—the most powerful circadian tool—to minimize jet lag.' },
+    { property: 'og:type', content: 'article' },
+    { property: 'og:url', content: 'https://voyageclock.com/learn/light-exposure' },
+    { property: 'og:image', content: 'https://voyageclock.com/og/light.png' }
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://voyageclock.com/learn/light-exposure' }
+  ]
+})
 </script>
