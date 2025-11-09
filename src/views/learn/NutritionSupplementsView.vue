@@ -433,8 +433,9 @@
 
 <script setup lang="ts">
 import EducationLayout from '@/components/education/EducationLayout.vue'
+import type { RelatedTopic } from '@/types/relatedTopic'
 
-const relatedTopics = [
+const relatedTopics: RelatedTopic[] = [
   {
     path: '/learn/sleep-strategies',
     icon: '😴',
@@ -449,4 +450,3 @@ const relatedTopics = [
   },
 ]
 </script>
-

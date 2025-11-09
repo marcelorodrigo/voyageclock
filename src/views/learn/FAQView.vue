@@ -327,8 +327,9 @@
 
 <script setup lang="ts">
 import EducationLayout from '@/components/education/EducationLayout.vue'
+import type { RelatedTopic } from '@/types/relatedTopic'
 
-const relatedTopics = [
+const relatedTopics: RelatedTopic[] = [
   {
     path: '/learn/circadian-rhythms',
     icon: '🕐',
@@ -343,4 +344,3 @@ const relatedTopics = [
   },
 ]
 </script>
-
