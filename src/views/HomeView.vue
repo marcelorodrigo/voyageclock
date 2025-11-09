@@ -1,5 +1,31 @@
 <template>
   <div class="min-h-screen bg-blue-50">
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center gap-2 text-xl font-bold text-gray-900">
+            <span class="text-2xl">✈️</span>
+            Voyage Clock
+          </div>
+          <div class="flex items-center gap-4">
+            <router-link
+              to="/learn"
+              class="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+            >
+              Learn
+            </router-link>
+            <router-link
+              to="/plan"
+              class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+            >
+              Start Planning
+            </router-link>
+          </div>
+        </div>
+      </div>
+    </nav>
+
     <!-- Hero Section -->
     <header class="py-16 md:py-24 px-4">
       <div class="max-w-4xl mx-auto text-center">
@@ -16,12 +42,18 @@
           Get a customized adaptation plan that includes light exposure timing, sleep schedule
           adjustments, and evidence-based strategies to help you feel your best when you arrive.
         </p>
-        <div class="flex justify-center">
+        <div class="flex justify-center gap-4 flex-wrap">
           <router-link
             to="/plan"
             class="inline-block px-8 py-4 text-lg bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Start Planning Your Trip
+          </router-link>
+          <router-link
+            to="/learn"
+            class="inline-block px-8 py-4 text-lg bg-white text-blue-600 border-2 border-blue-600 rounded-lg font-medium hover:bg-blue-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            Learn the Science
           </router-link>
         </div>
       </div>
@@ -104,6 +136,25 @@
             Implement the strategies to minimize jet lag and feel great at your destination.
           </p>
         </div>
+      </div>
+    </section>
+
+    <!-- Learn Section -->
+    <section class="py-16 px-4 bg-white border-t border-gray-200">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          Want to Learn the Science?
+        </h2>
+        <p class="text-xl text-gray-600 mb-8">
+          Explore our comprehensive educational resources on circadian rhythms, jet lag, and
+          evidence-based strategies.
+        </p>
+        <router-link
+          to="/learn"
+          class="inline-block px-8 py-4 text-lg bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+        >
+          Explore Educational Content
+        </router-link>
       </div>
     </section>
 

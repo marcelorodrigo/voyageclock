@@ -1,27 +1,46 @@
-# voyageclock
+# Voyage Clock
 
-This template should help get you started developing with Vue 3 in Vite.
+Voyage Clock helps travelers adapt to new time zones with personalized, science-based plans to minimize jet lag and accelerate circadian rhythm adjustment.
 
-## Recommended IDE Setup
+## Features
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- **Personalized Jet Lag Plans**: Enter your travel details and usual sleep schedule to receive a tailored adaptation plan.
+- **Smart Recommendations**: Get daily guidance on light exposure, sleep timing, exercise, caffeine, and melatonin use, based on circadian science.
+- **Visual Timelines**: See your adaptation plan as an intuitive, color-coded timeline for each phase of your journey (pre-travel, travel day, post-arrival).
+- **Travel Direction Awareness**: Recommendations adapt to eastward or westward travel for optimal adjustment.
+- **Responsive & Mobile-Friendly**: Access your plan on any device, with print-friendly options for on-the-go reference.
+- **Educational Content**: Learn about circadian rhythms, jet lag, and the science behind each recommendation (coming soon).
 
-## Recommended Browser Setup
+## How It Works
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+1. **Input Your Trip**: Select your home and destination time zones, departure date/time, and usual sleep schedule.
+2. **Get Your Plan**: Instantly receive a step-by-step adaptation schedule, including when to seek or avoid light, adjust sleep, exercise, and more.
+3. **Follow Daily Guidance**: Use the timeline and daily cards to stay on track before, during, and after your trip.
 
-## Type Support for `.vue` Imports in TS
+## Who Is It For?
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- **Business travelers**: Be productive right after arrival.
+- **Vacationers**: Maximize your time and energy on holiday.
+- **Frequent flyers**: Quickly generate plans for recurring routes.
+- **Health-conscious travelers**: Trust evidence-based advice.
+- **Mobile users**: Access your plan anywhere, anytime.
+- **People with sleep issues**: Customize recommendations for your needs.
 
-## Customize configuration
+## Example Recommendations
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- Gradually shift your sleep schedule before departure
+- Seek morning or evening light depending on travel direction
+- Adjust caffeine and melatonin timing
+- In-flight sleep and meal strategies
+- Post-arrival light exposure and activity tips
+
+## Technical Details
+
+**Frontend**: Vue 3 (Composition API), TypeScript, Pinia, Vue Router, TailwindCSS, Vite
+
+**Testing**: Vitest (unit), Playwright (e2e)
+
+---
 
 ## Project Setup
 
@@ -71,3 +90,4 @@ pnpm test:e2e --debug
 ```sh
 pnpm lint
 ```
+
