@@ -175,9 +175,9 @@ const allDays = computed<DayData[]>(() => {
   const days: DayData[] = []
 
   // Pre-travel days
-  props.plan.preTravel.forEach((rec) => {
+  for (const rec of props.plan.preTravel) {
     days.push(buildDayData(rec, 'pre-travel'))
-  })
+  }
 
   // Travel day
   const travelDayData: DayData = {
@@ -194,9 +194,9 @@ const allDays = computed<DayData[]>(() => {
   days.push(travelDayData)
 
   // Post-arrival days
-  props.plan.postArrival.forEach((rec) => {
+  for (const rec of props.plan.postArrival) {
     days.push(buildDayData(rec, 'post-arrival'))
-  })
+  }
 
   return days
 })
@@ -280,7 +280,7 @@ function formatDayHeader(day: DayData): string {
 function getDayLabel(day: DayData): string {
   if (day.phase === 'travel') return 'Travel Day'
   if (day.phase === 'pre-travel' && day.recommendation) {
-    return `Day ${day.recommendation.dayNumber}`
+    return `Day ${day.recommendation.dayNumber} before trip`
   }
   if (day.phase === 'post-arrival' && day.recommendation) {
     return `Day ${day.recommendation.dayNumber}`
@@ -304,7 +304,7 @@ function getBlockStyle(block: TimeBlock): Record<string, string> {
   const start = parseTime(block.start)
   const end = parseTime(block.end)
 
-  let startMinutes = start.hours * 60 + start.minutes
+  const startMinutes = start.hours * 60 + start.minutes
   let endMinutes = end.hours * 60 + end.minutes
 
   // Handle overnight blocks
@@ -649,4 +649,3 @@ function parseTime(timeString: string): { hours: number; minutes: number } {
   }
 }
 </style>
-
