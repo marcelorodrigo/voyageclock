@@ -8,35 +8,6 @@
       <p class="timeline-subtitle">Your complete adaptation schedule at a glance</p>
     </div>
 
-    <!-- Timeline Controls -->
-    <div class="timeline-controls">
-      <button
-        v-if="canScrollLeft"
-        @click="scrollLeft"
-        class="scroll-btn scroll-btn-left"
-        aria-label="Scroll left"
-      >
-        ‹
-      </button>
-      <div class="view-selector">
-        <button
-          v-for="view in viewOptions"
-          :key="view.value"
-          @click="currentView = view.value"
-          :class="['view-btn', { active: currentView === view.value }]"
-        >
-          {{ view.label }}
-        </button>
-      </div>
-      <button
-        v-if="canScrollRight"
-        @click="scrollRight"
-        class="scroll-btn scroll-btn-right"
-        aria-label="Scroll right"
-      >
-        ›
-      </button>
-    </div>
 
     <!-- Legend -->
     <div class="timeline-legend">
@@ -47,7 +18,7 @@
     </div>
 
     <!-- Timeline Grid -->
-    <div ref="timelineContainer" class="timeline-container" @scroll="handleScroll">
+    <div class="timeline-container">
       <div class="timeline-grid">
         <!-- Time axis (left column) -->
         <div class="time-axis">
@@ -59,14 +30,14 @@
 
         <!-- Day columns -->
         <div
-          v-for="(day, index) in visibleDays"
+          v-for="day in allDays"
           :key="day.date.toISOString()"
           :class="['day-column', { 'is-today': isToday(day), 'is-travel-day': isTravelDay(day) }]"
         >
           <!-- Day header -->
           <div class="day-header">
             <div class="day-date">{{ formatDayHeader(day) }}</div>
-            <div class="day-label">{{ getDayLabel(day, index) }}</div>
+            <div class="day-label">{{ getDayLabel(day) }}</div>
           </div>
 
           <!-- Activity blocks -->
@@ -158,14 +129,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted, nextTick } from 'vue'
+import { computed } from 'vue'
 import type { TravelPlan, DailyRecommendation } from '@/types/travel'
 
 const props = defineProps<{
   plan: TravelPlan
 }>()
-
-type ViewType = 'all' | 'week' | 'travel'
 
 interface TimeBlock {
   start: string
@@ -189,16 +158,6 @@ interface DayData {
   caffeineCutoffMarkers: TimeMarker[]
 }
 
-const currentView = ref<ViewType>('all')
-const timelineContainer = ref<HTMLElement>()
-const canScrollLeft = ref(false)
-const canScrollRight = ref(false)
-
-const viewOptions = [
-  { value: 'all' as ViewType, label: 'All Days' },
-  { value: 'week' as ViewType, label: 'Week View' },
-  { value: 'travel' as ViewType, label: 'Travel Day' },
-]
 
 const legendItems = [
   { key: 'sleep', label: 'Sleep', color: '#3b82f6' },
@@ -242,21 +201,6 @@ const allDays = computed<DayData[]>(() => {
   return days
 })
 
-// Filter days based on current view
-const visibleDays = computed(() => {
-  if (currentView.value === 'all') {
-    return allDays.value
-  } else if (currentView.value === 'week') {
-    // Show first 7 days
-    return allDays.value.slice(0, 7)
-  } else {
-    // Show travel day and surrounding days
-    const travelIndex = allDays.value.findIndex((d) => d.phase === 'travel')
-    const start = Math.max(0, travelIndex - 1)
-    const end = Math.min(allDays.value.length, travelIndex + 2)
-    return allDays.value.slice(start, end)
-  }
-})
 
 // Check if today is within the plan dates
 const showCurrentTimeIndicator = computed(() => {
@@ -333,7 +277,7 @@ function formatDayHeader(day: DayData): string {
   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
 }
 
-function getDayLabel(day: DayData, index: number): string {
+function getDayLabel(day: DayData): string {
   if (day.phase === 'travel') return 'Travel Day'
   if (day.phase === 'pre-travel' && day.recommendation) {
     return `Day ${day.recommendation.dayNumber}`
@@ -391,31 +335,6 @@ function parseTime(timeString: string): { hours: number; minutes: number } {
   const [hours = 0, minutes = 0] = timeString.split(':').map(Number)
   return { hours, minutes }
 }
-
-function scrollLeft() {
-  if (timelineContainer.value) {
-    timelineContainer.value.scrollBy({ left: -300, behavior: 'smooth' })
-  }
-}
-
-function scrollRight() {
-  if (timelineContainer.value) {
-    timelineContainer.value.scrollBy({ left: 300, behavior: 'smooth' })
-  }
-}
-
-function handleScroll() {
-  if (!timelineContainer.value) return
-  const { scrollLeft, scrollWidth, clientWidth } = timelineContainer.value
-  canScrollLeft.value = scrollLeft > 0
-  canScrollRight.value = scrollLeft < scrollWidth - clientWidth - 10
-}
-
-onMounted(() => {
-  nextTick(() => {
-    handleScroll()
-  })
-})
 </script>
 
 <style scoped>
@@ -450,63 +369,6 @@ onMounted(() => {
   color: #6b7280;
 }
 
-.timeline-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  gap: 1rem;
-}
-
-.view-selector {
-  display: flex;
-  gap: 0.5rem;
-  background-color: #f3f4f6;
-  padding: 0.25rem;
-  border-radius: 0.5rem;
-}
-
-.view-btn {
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  border: none;
-  background-color: transparent;
-  color: #6b7280;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.view-btn:hover {
-  color: #111827;
-}
-
-.view-btn.active {
-  background-color: #ffffff;
-  color: #2563eb;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-.scroll-btn {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  border: 1px solid #d1d5db;
-  background-color: #ffffff;
-  color: #6b7280;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.scroll-btn:hover {
-  background-color: #f3f4f6;
-  border-color: #9ca3af;
-}
 
 .timeline-legend {
   display: flex;
@@ -774,7 +636,6 @@ onMounted(() => {
 }
 
 @media print {
-  .timeline-controls,
   .mobile-hint {
     display: none;
   }
