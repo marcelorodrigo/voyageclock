@@ -93,7 +93,6 @@ export interface TravelFormData {
   destinationTimezone: string
   departureDate: string // ISO date string
   departureTime: string // HH:mm format
-  daysAtDestination: number
   currentBedtime: string // HH:mm format
   currentWakeTime: string // HH:mm format
 }

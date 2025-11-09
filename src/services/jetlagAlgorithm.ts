@@ -22,8 +22,6 @@ import type {
 import { formatTime, parseTime, addDays } from './dateTimeUtils'
 
 // Constants based on circadian rhythm research
-const MAX_SHIFT_PER_DAY = 1.5 // hours - maximum comfortable circadian shift
-const MIN_SHIFT_PER_DAY = 1 // hours - minimum effective shift
 const MAX_PRE_TRAVEL_DAYS = 7 // maximum days to adjust before travel
 const LIGHT_EXPOSURE_DURATION = 2 // hours - recommended bright light exposure
 const LIGHT_AVOIDANCE_DURATION = 3 // hours - critical light avoidance period
@@ -31,13 +29,12 @@ const MELATONIN_THRESHOLD = 3 // hours - timezone difference to recommend melato
 
 /**
  * Generate a complete travel plan with recommendations
+ * Note: timezoneOffset should be set by the caller after generation
  */
-export function generateTravelPlan(formData: TravelFormData): TravelPlan {
+export function generateTravelPlan(formData: TravelFormData, timezoneOffset: number = 0): TravelPlan {
   const departureDateTime = new Date(`${formData.departureDate}T${formData.departureTime}`)
-  const timezoneOffset = 0 // Will be set by the store
   const travelDirection = getTravelDirection(timezoneOffset)
   const adjustmentDays = calculateAdjustmentDays(Math.abs(timezoneOffset))
-  const shiftRate = calculateShiftRate(Math.abs(timezoneOffset), adjustmentDays)
 
   return {
     id: generatePlanId(),
@@ -59,7 +56,6 @@ export function generateTravelPlan(formData: TravelFormData): TravelPlan {
       departureDateTime,
       timezoneOffset,
       travelDirection,
-      shiftRate,
     ),
     travelDay: generateTravelDayRecommendations(
       departureDateTime,
@@ -70,9 +66,6 @@ export function generateTravelPlan(formData: TravelFormData): TravelPlan {
       formData,
       departureDateTime,
       timezoneOffset,
-      travelDirection,
-      shiftRate,
-      formData.daysAtDestination,
     ),
   }
 }
@@ -92,18 +85,11 @@ function calculateAdjustmentDays(timezoneOffsetHours: number): number {
   if (timezoneOffsetHours <= 2) return 1
   if (timezoneOffsetHours <= 4) return 2
 
-  // For larger differences, use standard rate
-  const days = Math.ceil(timezoneOffsetHours / MAX_SHIFT_PER_DAY)
+  // For larger differences, use standard rate of 1.5 hours per day
+  const days = Math.ceil(timezoneOffsetHours / 1.5)
   return Math.min(days, MAX_PRE_TRAVEL_DAYS)
 }
 
-/**
- * Calculate the rate of shift per day
- */
-function calculateShiftRate(timezoneOffsetHours: number, adjustmentDays: number): number {
-  const rate = timezoneOffsetHours / adjustmentDays
-  return Math.min(Math.max(rate, MIN_SHIFT_PER_DAY), MAX_SHIFT_PER_DAY)
-}
 
 /**
  * Calculate sleep duration in hours
@@ -147,28 +133,50 @@ function generatePreTravelRecommendations(
   departureDate: Date,
   timezoneOffset: number,
   direction: 'east' | 'west',
-  shiftRate: number,
 ): DailyRecommendation[] {
   const recommendations: DailyRecommendation[] = []
-  const preTravelDays = calculateAdjustmentDays(Math.abs(timezoneOffset))
 
   // Only generate pre-travel days if offset is significant (>2 hours)
   if (Math.abs(timezoneOffset) <= 2) {
     return recommendations
   }
 
+  // Calculate how many days are available before departure
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const departure = new Date(departureDate)
+  departure.setHours(0, 0, 0, 0)
+  const daysUntilDeparture = Math.floor((departure.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
+
+  // Don't generate pre-travel recommendations if trip is today
+  if (daysUntilDeparture <= 0) {
+    return recommendations
+  }
+
+  // Calculate optimal number of pre-travel days (max 5 days as per requirements)
+  const idealPreTravelDays = calculateAdjustmentDays(Math.abs(timezoneOffset))
+  const MAX_ALLOWED_PRE_TRAVEL_DAYS = 5
+  const preTravelDays = Math.min(idealPreTravelDays, daysUntilDeparture, MAX_ALLOWED_PRE_TRAVEL_DAYS)
+
+  // Calculate actual shift rate based on available days
+  const totalShiftNeeded = Math.abs(timezoneOffset)
+  const actualShiftRate = preTravelDays > 0 ? totalShiftNeeded / preTravelDays : 0
+
   for (let day = -preTravelDays; day < 0; day++) {
     const currentDate = addDays(departureDate, day)
+    const daysFromStart = preTravelDays + day // 0-indexed from first adjustment day
 
-    // Calculate shifted sleep times
-    const shiftDirection = direction === 'east' ? -shiftRate : shiftRate
+    // Calculate cumulative shift - gradually adjust towards destination time
+    const cumulativeShift = (daysFromStart + 1) * actualShiftRate
+    const shiftDirection = direction === 'east' ? -1 : 1 // East = go to bed earlier (negative), West = later (positive)
+
     const adjustedBedtime = addHoursToTime(
       formData.currentBedtime,
-      shiftDirection * Math.abs(day),
+      shiftDirection * cumulativeShift,
     )
     const adjustedWakeTime = addHoursToTime(
       formData.currentWakeTime,
-      shiftDirection * Math.abs(day),
+      shiftDirection * cumulativeShift,
     )
 
     const recommendation: DailyRecommendation = {
@@ -178,7 +186,7 @@ function generatePreTravelRecommendations(
         bedtime: adjustedBedtime,
         wakeTime: adjustedWakeTime,
         duration: calculateSleepDuration(adjustedBedtime, adjustedWakeTime),
-        notes: generateSleepNotes(day, direction, shiftRate),
+        notes: generateSleepNotes(day, direction, actualShiftRate),
       },
       lightExposure: generateLightExposureWindows(adjustedWakeTime, direction),
       lightAvoidance: generateLightAvoidanceWindows(adjustedBedtime, direction),
@@ -188,7 +196,7 @@ function generatePreTravelRecommendations(
         Math.abs(timezoneOffset) >= MELATONIN_THRESHOLD
           ? generateMelatoninRecommendation(adjustedBedtime)
           : undefined,
-      generalNotes: generatePreTravelNotes(day, direction, Math.abs(timezoneOffset)),
+      generalNotes: generatePreTravelNotes(day, direction),
     }
 
     recommendations.push(recommendation)
@@ -218,58 +226,120 @@ function generateTravelDayRecommendations(
 }
 
 /**
- * Generate post-arrival recommendations (days after arrival)
+ * Generate post-arrival recommendations (day 1 at destination)
+ * Day 1 focuses on resuming normal daily life according to scheduled bedtime parameters
  */
 function generatePostArrivalRecommendations(
   formData: TravelFormData,
   departureDate: Date,
   timezoneOffset: number,
-  direction: 'east' | 'west',
-  shiftRate: number,
-  daysAtDestination: number,
 ): DailyRecommendation[] {
   const recommendations: DailyRecommendation[] = []
-  const postArrivalDays = Math.min(
-    calculateAdjustmentDays(Math.abs(timezoneOffset)),
-    daysAtDestination,
-  )
 
-  // Target sleep times in destination timezone
+  // Only generate Day 1 recommendation
+  const arrivalDate = addDays(departureDate, 1)
+
+  // Use normal sleep schedule at destination
   const targetBedtime = formData.currentBedtime
   const targetWakeTime = formData.currentWakeTime
 
-  for (let day = 1; day <= postArrivalDays; day++) {
-    const currentDate = addDays(departureDate, day)
-
-    // Use destination target sleep times
-    const adjustedBedtime = targetBedtime
-    const adjustedWakeTime = targetWakeTime
-
-    const recommendation: DailyRecommendation = {
-      date: currentDate,
-      dayNumber: day,
-      sleep: {
-        bedtime: adjustedBedtime,
-        wakeTime: adjustedWakeTime,
-        duration: calculateSleepDuration(adjustedBedtime, adjustedWakeTime),
-        notes: generatePostArrivalSleepNotes(day, postArrivalDays),
-      },
-      lightExposure: generateLightExposureWindows(adjustedWakeTime, direction),
-      lightAvoidance: generateLightAvoidanceWindows(adjustedBedtime, direction),
-      exercise: generateExerciseRecommendation(adjustedWakeTime, direction),
-      caffeine: generateCaffeineRecommendation(adjustedBedtime),
-      melatonin:
-        Math.abs(timezoneOffset) >= MELATONIN_THRESHOLD && day <= 3
-          ? generateMelatoninRecommendation(adjustedBedtime)
-          : undefined,
-      meals: generateMealTimingRecommendation(adjustedWakeTime),
-      generalNotes: generatePostArrivalNotes(day, Math.abs(timezoneOffset)),
-    }
-
-    recommendations.push(recommendation)
+  const recommendation: DailyRecommendation = {
+    date: arrivalDate,
+    dayNumber: 1,
+    sleep: {
+      bedtime: targetBedtime,
+      wakeTime: targetWakeTime,
+      duration: calculateSleepDuration(targetBedtime, targetWakeTime),
+      notes: 'First day at destination. Resume your normal sleep schedule according to local time. Avoid naps longer than 20 minutes if needed.',
+    },
+    lightExposure: generateArrivalDayLightExposure(targetWakeTime),
+    lightAvoidance: generateArrivalDayLightAvoidance(targetBedtime),
+    exercise: generateArrivalDayExercise(targetWakeTime),
+    caffeine: generateCaffeineRecommendation(targetBedtime),
+    melatonin:
+      Math.abs(timezoneOffset) >= MELATONIN_THRESHOLD
+        ? generateMelatoninRecommendation(targetBedtime)
+        : undefined,
+    meals: generateMealTimingRecommendation(targetWakeTime),
+    generalNotes: generateArrivalDayNotes(Math.abs(timezoneOffset)),
   }
 
+  recommendations.push(recommendation)
+
   return recommendations
+}
+
+/**
+ * Generate light exposure for arrival day (Day 1)
+ */
+function generateArrivalDayLightExposure(wakeTime: string): TimeWindow[] {
+  const morningStart = addHoursToTime(wakeTime, 0.5)
+  const morningEnd = addHoursToTime(morningStart, 2)
+
+  return [
+    {
+      start: morningStart,
+      end: morningEnd,
+      priority: 'critical',
+      notes: 'Get bright light exposure early in the day. Go outside, open curtains, or spend time in well-lit areas. This helps synchronize your body clock to local time.',
+    },
+  ]
+}
+
+/**
+ * Generate light avoidance for arrival day (Day 1)
+ */
+function generateArrivalDayLightAvoidance(bedtime: string): TimeWindow[] {
+  const avoidanceStart = addHoursToTime(bedtime, -2)
+
+  return [
+    {
+      start: avoidanceStart,
+      end: bedtime,
+      priority: 'recommended',
+      notes: 'Dim lights in the evening, reduce screen brightness, and create a relaxing environment to prepare for sleep at your normal local bedtime.',
+    },
+  ]
+}
+
+/**
+ * Generate exercise recommendation for arrival day (Day 1)
+ */
+function generateArrivalDayExercise(wakeTime: string): DailyRecommendation['exercise'] {
+  const startTime = addHoursToTime(wakeTime, 2)
+  const endTime = addHoursToTime(startTime, 1)
+
+  return {
+    timing: {
+      start: startTime,
+      end: endTime,
+      priority: 'recommended',
+    },
+    intensity: 'moderate',
+    notes: 'Light to moderate exercise helps your body adjust. Take a walk, do some stretching, or engage in gentle activities. Avoid intense exercise if you feel very fatigued.',
+  }
+}
+
+/**
+ * Generate general notes for arrival day (Day 1)
+ */
+function generateArrivalDayNotes(timezoneOffset: number): string[] {
+  const notes: string[] = [
+    'Welcome to your destination! Today is about establishing your normal routine in local time.',
+    'Follow your regular sleep schedule - go to bed and wake up at your usual times (in local time).',
+    'Get outside and stay active during daylight hours to help your body adjust.',
+  ]
+
+  if (timezoneOffset >= 6) {
+    notes.push('Large time difference - you may feel tired, but try to stay awake until your normal bedtime.')
+  }
+
+  notes.push(
+    'Eat meals at normal local times and stay well hydrated.',
+    'If you need a nap, keep it short (20 minutes max) and before 3 PM local time.'
+  )
+
+  return notes
 }
 
 /**
@@ -439,23 +509,10 @@ function generateSleepNotes(dayNumber: number, direction: 'east' | 'west', shift
     return `Final adjustment day. Go to bed ${action} to match your destination schedule.`
   }
 
-  return `Shift your sleep ${shiftRate} hours ${action} than usual. This gradual adjustment reduces jet lag.`
+  const formattedShiftRate = shiftRate.toFixed(1)
+  return `Shift your sleep ${formattedShiftRate} hours ${action} than usual. This gradual adjustment reduces jet lag.`
 }
 
-/**
- * Generate sleep notes for post-arrival days
- */
-function generatePostArrivalSleepNotes(dayNumber: number, totalDays: number): string {
-  if (dayNumber === 1) {
-    return 'First day at destination. Stick to local time even if tired. No naps longer than 20 minutes before 3 PM.'
-  }
-
-  if (dayNumber === totalDays) {
-    return 'Final adjustment day. Your circadian rhythm should be well-aligned with local time now.'
-  }
-
-  return `Day ${dayNumber} of adjustment. Continue following the local schedule. Light naps (20 min) are OK if needed.`
-}
 
 /**
  * Generate general notes for pre-travel phase
@@ -463,7 +520,6 @@ function generatePostArrivalSleepNotes(dayNumber: number, totalDays: number): st
 function generatePreTravelNotes(
   dayNumber: number,
   direction: 'east' | 'west',
-  timezoneOffset: number,
 ): string[] {
   const notes: string[] = []
   const daysUntil = Math.abs(dayNumber)
@@ -487,30 +543,6 @@ function generatePreTravelNotes(
   return notes
 }
 
-/**
- * Generate general notes for post-arrival phase
- */
-function generatePostArrivalNotes(dayNumber: number, timezoneOffset: number): string[] {
-  const notes: string[] = []
-
-  if (dayNumber === 1) {
-    notes.push(
-      'Welcome to your destination! The first 24 hours are crucial for adaptation.',
-      'Get outside during the recommended light exposure times - this is the #1 priority.',
-      'Resist the urge to nap excessively. Power naps (<20 min) are OK if absolutely needed.'
-    )
-  }
-
-  if (timezoneOffset >= 6) {
-    notes.push('Large timezone change - be patient with yourself. Full adaptation takes time.')
-  }
-
-  if (dayNumber <= 3) {
-    notes.push('Stay well hydrated and eat regular meals at local times.')
-  }
-
-  return notes
-}
 
 /**
  * Generate travel day notes
@@ -569,6 +601,6 @@ function generateFlightMealStrategy(): string {
  * Generate a unique plan ID
  */
 function generatePlanId(): string {
-  return `plan-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+  return `plan-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`
 }
 
