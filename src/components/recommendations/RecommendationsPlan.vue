@@ -24,6 +24,9 @@
     <!-- Overview Card -->
     <OverviewCard :plan="plan" />
 
+    <!-- Timeline Visualization -->
+    <TimelineVisualization :plan="plan" />
+
     <!-- Pre-Travel Phase -->
     <section v-if="plan.preTravel.length > 0" class="phase-section">
       <div class="phase-header">
@@ -110,6 +113,7 @@
 </template>
 
 <script setup lang="ts">
+import TimelineVisualization from './TimelineVisualization.vue'
 import { useRouter } from 'vue-router'
 import type { TravelPlan } from '@/types/travel'
 import OverviewCard from './OverviewCard.vue'
