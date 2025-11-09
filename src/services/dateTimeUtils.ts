@@ -66,16 +66,16 @@ export function isValidDate(dateString: string): boolean {
   if (!dateRegex.test(dateString)) {
     return false
   }
-  
+
   const date = new Date(dateString)
   if (Number.isNaN(date.getTime())) {
     return false
   }
-  
+
   // Verify the date components match the input (no rollover)
   const [year, month, day] = dateString.split('-').map(Number)
-  return date.getFullYear() === year && 
-         date.getMonth() === month - 1 && 
+  return date.getFullYear() === year &&
+         date.getMonth() === month - 1 &&
          date.getUTCDate() === day
 }
 
@@ -117,3 +117,31 @@ export function combineDateTime(dateString: string, timeString: string): Date {
   date.setHours(hours, minutes, 0, 0)
   return date
 }
+
+/**
+ * Add days to a date
+ * @param date Base date
+ * @param days Number of days to add (can be negative)
+ * @returns New date with days added
+ */
+export function addDays(date: Date, days: number): Date {
+  const result = new Date(date)
+  result.setDate(result.getDate() + days)
+  return result
+}
+
+/**
+ * Compare two dates (ignoring time)
+ * @param date1 First date
+ * @param date2 Second date
+ * @returns -1 if date1 < date2, 0 if equal, 1 if date1 > date2
+ */
+export function compareDates(date1: Date, date2: Date): number {
+  const d1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate())
+  const d2 = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate())
+
+  if (d1 < d2) return -1
+  if (d1 > d2) return 1
+  return 0
+}
+
