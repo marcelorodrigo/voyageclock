@@ -20,7 +20,6 @@ export const useTravelStore = defineStore('travel', () => {
     destinationTimezone: '',
     departureDate: getTodayDate(),
     departureTime: '09:00',
-    daysAtDestination: 7,
     currentBedtime: '23:00',
     currentWakeTime: '07:00',
   })
@@ -71,7 +70,6 @@ export const useTravelStore = defineStore('travel', () => {
       formData.value.destinationTimezone &&
       formData.value.departureDate &&
       formData.value.departureTime &&
-      formData.value.daysAtDestination > 0 &&
       formData.value.currentBedtime &&
       formData.value.currentWakeTime
     )
@@ -121,13 +119,6 @@ export const useTravelStore = defineStore('travel', () => {
         }
         break
 
-      case 'daysAtDestination':
-        if (!formData.value.daysAtDestination || formData.value.daysAtDestination < 1) {
-          errors.value.daysAtDestination = 'Must be at least 1 day'
-        } else if (formData.value.daysAtDestination > 365) {
-          errors.value.daysAtDestination = 'Cannot exceed 365 days'
-        }
-        break
 
       case 'currentBedtime':
         if (!formData.value.currentBedtime) {
@@ -163,7 +154,6 @@ export const useTravelStore = defineStore('travel', () => {
       destinationTimezone: '',
       departureDate: getTodayDate(),
       departureTime: '09:00',
-      daysAtDestination: 7,
       currentBedtime: '23:00',
       currentWakeTime: '07:00',
     }

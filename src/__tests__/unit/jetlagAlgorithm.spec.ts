@@ -15,7 +15,6 @@ describe('Jet Lag Algorithm', () => {
       destinationTimezone: 'Europe/London',
       departureDate: '2024-01-20',
       departureTime: '18:00',
-      daysAtDestination: 7,
       currentBedtime: '23:00',
       currentWakeTime: '07:00',
     }
@@ -212,20 +211,26 @@ describe('Jet Lag Algorithm', () => {
       expect(firstDay.sleep.wakeTime).toBe(mockFormData.currentWakeTime)
     })
 
-    it('should include melatonin for first 3 days only', () => {
-      mockFormData.daysAtDestination = 10
-
+    it('should only generate Day 1 arrival recommendation', () => {
       const plan = generateTravelPlan(mockFormData, 6) // 6 hour eastward
 
-      // Check first 3 days have melatonin
-      expect(plan.postArrival[0].melatonin).toBeDefined()
-      expect(plan.postArrival[1].melatonin).toBeDefined()
-      expect(plan.postArrival[2].melatonin).toBeDefined()
+      // Should only generate 1 day (Day 1 at destination)
+      expect(plan.postArrival).toHaveLength(1)
+      expect(plan.postArrival[0].dayNumber).toBe(1)
+    })
 
-      // Day 4+ should not have melatonin
-      if (plan.postArrival.length > 3) {
-        expect(plan.postArrival[3].melatonin).toBeUndefined()
-      }
+    it('should include melatonin for large timezone differences', () => {
+      const plan = generateTravelPlan(mockFormData, 6) // 6 hour eastward (>= 3 hour threshold)
+
+      // Day 1 should have melatonin for large timezone differences
+      expect(plan.postArrival[0].melatonin).toBeDefined()
+    })
+
+    it('should not include melatonin for small timezone differences', () => {
+      const plan = generateTravelPlan(mockFormData, 2) // 2 hour eastward (< 3 hour threshold)
+
+      // Day 1 should not have melatonin for small timezone differences
+      expect(plan.postArrival[0].melatonin).toBeUndefined()
     })
   })
 
@@ -279,13 +284,11 @@ describe('Jet Lag Algorithm', () => {
       expect(plan.preTravel).toHaveLength(5)
     })
 
-    it('should handle very short trips', () => {
-      mockFormData.daysAtDestination = 2
-
+    it('should always generate exactly 1 post-arrival day', () => {
       const plan = generateTravelPlan(mockFormData, 6) // 6 hour offset
 
-      // Post-arrival should be limited by trip duration
-      expect(plan.postArrival.length).toBeLessThanOrEqual(2)
+      // Post-arrival should always be exactly 1 day (Day 1 at destination)
+      expect(plan.postArrival).toHaveLength(1)
     })
 
     it('should generate unique plan IDs', () => {

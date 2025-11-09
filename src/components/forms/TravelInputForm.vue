@@ -73,30 +73,6 @@
         @update:time-value="(value) => travelStore.updateField('departureTime', value)"
         @blur="() => travelStore.markFieldTouched('departureDate')"
       />
-
-      <div class="form-field">
-        <label for="days-at-destination" class="form-label">
-          Days at Destination
-          <span class="text-red-500">*</span>
-        </label>
-        <input
-          id="days-at-destination"
-          type="number"
-          min="1"
-          max="365"
-          :value="travelStore.formData.daysAtDestination"
-          @input="handleDaysChange"
-          @blur="() => travelStore.markFieldTouched('daysAtDestination')"
-          class="form-input"
-          :class="{ 'form-input-error': showError('daysAtDestination') }"
-          :aria-describedby="showError('daysAtDestination') ? 'days-error' : undefined"
-          :aria-invalid="showError('daysAtDestination')"
-        />
-        <p v-if="showError('daysAtDestination')" id="days-error" class="form-error">
-          {{ travelStore.errors.daysAtDestination }}
-        </p>
-        <p v-else class="form-help">How many days will you spend at your destination?</p>
-      </div>
     </section>
 
     <!-- Sleep Schedule Section -->
@@ -179,11 +155,6 @@ function showError(field: keyof typeof travelStore.formData): boolean {
   return !!(travelStore.touched[field] && travelStore.errors[field])
 }
 
-function handleDaysChange(event: Event) {
-  const target = event.target as HTMLInputElement
-  const value = Number.parseInt(target.value, 10)
-  travelStore.updateField('daysAtDestination', value || 1)
-}
 
 async function handleSubmit() {
   if (travelStore.validateForm()) {
