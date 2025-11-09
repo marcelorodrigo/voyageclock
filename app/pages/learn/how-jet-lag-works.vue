@@ -228,18 +228,18 @@ useSeoMeta({
   description: 'Understand the science behind jet lag and why traveling across time zones disrupts your body. Learn about symptoms, causes, and why eastward travel is harder than westward.',
   ogTitle: 'How Jet Lag Works - The Science of Time Zone Disruption | Voyage Clock',
   ogDescription: 'Discover why crossing time zones causes circadian misalignment, affects multiple body systems, and why some people experience more severe symptoms.',
-  ogImage: 'https://voyageclock.com/og/jetlag.png',
-  ogUrl: 'https://voyageclock.com/learn/how-jet-lag-works',
+  ogImage: 'https://voyageclock.pages.dev/og/jetlag.png',
+  ogUrl: 'https://voyageclock.pages.dev/learn/how-jet-lag-works',
   ogType: 'article',
   twitterCard: 'summary_large_image',
   twitterTitle: 'How Jet Lag Works - Understanding Time Zone Disruption',
   twitterDescription: 'Learn the science behind jet lag, why it happens, and what factors influence its severity.',
-  twitterImage: 'https://voyageclock.com/og/jetlag.png',
+  twitterImage: 'https://voyageclock.pages.dev/og/jetlag.png',
 })
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.com/learn/how-jet-lag-works' }
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/how-jet-lag-works' }
   ]
 })
 </script>

@@ -114,18 +114,18 @@ useSeoMeta({
   description: 'Get practical strategies for managing long flights and minimizing jet lag on your journey. Learn expert tips for before departure, during flight, and after arrival to optimize your travel experience.',
   ogTitle: 'Travel Day Tips - Managing Long Flights | Voyage Clock',
   ogDescription: 'Master the art of long-haul travel with practical tips for sleep management, hydration, comfort, and arrival strategies.',
-  ogImage: 'https://voyageclock.com/og/travel-tips.png',
-  ogUrl: 'https://voyageclock.com/learn/travel-day-tips',
+  ogImage: 'https://voyageclock.pages.dev/og/travel-tips.png',
+  ogUrl: 'https://voyageclock.pages.dev/learn/travel-day-tips',
   ogType: 'article',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Travel Day Tips for Jet Lag Prevention',
   twitterDescription: 'Practical advice for managing sleep, hydration, and comfort during long flights to minimize jet lag.',
-  twitterImage: 'https://voyageclock.com/og/travel-tips.png',
+  twitterImage: 'https://voyageclock.pages.dev/og/travel-tips.png',
 })
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.com/learn/travel-day-tips' }
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/travel-day-tips' }
   ]
 })
 </script>

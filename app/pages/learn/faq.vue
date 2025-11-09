@@ -349,18 +349,18 @@ useSeoMeta({
   description: 'Get answers to frequently asked questions about jet lag, circadian rhythms, and travel health. Learn about eastward vs westward travel, adjustment times, melatonin use, and evidence-based strategies.',
   ogTitle: 'Frequently Asked Questions About Jet Lag | Voyage Clock',
   ogDescription: 'Quick answers to common questions about jet lag severity, recovery time, prevention strategies, and circadian rhythm science.',
-  ogImage: 'https://voyageclock.com/og/faq.png',
-  ogUrl: 'https://voyageclock.com/learn/faq',
+  ogImage: 'https://voyageclock.pages.dev/og/faq.png',
+  ogUrl: 'https://voyageclock.pages.dev/learn/faq',
   ogType: 'article',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Jet Lag FAQ - Your Questions Answered',
   twitterDescription: 'Find answers to common jet lag questions about symptoms, recovery, prevention, and travel strategies.',
-  twitterImage: 'https://voyageclock.com/og/faq.png',
+  twitterImage: 'https://voyageclock.pages.dev/og/faq.png',
 })
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.com/learn/faq' }
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/faq' }
   ]
 })
 </script>

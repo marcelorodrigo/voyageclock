@@ -382,18 +382,18 @@ useSeoMeta({
   description: 'Learn how exercise timing and physical activity can help shift your circadian rhythm and reduce jet lag. Discover optimal workout timing, intensity levels, and movement strategies for travelers.',
   ogTitle: 'Exercise & Physical Activity - Jet Lag Prevention | Voyage Clock',
   ogDescription: 'Discover how strategic exercise timing can complement light exposure and sleep strategies to accelerate circadian rhythm adjustment.',
-  ogImage: 'https://voyageclock.com/og/exercise.png',
-  ogUrl: 'https://voyageclock.com/learn/exercise-activity',
+  ogImage: 'https://voyageclock.pages.dev/og/exercise.png',
+  ogUrl: 'https://voyageclock.pages.dev/learn/exercise-activity',
   ogType: 'article',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Exercise & Physical Activity for Jet Lag Prevention',
   twitterDescription: 'Learn how exercise timing affects your circadian rhythm and how to use physical activity to minimize jet lag.',
-  twitterImage: 'https://voyageclock.com/og/exercise.png',
+  twitterImage: 'https://voyageclock.pages.dev/og/exercise.png',
 })
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.com/learn/exercise-activity' }
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/exercise-activity' }
   ]
 })
 </script>

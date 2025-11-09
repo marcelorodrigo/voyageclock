@@ -311,18 +311,18 @@ useSeoMeta({
   description: 'Master sleep timing and quality before, during, and after travel. Learn pre-travel adjustment, in-flight sleep tactics, sleep hygiene, napping strategies, and circadian sleep optimization to minimize jet lag.',
   ogTitle: 'Sleep Strategies for Jet Lag Prevention | Voyage Clock',
   ogDescription: 'Optimize your sleep schedule before departure and maintain quality sleep during travel. Learn evidence-based sleep strategies to prevent jet lag.',
-  ogImage: 'https://voyageclock.com/og/sleep.png',
-  ogUrl: 'https://voyageclock.com/learn/sleep-strategies',
+  ogImage: 'https://voyageclock.pages.dev/og/sleep.png',
+  ogUrl: 'https://voyageclock.pages.dev/learn/sleep-strategies',
   ogType: 'article',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Sleep Strategies for Jet Lag Prevention',
   twitterDescription: 'Learn how to adjust your sleep timing before travel and optimize sleep quality during and after your journey.',
-  twitterImage: 'https://voyageclock.com/og/sleep.png',
+  twitterImage: 'https://voyageclock.pages.dev/og/sleep.png',
 })
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.com/learn/sleep-strategies' }
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/sleep-strategies' }
   ]
 })
 </script>

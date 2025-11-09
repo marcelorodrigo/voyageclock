@@ -280,18 +280,18 @@ useSeoMeta({
   description: 'Explore comprehensive, science-based educational resources on jet lag, circadian rhythms, light exposure, sleep strategies, nutrition, and evidence-based travel health strategies.',
   ogTitle: 'Understanding Jet Lag & Circadian Rhythms | Voyage Clock',
   ogDescription: 'Discover the science behind jet lag and learn evidence-based strategies including light exposure, sleep optimization, exercise timing, and nutrition for better travel.',
-  ogImage: 'https://voyageclock.com/og/learn.png',
-  ogUrl: 'https://voyageclock.com/learn/',
+  ogImage: 'https://voyageclock.pages.dev/og/learn.png',
+  ogUrl: 'https://voyageclock.pages.dev/learn/',
   ogType: 'website',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Learn About Jet Lag & Circadian Rhythms',
   twitterDescription: 'Explore science-based educational resources on jet lag prevention and circadian rhythm optimization.',
-  twitterImage: 'https://voyageclock.com/og/learn.png',
+  twitterImage: 'https://voyageclock.pages.dev/og/learn.png',
 })
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.com/learn/' }
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/' }
   ]
 })
 </script>

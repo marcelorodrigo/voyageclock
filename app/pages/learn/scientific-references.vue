@@ -458,18 +458,18 @@ useSeoMeta({
   description: 'Explore peer-reviewed research, sleep medicine guidelines, and circadian rhythm studies that form the foundation of our jet lag prevention recommendations. Evidence-based travel strategies backed by science.',
   ogTitle: 'Scientific References - The Research Behind Our Recommendations | Voyage Clock',
   ogDescription: 'Discover the peer-reviewed studies and circadian rhythm research supporting our evidence-based jet lag prevention strategies.',
-  ogImage: 'https://voyageclock.com/og/references.png',
-  ogUrl: 'https://voyageclock.com/learn/scientific-references',
+  ogImage: 'https://voyageclock.pages.dev/og/references.png',
+  ogUrl: 'https://voyageclock.pages.dev/learn/scientific-references',
   ogType: 'article',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Scientific References for Jet Lag Prevention',
   twitterDescription: 'Explore the peer-reviewed research and sleep science behind evidence-based jet lag prevention strategies.',
-  twitterImage: 'https://voyageclock.com/og/references.png',
+  twitterImage: 'https://voyageclock.pages.dev/og/references.png',
 })
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.com/learn/scientific-references' }
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/scientific-references' }
   ]
 })
 </script>

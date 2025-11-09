@@ -165,18 +165,18 @@ useSeoMeta({
   description: 'Learn how your body internal 24-hour clock regulates sleep, alertness, body temperature, hormones, metabolism, and health. Discover the science of circadian rhythms and how they impact travel and jet lag.',
   ogTitle: 'Understanding Circadian Rhythms | Voyage Clock',
   ogDescription: 'Discover how your body master clock controls sleep-wake patterns, hormone production, metabolism, and more. Learn the science behind circadian rhythms.',
-  ogImage: 'https://voyageclock.com/og/circadian.png',
-  ogUrl: 'https://voyageclock.com/learn/circadian-rhythms',
+  ogImage: 'https://voyageclock.pages.dev/og/circadian.png',
+  ogUrl: 'https://voyageclock.pages.dev/learn/circadian-rhythms',
   ogType: 'article',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Understanding Circadian Rhythms - Your Body\'s Internal Clock',
   twitterDescription: 'Learn how your internal 24-hour clock regulates sleep, hormones, metabolism, and countless biological processes.',
-  twitterImage: 'https://voyageclock.com/og/circadian.png',
+  twitterImage: 'https://voyageclock.pages.dev/og/circadian.png',
 })
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.com/learn/circadian-rhythms' }
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/circadian-rhythms' }
   ]
 })
 </script>
