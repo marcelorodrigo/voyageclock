@@ -57,6 +57,20 @@ export function formatDate(date: Date): string {
 }
 
 /**
+ * Format a date in a readable format (e.g., "Jan 15, 2024")
+ * @param date Date object or date string
+ * @returns Formatted date string
+ */
+export function formatDateReadable(date: Date | string): string {
+  const d = typeof date === 'string' ? new Date(date) : date
+  return d.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  })
+}
+
+/**
  * Check if a date string is valid
  * @param dateString Date string in YYYY-MM-DD format
  * @returns True if valid
@@ -73,7 +87,10 @@ export function isValidDate(dateString: string): boolean {
   }
 
   // Verify the date components match the input (no rollover)
-  const [year, month, day] = dateString.split('-').map(Number)
+  const parts = dateString.split('-').map(Number)
+  const year = parts[0] ?? 0
+  const month = parts[1] ?? 0
+  const day = parts[2] ?? 0
   return date.getFullYear() === year &&
          date.getMonth() === month - 1 &&
          date.getUTCDate() === day

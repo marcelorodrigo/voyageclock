@@ -128,11 +128,13 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { useTravelStore } from '@/stores/travelStore'
 import TimezoneSelector from './TimezoneSelector.vue'
 import DateTimePicker from './DateTimePicker.vue'
 import SleepScheduleInput from './SleepScheduleInput.vue'
 
+const router = useRouter()
 const travelStore = useTravelStore()
 
 const showTimezoneInfo = computed(() => {
@@ -183,10 +185,12 @@ function handleDaysChange(event: Event) {
   travelStore.updateField('daysAtDestination', value || 1)
 }
 
-function handleSubmit() {
+async function handleSubmit() {
   if (travelStore.validateForm()) {
-    // Phase 1.2 will implement the plan generation and results page
-    console.log('Form is valid, ready to generate plan:', travelStore.formData)
+    const success = await travelStore.generatePlan()
+    if (success) {
+      router.push({ name: 'plan-results' })
+    }
   }
 }
 
