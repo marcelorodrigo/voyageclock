@@ -189,12 +189,8 @@ export const useTravelStore = defineStore('travel', () => {
     generationError.value = null
 
     try {
-      // Generate the plan using the algorithm
-      const plan = generateTravelPlan(formData.value)
-
-      // Update the plan with actual timezone offset from computed value
-      plan.timezoneOffset = timezoneOffset.value
-      plan.travelDirection = travelDirection.value
+      // Generate the plan using the algorithm with timezone offset
+      const plan = generateTravelPlan(formData.value, timezoneOffset.value)
 
       travelPlan.value = plan
       return true

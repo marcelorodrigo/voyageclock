@@ -31,10 +31,10 @@ const MELATONIN_THRESHOLD = 3 // hours - timezone difference to recommend melato
 
 /**
  * Generate a complete travel plan with recommendations
+ * Note: timezoneOffset should be set by the caller after generation
  */
-export function generateTravelPlan(formData: TravelFormData): TravelPlan {
+export function generateTravelPlan(formData: TravelFormData, timezoneOffset: number = 0): TravelPlan {
   const departureDateTime = new Date(`${formData.departureDate}T${formData.departureTime}`)
-  const timezoneOffset = 0 // Will be set by the store
   const travelDirection = getTravelDirection(timezoneOffset)
   const adjustmentDays = calculateAdjustmentDays(Math.abs(timezoneOffset))
   const shiftRate = calculateShiftRate(Math.abs(timezoneOffset), adjustmentDays)
@@ -59,7 +59,6 @@ export function generateTravelPlan(formData: TravelFormData): TravelPlan {
       departureDateTime,
       timezoneOffset,
       travelDirection,
-      shiftRate,
     ),
     travelDay: generateTravelDayRecommendations(
       departureDateTime,
@@ -147,28 +146,50 @@ function generatePreTravelRecommendations(
   departureDate: Date,
   timezoneOffset: number,
   direction: 'east' | 'west',
-  shiftRate: number,
 ): DailyRecommendation[] {
   const recommendations: DailyRecommendation[] = []
-  const preTravelDays = calculateAdjustmentDays(Math.abs(timezoneOffset))
 
   // Only generate pre-travel days if offset is significant (>2 hours)
   if (Math.abs(timezoneOffset) <= 2) {
     return recommendations
   }
 
+  // Calculate how many days are available before departure
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const departure = new Date(departureDate)
+  departure.setHours(0, 0, 0, 0)
+  const daysUntilDeparture = Math.floor((departure.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
+
+  // Don't generate pre-travel recommendations if trip is today
+  if (daysUntilDeparture <= 0) {
+    return recommendations
+  }
+
+  // Calculate optimal number of pre-travel days (max 5 days as per requirements)
+  const idealPreTravelDays = calculateAdjustmentDays(Math.abs(timezoneOffset))
+  const MAX_ALLOWED_PRE_TRAVEL_DAYS = 5
+  const preTravelDays = Math.min(idealPreTravelDays, daysUntilDeparture, MAX_ALLOWED_PRE_TRAVEL_DAYS)
+
+  // Calculate actual shift rate based on available days
+  const totalShiftNeeded = Math.abs(timezoneOffset)
+  const actualShiftRate = preTravelDays > 0 ? totalShiftNeeded / preTravelDays : 0
+
   for (let day = -preTravelDays; day < 0; day++) {
     const currentDate = addDays(departureDate, day)
+    const daysFromStart = preTravelDays + day // 0-indexed from first adjustment day
 
-    // Calculate shifted sleep times
-    const shiftDirection = direction === 'east' ? -shiftRate : shiftRate
+    // Calculate cumulative shift - gradually adjust towards destination time
+    const cumulativeShift = (daysFromStart + 1) * actualShiftRate
+    const shiftDirection = direction === 'east' ? -1 : 1 // East = go to bed earlier (negative), West = later (positive)
+
     const adjustedBedtime = addHoursToTime(
       formData.currentBedtime,
-      shiftDirection * Math.abs(day),
+      shiftDirection * cumulativeShift,
     )
     const adjustedWakeTime = addHoursToTime(
       formData.currentWakeTime,
-      shiftDirection * Math.abs(day),
+      shiftDirection * cumulativeShift,
     )
 
     const recommendation: DailyRecommendation = {
@@ -178,7 +199,7 @@ function generatePreTravelRecommendations(
         bedtime: adjustedBedtime,
         wakeTime: adjustedWakeTime,
         duration: calculateSleepDuration(adjustedBedtime, adjustedWakeTime),
-        notes: generateSleepNotes(day, direction, shiftRate),
+        notes: generateSleepNotes(day, direction, actualShiftRate),
       },
       lightExposure: generateLightExposureWindows(adjustedWakeTime, direction),
       lightAvoidance: generateLightAvoidanceWindows(adjustedBedtime, direction),
@@ -439,7 +460,8 @@ function generateSleepNotes(dayNumber: number, direction: 'east' | 'west', shift
     return `Final adjustment day. Go to bed ${action} to match your destination schedule.`
   }
 
-  return `Shift your sleep ${shiftRate} hours ${action} than usual. This gradual adjustment reduces jet lag.`
+  const formattedShiftRate = shiftRate.toFixed(1)
+  return `Shift your sleep ${formattedShiftRate} hours ${action} than usual. This gradual adjustment reduces jet lag.`
 }
 
 /**
@@ -569,6 +591,6 @@ function generateFlightMealStrategy(): string {
  * Generate a unique plan ID
  */
 function generatePlanId(): string {
-  return `plan-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+  return `plan-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`
 }
 
