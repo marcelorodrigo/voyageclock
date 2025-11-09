@@ -71,42 +71,6 @@ export function formatDateReadable(date: Date | string): string {
 }
 
 /**
- * Check if a date string is valid
- * @param dateString Date string in YYYY-MM-DD format
- * @returns True if valid
- */
-export function isValidDate(dateString: string): boolean {
-  const dateRegex = /^\d{4}-\d{2}-\d{2}$/
-  if (!dateRegex.test(dateString)) {
-    return false
-  }
-
-  const date = new Date(dateString)
-  if (Number.isNaN(date.getTime())) {
-    return false
-  }
-
-  // Verify the date components match the input (no rollover)
-  const parts = dateString.split('-').map(Number)
-  const year = parts[0] ?? 0
-  const month = parts[1] ?? 0
-  const day = parts[2] ?? 0
-  return date.getFullYear() === year &&
-         date.getMonth() === month - 1 &&
-         date.getUTCDate() === day
-}
-
-/**
- * Check if a time string is valid (HH:mm format)
- * @param timeString Time string
- * @returns True if valid
- */
-export function isValidTime(timeString: string): boolean {
-  const timeRegex = /^([0-1]\d|2[0-3]):([0-5]\d)$/
-  return timeRegex.test(timeString)
-}
-
-/**
  * Get today's date in YYYY-MM-DD format
  * @returns Today's date string
  */
@@ -122,18 +86,6 @@ export function getMinDepartureDate(): string {
   return getTodayDate()
 }
 
-/**
- * Combine date and time into a single Date object
- * @param dateString Date in YYYY-MM-DD format
- * @param timeString Time in HH:mm format
- * @returns Combined Date object
- */
-export function combineDateTime(dateString: string, timeString: string): Date {
-  const [hours = 0, minutes = 0] = timeString.split(':').map(Number)
-  const date = new Date(dateString)
-  date.setHours(hours, minutes, 0, 0)
-  return date
-}
 
 /**
  * Add days to a date
@@ -146,19 +98,3 @@ export function addDays(date: Date, days: number): Date {
   result.setDate(result.getDate() + days)
   return result
 }
-
-/**
- * Compare two dates (ignoring time)
- * @param date1 First date
- * @param date2 Second date
- * @returns -1 if date1 < date2, 0 if equal, 1 if date1 > date2
- */
-export function compareDates(date1: Date, date2: Date): number {
-  const d1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate())
-  const d2 = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate())
-
-  if (d1 < d2) return -1
-  if (d1 > d2) return 1
-  return 0
-}
-
