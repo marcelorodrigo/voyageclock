@@ -161,8 +161,8 @@ const relatedTopics: RelatedTopic[] = [
 ]
 
 useSeoMeta({
-  title: 'Understanding Circadian Rhythms - Your Body Internal Clock | Voyage Clock',
-  description: 'Learn how your body internal 24-hour clock regulates sleep, alertness, body temperature, hormones, metabolism, and health. Discover the science of circadian rhythms and how they impact travel and jet lag.',
+  title: 'Understanding Circadian Rhythms - Your Body\'s Internal Clock | Voyage Clock',
+  description: 'Learn how your body\'s internal 24-hour clock regulates sleep, alertness, body temperature, hormones, metabolism, and health. Discover the science of circadian rhythms and how they impact travel and jet lag.',
   ogTitle: 'Understanding Circadian Rhythms | Voyage Clock',
   ogDescription: 'Discover how your body master clock controls sleep-wake patterns, hormone production, metabolism, and more. Learn the science behind circadian rhythms.',
   ogImage: 'https://voyageclock.pages.dev/og/circadian.png',
