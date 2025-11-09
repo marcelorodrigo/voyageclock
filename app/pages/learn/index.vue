@@ -275,19 +275,23 @@
 
 <script setup lang="ts">
 // Education hub page - links to all educational content
-definePageMeta({
-  title: 'Learn About Jet Lag & Circadian Rhythms | Voyage Clock',
-  description: 'Explore educational resources on jet lag, circadian rhythms, and travel health. Start learning with Voyage Clock.',
-  meta: [
-    { name: 'description', content: 'Explore educational resources on jet lag, circadian rhythms, and travel health. Start learning with Voyage Clock.' },
-    { property: 'og:title', content: 'Learn About Jet Lag & Circadian Rhythms | Voyage Clock' },
-    { property: 'og:description', content: 'Explore educational resources on jet lag, circadian rhythms, and travel health.' },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: 'https://voyageclock.com/learn/' },
-    { property: 'og:image', content: 'https://voyageclock.com/og/learn.png' }
-  ],
+useSeoMeta({
+  title: 'Learn About Jet Lag & Circadian Rhythms - Educational Resources | Voyage Clock',
+  description: 'Explore comprehensive, science-based educational resources on jet lag, circadian rhythms, light exposure, sleep strategies, nutrition, and evidence-based travel health strategies.',
+  ogTitle: 'Understanding Jet Lag & Circadian Rhythms | Voyage Clock',
+  ogDescription: 'Discover the science behind jet lag and learn evidence-based strategies including light exposure, sleep optimization, exercise timing, and nutrition for better travel.',
+  ogImage: 'https://voyageclock.pages.dev/og/learn.png',
+  ogUrl: 'https://voyageclock.pages.dev/learn/',
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Learn About Jet Lag & Circadian Rhythms',
+  twitterDescription: 'Explore science-based educational resources on jet lag prevention and circadian rhythm optimization.',
+  twitterImage: 'https://voyageclock.pages.dev/og/learn.png',
+})
+
+useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.com/learn/' }
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/' }
   ]
 })
 </script>

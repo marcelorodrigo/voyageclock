@@ -160,19 +160,23 @@ const relatedTopics: RelatedTopic[] = [
   },
 ]
 
-definePageMeta({
-  title: 'Understanding Circadian Rhythms | Voyage Clock',
-  description: 'Learn how your body’s internal 24-hour clock regulates sleep, alertness, and health. Discover the science of circadian rhythms and their impact on travel.',
-  meta: [
-    { name: 'description', content: 'Learn how your body’s internal 24-hour clock regulates sleep, alertness, and health. Discover the science of circadian rhythms and their impact on travel.' },
-    { property: 'og:title', content: 'Understanding Circadian Rhythms | Voyage Clock' },
-    { property: 'og:description', content: 'Learn how your body’s internal 24-hour clock regulates sleep, alertness, and health.' },
-    { property: 'og:type', content: 'article' },
-    { property: 'og:url', content: 'https://voyageclock.com/learn/circadian-rhythms' },
-    { property: 'og:image', content: 'https://voyageclock.com/og/circadian.png' }
-  ],
+useSeoMeta({
+  title: 'Understanding Circadian Rhythms - Your Body\'s Internal Clock | Voyage Clock',
+  description: 'Learn how your body\'s internal 24-hour clock regulates sleep, alertness, body temperature, hormones, metabolism, and health. Discover the science of circadian rhythms and how they impact travel and jet lag.',
+  ogTitle: 'Understanding Circadian Rhythms | Voyage Clock',
+  ogDescription: 'Discover how your body master clock controls sleep-wake patterns, hormone production, metabolism, and more. Learn the science behind circadian rhythms.',
+  ogImage: 'https://voyageclock.pages.dev/og/circadian.png',
+  ogUrl: 'https://voyageclock.pages.dev/learn/circadian-rhythms',
+  ogType: 'article',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Understanding Circadian Rhythms - Your Body\'s Internal Clock',
+  twitterDescription: 'Learn how your internal 24-hour clock regulates sleep, hormones, metabolism, and countless biological processes.',
+  twitterImage: 'https://voyageclock.pages.dev/og/circadian.png',
+})
+
+useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.com/learn/circadian-rhythms' }
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/circadian-rhythms' }
   ]
 })
 </script>

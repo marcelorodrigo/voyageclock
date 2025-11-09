@@ -281,19 +281,23 @@ const relatedTopics: RelatedTopic[] = [
   },
 ]
 
-definePageMeta({
-  title: 'Light Exposure Science | Voyage Clock',
-  description: 'How to use light—the most powerful circadian tool—to minimize jet lag. Learn about light exposure strategies for travelers.',
-  meta: [
-    { name: 'description', content: 'How to use light—the most powerful circadian tool—to minimize jet lag. Learn about light exposure strategies for travelers.' },
-    { property: 'og:title', content: 'Light Exposure Science | Voyage Clock' },
-    { property: 'og:description', content: 'How to use light—the most powerful circadian tool—to minimize jet lag.' },
-    { property: 'og:type', content: 'article' },
-    { property: 'og:url', content: 'https://voyageclock.com/learn/light-exposure' },
-    { property: 'og:image', content: 'https://voyageclock.com/og/light.png' }
-  ],
+useSeoMeta({
+  title: 'Light Exposure Science - Strategic Light for Jet Lag Prevention | Voyage Clock',
+  description: 'Learn how to use light—the most powerful circadian tool—to minimize jet lag. Discover phase response curves, optimal timing, light intensity, and blue light blocking strategies for travelers.',
+  ogTitle: 'Light Exposure Science - Master Circadian Rhythm Shifting | Voyage Clock',
+  ogDescription: 'Discover how strategic light exposure is the most effective tool for shifting your body clock and preventing jet lag.',
+  ogImage: 'https://voyageclock.pages.dev/og/light.png',
+  ogUrl: 'https://voyageclock.pages.dev/learn/light-exposure',
+  ogType: 'article',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Light Exposure Science for Jet Lag Prevention',
+  twitterDescription: 'Master the use of light—the most powerful tool for adjusting your circadian rhythm and minimizing jet lag.',
+  twitterImage: 'https://voyageclock.pages.dev/og/light.png',
+})
+
+useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.com/learn/light-exposure' }
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/light-exposure' }
   ]
 })
 </script>

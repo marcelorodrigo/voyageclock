@@ -450,19 +450,23 @@ const relatedTopics: RelatedTopic[] = [
   },
 ]
 
-definePageMeta({
-  title: 'Nutrition & Supplements | Voyage Clock',
-  description: 'Meal timing, caffeine strategies, melatonin, and nutritional approaches to minimize jet lag. Evidence-based tips for travelers.',
-  meta: [
-    { name: 'description', content: 'Meal timing, caffeine strategies, melatonin, and nutritional approaches to minimize jet lag. Evidence-based tips for travelers.' },
-    { property: 'og:title', content: 'Nutrition & Supplements | Voyage Clock' },
-    { property: 'og:description', content: 'Meal timing, caffeine strategies, melatonin, and nutritional approaches to minimize jet lag.' },
-    { property: 'og:type', content: 'article' },
-    { property: 'og:url', content: 'https://voyageclock.com/learn/nutrition-supplements' },
-    { property: 'og:image', content: 'https://voyageclock.com/og/nutrition.png' }
-  ],
+useSeoMeta({
+  title: 'Nutrition & Supplements for Jet Lag Prevention | Voyage Clock',
+  description: 'Learn strategic meal timing, caffeine management, melatonin supplementation, and nutritional approaches to minimize jet lag. Discover evidence-based eating strategies, hydration tips, and supplement guidance for travelers.',
+  ogTitle: 'Nutrition & Supplements - Jet Lag Prevention | Voyage Clock',
+  ogDescription: 'Master meal timing, caffeine strategies, and melatonin use to support your circadian rhythm adjustment and minimize jet lag symptoms.',
+  ogImage: 'https://voyageclock.pages.dev/og/nutrition.png',
+  ogUrl: 'https://voyageclock.pages.dev/learn/nutrition-supplements',
+  ogType: 'article',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Nutrition & Supplements for Jet Lag Prevention',
+  twitterDescription: 'Discover how meal timing, caffeine, melatonin, and nutrition can help minimize jet lag and support circadian adjustment.',
+  twitterImage: 'https://voyageclock.pages.dev/og/nutrition.png',
+})
+
+useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.com/learn/nutrition-supplements' }
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/nutrition-supplements' }
   ]
 })
 </script>

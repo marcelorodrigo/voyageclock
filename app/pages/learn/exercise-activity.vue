@@ -377,19 +377,23 @@ const relatedTopics: RelatedTopic[] = [
   },
 ]
 
-definePageMeta({
-  title: 'Exercise & Physical Activity | Voyage Clock',
-  description: 'How movement and exercise timing can help shift your circadian rhythm and reduce jet lag. Learn the science and strategies for travelers.',
-  meta: [
-    { name: 'description', content: 'How movement and exercise timing can help shift your circadian rhythm and reduce jet lag. Learn the science and strategies for travelers.' },
-    { property: 'og:title', content: 'Exercise & Physical Activity | Voyage Clock' },
-    { property: 'og:description', content: 'How movement and exercise timing can help shift your circadian rhythm and reduce jet lag.' },
-    { property: 'og:type', content: 'article' },
-    { property: 'og:url', content: 'https://voyageclock.com/learn/exercise-activity' },
-    { property: 'og:image', content: 'https://voyageclock.com/og/exercise.png' }
-  ],
+useSeoMeta({
+  title: 'Exercise & Physical Activity for Jet Lag Prevention | Voyage Clock',
+  description: 'Learn how exercise timing and physical activity can help shift your circadian rhythm and reduce jet lag. Discover optimal workout timing, intensity levels, and movement strategies for travelers.',
+  ogTitle: 'Exercise & Physical Activity - Jet Lag Prevention | Voyage Clock',
+  ogDescription: 'Discover how strategic exercise timing can complement light exposure and sleep strategies to accelerate circadian rhythm adjustment.',
+  ogImage: 'https://voyageclock.pages.dev/og/exercise.png',
+  ogUrl: 'https://voyageclock.pages.dev/learn/exercise-activity',
+  ogType: 'article',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Exercise & Physical Activity for Jet Lag Prevention',
+  twitterDescription: 'Learn how exercise timing affects your circadian rhythm and how to use physical activity to minimize jet lag.',
+  twitterImage: 'https://voyageclock.pages.dev/og/exercise.png',
+})
+
+useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.com/learn/exercise-activity' }
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/exercise-activity' }
   ]
 })
 </script>

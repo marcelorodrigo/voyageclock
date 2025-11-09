@@ -50,22 +50,25 @@ onMounted(() => {
 function goBack() {
   router.push({ name: 'plan-input' })
 }
-</script>
 
-<script setup>
-definePageMeta({
-  title: 'Your Jet Lag Plan Results | Voyage Clock',
-  description: 'View your personalized jet lag prevention plan, including sleep, light, and nutrition strategies for your trip.',
-  meta: [
-    { name: 'description', content: 'View your personalized jet lag prevention plan, including sleep, light, and nutrition strategies for your trip.' },
-    { property: 'og:title', content: 'Your Jet Lag Plan Results | Voyage Clock' },
-    { property: 'og:description', content: 'View your personalized jet lag prevention plan, including sleep, light, and nutrition strategies for your trip.' },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: 'https://voyageclock.com/plan/results' },
-    { property: 'og:image', content: 'https://voyageclock.com/og/results.png' }
-  ],
+useSeoMeta({
+  title: 'Your Personalized Jet Lag Plan - Results | Voyage Clock',
+  description: 'View your customized jet lag prevention plan with detailed recommendations for sleep timing, light exposure, nutrition, and travel day strategies tailored to your specific journey.',
+  ogTitle: 'Your Personalized Jet Lag Plan | Voyage Clock',
+  ogDescription: 'Your custom adaptation plan with day-by-day recommendations to minimize jet lag and feel your best when you arrive.',
+  ogImage: 'https://voyageclock.pages.dev/og/results.png',
+  ogUrl: 'https://voyageclock.pages.dev/plan/results',
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Your Personalized Jet Lag Plan',
+  twitterDescription: 'View your custom jet lag prevention plan with detailed recommendations for your journey.',
+  twitterImage: 'https://voyageclock.pages.dev/og/results.png',
+  robots: 'noindex, nofollow'
+})
+
+useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.com/plan/results' }
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/plan/results' }
   ]
 })
 </script>
