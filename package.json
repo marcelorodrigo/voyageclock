@@ -10,7 +10,10 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "test": "vitest",
+    "test:unit": "vitest --project unit",
+    "test:nuxt": "vitest --project nuxt"
   },
   "dependencies": {
     "@pinia/nuxt": "0.11.3",

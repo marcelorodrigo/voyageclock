@@ -1,4 +1,5 @@
 name: CI
+
 on:
   pull_request
 jobs:
@@ -24,5 +25,7 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Lint check ✅
         run: pnpm lint
+      - name: Tests
+        run: pnpm test
       - name: Deploy 😎
         run: pnpm generate
