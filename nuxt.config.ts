@@ -2,17 +2,9 @@
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
-  css: ['./app/assets/css/tailwind.css'],
+
+  modules: ['@pinia/nuxt', '@nuxt/eslint'],
   devtools: { enabled: true },
-
-  modules: ['@pinia/nuxt'],
-
-  vite: {
-    plugins: [
-      tailwindcss(),
-    ],
-  },
 
   app: {
     head: {
@@ -22,11 +14,25 @@ export default defineNuxtConfig({
       },
       meta: [
         { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-      ]
-    }
-  }
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      ],
+    },
+  },
+  css: ['./app/assets/css/tailwind.css'],
+  compatibilityDate: '2025-07-15',
+
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
+  eslint: {
+    checker: true,
+    config: {
+      stylistic: true, // turn on code formatting
+    },
+  },
 })

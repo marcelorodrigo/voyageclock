@@ -1,13 +1,18 @@
 <template>
   <div class="sleep-schedule-input">
-    <h3 class="section-title">Your Current Sleep Schedule</h3>
+    <h3 class="section-title">
+      Your Current Sleep Schedule
+    </h3>
     <p class="section-description">
       This helps us create personalized recommendations for adapting to your destination timezone.
     </p>
 
     <div class="sleep-inputs">
       <div class="form-field">
-        <label :for="`${id}-bedtime`" class="form-label">
+        <label
+          :for="`${id}-bedtime`"
+          class="form-label"
+        >
           Usual Bedtime
           <span class="text-red-500">*</span>
         </label>
@@ -15,20 +20,27 @@
           :id="`${id}-bedtime`"
           type="time"
           :value="bedtime"
-          @input="handleBedtimeChange"
-          @blur="() => emit('blur', 'bedtime')"
           class="form-input"
           :class="{ 'form-input-error': bedtimeError }"
           :aria-describedby="bedtimeError ? `${id}-bedtime-error` : undefined"
           :aria-invalid="!!bedtimeError"
-        />
-        <p v-if="bedtimeError" :id="`${id}-bedtime-error`" class="form-error">
+          @input="handleBedtimeChange"
+          @blur="() => emit('blur', 'bedtime')"
+        >
+        <p
+          v-if="bedtimeError"
+          :id="`${id}-bedtime-error`"
+          class="form-error"
+        >
           {{ bedtimeError }}
         </p>
       </div>
 
       <div class="form-field">
-        <label :for="`${id}-waketime`" class="form-label">
+        <label
+          :for="`${id}-waketime`"
+          class="form-label"
+        >
           Usual Wake Time
           <span class="text-red-500">*</span>
         </label>
@@ -36,28 +48,42 @@
           :id="`${id}-waketime`"
           type="time"
           :value="wakeTime"
-          @input="handleWakeTimeChange"
-          @blur="() => emit('blur', 'wakeTime')"
           class="form-input"
           :class="{ 'form-input-error': wakeTimeError }"
           :aria-describedby="wakeTimeError ? `${id}-waketime-error` : undefined"
           :aria-invalid="!!wakeTimeError"
-        />
-        <p v-if="wakeTimeError" :id="`${id}-waketime-error`" class="form-error">
+          @input="handleWakeTimeChange"
+          @blur="() => emit('blur', 'wakeTime')"
+        >
+        <p
+          v-if="wakeTimeError"
+          :id="`${id}-waketime-error`"
+          class="form-error"
+        >
           {{ wakeTimeError }}
         </p>
       </div>
     </div>
 
-    <div v-if="sleepDuration" class="sleep-summary">
+    <div
+      v-if="sleepDuration"
+      class="sleep-summary"
+    >
       <div class="sleep-summary-content">
         <span class="sleep-icon">😴</span>
         <div>
-          <p class="sleep-summary-label">Sleep Duration</p>
-          <p class="sleep-summary-value">{{ formatDuration(sleepDuration) }}</p>
+          <p class="sleep-summary-label">
+            Sleep Duration
+          </p>
+          <p class="sleep-summary-value">
+            {{ formatDuration(sleepDuration) }}
+          </p>
         </div>
       </div>
-      <p v-if="sleepWarning" class="sleep-warning">
+      <p
+        v-if="sleepWarning"
+        class="sleep-warning"
+      >
         {{ sleepWarning }}
       </p>
     </div>
@@ -77,8 +103,7 @@ interface Props {
 }
 
 interface Emits {
-  (e: 'update:bedtime', value: string): void
-  (e: 'update:wakeTime', value: string): void
+  (e: 'update:bedtime' | 'update:wakeTime', value: string): void
   (e: 'blur', field: 'bedtime' | 'wakeTime'): void
 }
 

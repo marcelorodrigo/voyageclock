@@ -5,14 +5,22 @@
         <span class="timeline-icon">📅</span>
         Visual Timeline
       </h3>
-      <p class="timeline-subtitle">Your complete adaptation schedule at a glance</p>
+      <p class="timeline-subtitle">
+        Your complete adaptation schedule at a glance
+      </p>
     </div>
-
 
     <!-- Legend -->
     <div class="timeline-legend">
-      <div v-for="item in legendItems" :key="item.key" class="legend-item">
-        <span class="legend-color" :style="{ backgroundColor: item.color }"></span>
+      <div
+        v-for="item in legendItems"
+        :key="item.key"
+        class="legend-item"
+      >
+        <span
+          class="legend-color"
+          :style="{ backgroundColor: item.color }"
+        />
         <span class="legend-label">{{ item.label }}</span>
       </div>
     </div>
@@ -22,8 +30,14 @@
       <div class="timeline-grid">
         <!-- Time axis (left column) -->
         <div class="time-axis">
-          <div class="axis-header">Time</div>
-          <div v-for="hour in hours" :key="hour" class="time-label">
+          <div class="axis-header">
+            Time
+          </div>
+          <div
+            v-for="hour in hours"
+            :key="hour"
+            class="time-label"
+          >
             {{ formatHour(hour) }}
           </div>
         </div>
@@ -36,8 +50,12 @@
         >
           <!-- Day header -->
           <div class="day-header">
-            <div class="day-date">{{ formatDayHeader(day) }}</div>
-            <div class="day-label">{{ getDayLabel(day) }}</div>
+            <div class="day-date">
+              {{ formatDayHeader(day) }}
+            </div>
+            <div class="day-label">
+              {{ getDayLabel(day) }}
+            </div>
           </div>
 
           <!-- Activity blocks -->
@@ -63,7 +81,10 @@
               :title="`Light Exposure: ${block.start} - ${block.end}`"
             >
               <span class="block-icon">🌞</span>
-              <span v-if="block.priority === 'critical'" class="priority-badge">!</span>
+              <span
+                v-if="block.priority === 'critical'"
+                class="priority-badge"
+              >!</span>
             </div>
 
             <!-- Light avoidance blocks -->
@@ -115,9 +136,15 @@
     </div>
 
     <!-- Current time indicator (if plan is active) -->
-    <div v-if="showCurrentTimeIndicator" class="current-time-indicator" :style="currentTimeStyle">
-      <div class="current-time-line"></div>
-      <div class="current-time-label">Now</div>
+    <div
+      v-if="showCurrentTimeIndicator"
+      class="current-time-indicator"
+      :style="currentTimeStyle"
+    >
+      <div class="current-time-line" />
+      <div class="current-time-label">
+        Now
+      </div>
     </div>
 
     <!-- Mobile view hint -->
@@ -157,7 +184,6 @@ interface DayData {
   melatoninMarkers: TimeMarker[]
   caffeineCutoffMarkers: TimeMarker[]
 }
-
 
 const legendItems = [
   { key: 'sleep', label: 'Sleep', color: '#3b82f6' },
@@ -201,7 +227,6 @@ const allDays = computed<DayData[]>(() => {
   return days
 })
 
-
 // Check if today is within the plan dates
 const showCurrentTimeIndicator = computed(() => {
   const today = new Date()
@@ -240,12 +265,12 @@ function buildDayData(
         end: recommendation.sleep.wakeTime,
       },
     ],
-    lightExposureBlocks: recommendation.lightExposure.map((w) => ({
+    lightExposureBlocks: recommendation.lightExposure.map(w => ({
       start: w.start,
       end: w.end,
       priority: w.priority,
     })),
-    lightAvoidanceBlocks: recommendation.lightAvoidance.map((w) => ({
+    lightAvoidanceBlocks: recommendation.lightAvoidance.map(w => ({
       start: w.start,
       end: w.end,
     })),
@@ -331,7 +356,7 @@ function getMarkerStyle(marker: TimeMarker): Record<string, string> {
   }
 }
 
-function parseTime(timeString: string): { hours: number; minutes: number } {
+function parseTime(timeString: string): { hours: number, minutes: number } {
   const [hours = 0, minutes = 0] = timeString.split(':').map(Number)
   return { hours, minutes }
 }
@@ -368,7 +393,6 @@ function parseTime(timeString: string): { hours: number; minutes: number } {
   font-size: 1rem;
   color: #6b7280;
 }
-
 
 .timeline-legend {
   display: flex;

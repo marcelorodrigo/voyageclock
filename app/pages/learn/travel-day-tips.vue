@@ -125,7 +125,7 @@ useSeoMeta({
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/travel-day-tips' }
-  ]
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/travel-day-tips' },
+  ],
 })
 </script>

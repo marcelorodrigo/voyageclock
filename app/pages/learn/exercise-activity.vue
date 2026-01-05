@@ -393,7 +393,7 @@ useSeoMeta({
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/exercise-activity' }
-  ]
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/exercise-activity' },
+  ],
 })
 </script>

@@ -1,8 +1,14 @@
 <template>
   <div class="form-field">
-    <label :for="id" class="form-label">
+    <label
+      :for="id"
+      class="form-label"
+    >
       {{ label }}
-      <span v-if="required" class="text-red-500">*</span>
+      <span
+        v-if="required"
+        class="text-red-500"
+      >*</span>
     </label>
 
     <div class="datetime-inputs">
@@ -12,33 +18,43 @@
           type="date"
           :value="dateValue"
           :min="minDate"
-          @input="handleDateChange"
-          @blur="handleBlur"
           class="form-input"
           :class="{ 'form-input-error': error }"
           :aria-describedby="error ? `${id}-error` : undefined"
           :aria-invalid="!!error"
-        />
+          @input="handleDateChange"
+          @blur="handleBlur"
+        >
       </div>
 
-      <div v-if="includeTime" class="datetime-input-group">
+      <div
+        v-if="includeTime"
+        class="datetime-input-group"
+      >
         <input
           :id="`${id}-time`"
           type="time"
           :value="timeValue"
-          @input="handleTimeChange"
-          @blur="handleBlur"
           class="form-input"
           :class="{ 'form-input-error': error }"
-        />
+          @input="handleTimeChange"
+          @blur="handleBlur"
+        >
       </div>
     </div>
 
-    <p v-if="error" :id="`${id}-error`" class="form-error">
+    <p
+      v-if="error"
+      :id="`${id}-error`"
+      class="form-error"
+    >
       {{ error }}
     </p>
 
-    <p v-if="helpText && !error" class="form-help">
+    <p
+      v-if="helpText && !error"
+      class="form-help"
+    >
       {{ helpText }}
     </p>
   </div>
@@ -60,8 +76,7 @@ interface Props {
 }
 
 interface Emits {
-  (e: 'update:dateValue', value: string): void
-  (e: 'update:timeValue', value: string): void
+  (e: 'update:dateValue' | 'update:timeValue', value: string): void
   (e: 'blur'): void
 }
 

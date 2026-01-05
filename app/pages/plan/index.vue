@@ -25,7 +25,7 @@ useSeoMeta({
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.pages.dev/plan/' }
-  ]
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/plan/' },
+  ],
 })
 </script>

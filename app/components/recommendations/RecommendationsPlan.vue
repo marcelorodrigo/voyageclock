@@ -3,18 +3,28 @@
     <!-- Header with Actions -->
     <div class="plan-header">
       <div class="plan-header-content">
-        <h1 class="plan-title">Your Personalized Jet Lag Plan</h1>
+        <h1 class="plan-title">
+          Your Personalized Jet Lag Plan
+        </h1>
         <p class="plan-subtitle">
           Follow these science-based recommendations to minimize jet lag and adapt quickly to your
           new timezone.
         </p>
       </div>
       <div class="plan-actions">
-        <button @click="printPlan" class="btn btn-outline" title="Print plan">
+        <button
+          class="btn btn-outline"
+          title="Print plan"
+          @click="printPlan"
+        >
           <span class="btn-icon">🖨️</span>
           <span class="btn-text">Print</span>
         </button>
-        <button @click="editPlan" class="btn btn-outline" title="Edit inputs">
+        <button
+          class="btn btn-outline"
+          title="Edit inputs"
+          @click="editPlan"
+        >
           <span class="btn-icon">✏️</span>
           <span class="btn-text">Edit</span>
         </button>
@@ -28,7 +38,10 @@
     <TimelineVisualization :plan="plan" />
 
     <!-- Pre-Travel Phase -->
-    <section v-if="plan.preTravel.length > 0" class="phase-section">
+    <section
+      v-if="plan.preTravel.length > 0"
+      class="phase-section"
+    >
       <div class="phase-header">
         <h2 class="phase-title">
           <span class="phase-icon">📅</span>
@@ -59,13 +72,21 @@
           <span class="phase-icon">✈️</span>
           Travel Day
         </h2>
-        <p class="phase-description">Strategies for your journey</p>
+        <p class="phase-description">
+          Strategies for your journey
+        </p>
       </div>
-      <TravelDayCard :recommendation="plan.travelDay" :plan="plan" />
+      <TravelDayCard
+        :recommendation="plan.travelDay"
+        :plan="plan"
+      />
     </section>
 
     <!-- Post-Arrival Phase -->
-    <section v-if="plan.postArrival.length > 0" class="phase-section">
+    <section
+      v-if="plan.postArrival.length > 0"
+      class="phase-section"
+    >
       <div class="phase-header">
         <h2 class="phase-title">
           <span class="phase-icon">🌍</span>
@@ -92,7 +113,9 @@
     <!-- Footer -->
     <div class="plan-footer">
       <div class="disclaimer">
-        <h3 class="disclaimer-title">Important Information</h3>
+        <h3 class="disclaimer-title">
+          Important Information
+        </h3>
         <ul class="disclaimer-list">
           <li>
             These recommendations are general wellness guidance and not medical advice. Consult with
@@ -301,4 +324,3 @@ function editPlan() {
   }
 }
 </style>
-

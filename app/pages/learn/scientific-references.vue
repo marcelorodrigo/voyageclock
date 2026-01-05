@@ -73,8 +73,10 @@
     <h3>Light Intensity and Wavelength</h3>
     <p><strong>Key Findings:</strong></p>
     <ul>
-      <li>Intrinsically photosensitive retinal ganglion cells (ipRGCs) mediate circadian responses
-        to light</li>
+      <li>
+        Intrinsically photosensitive retinal ganglion cells (ipRGCs) mediate circadian responses
+        to light
+      </li>
       <li>Blue wavelengths (460-480 nm) are most effective for circadian shifting</li>
       <li>Minimum threshold ~1,000 lux; optimal ~10,000 lux</li>
       <li>Outdoor daylight provides 10,000-100,000+ lux even on cloudy days</li>
@@ -421,7 +423,9 @@
     </blockquote>
 
     <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mt-8">
-      <h3 class="text-xl font-bold text-gray-900 mb-2">Ready to Apply This Science?</h3>
+      <h3 class="text-xl font-bold text-gray-900 mb-2">
+        Ready to Apply This Science?
+      </h3>
       <p class="text-gray-700 mb-4">
         Create a personalized, evidence-based jet lag prevention plan for your next trip.
       </p>
@@ -469,8 +473,7 @@ useSeoMeta({
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/scientific-references' }
-  ]
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/scientific-references' },
+  ],
 })
 </script>
-

@@ -64,7 +64,9 @@
       <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <div class="text-center p-6">
           <span class="text-5xl block mb-4">🌞</span>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Light Exposure Guidance</h3>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">
+            Light Exposure Guidance
+          </h3>
           <p class="text-gray-600">
             Know exactly when to seek or avoid light to quickly adapt to your new timezone.
           </p>
@@ -72,7 +74,9 @@
 
         <div class="text-center p-6">
           <span class="text-5xl block mb-4">😴</span>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Sleep Schedule Optimization</h3>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">
+            Sleep Schedule Optimization
+          </h3>
           <p class="text-gray-600">
             Gradually adjust your sleep times before departure for a smoother transition.
           </p>
@@ -80,7 +84,9 @@
 
         <div class="text-center p-6">
           <span class="text-5xl block mb-4">🎯</span>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Personalized Timeline</h3>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">
+            Personalized Timeline
+          </h3>
           <p class="text-gray-600">
             Get a day-by-day plan tailored to your specific trip and sleep patterns.
           </p>
@@ -88,7 +94,9 @@
 
         <div class="text-center p-6">
           <span class="text-5xl block mb-4">🔬</span>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Science-Based</h3>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">
+            Science-Based
+          </h3>
           <p class="text-gray-600">
             Recommendations based on circadian rhythm research and sleep medicine.
           </p>
@@ -98,7 +106,9 @@
 
     <!-- How It Works Section -->
     <section class="py-16 px-4 bg-blue-50">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">How It Works</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
+        How It Works
+      </h2>
       <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="text-center">
           <div
@@ -106,7 +116,9 @@
           >
             1
           </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Enter Your Travel Details</h3>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">
+            Enter Your Travel Details
+          </h3>
           <p class="text-gray-600">
             Tell us where you're going, when you're leaving, and your typical sleep schedule.
           </p>
@@ -118,7 +130,9 @@
           >
             2
           </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Get Your Personalized Plan</h3>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">
+            Get Your Personalized Plan
+          </h3>
           <p class="text-gray-600">
             Receive a detailed timeline with specific recommendations for before, during, and after
             your flight.
@@ -131,7 +145,9 @@
           >
             3
           </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Follow the Guidance</h3>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">
+            Follow the Guidance
+          </h3>
           <p class="text-gray-600">
             Implement the strategies to minimize jet lag and feel great at your destination.
           </p>
@@ -161,7 +177,9 @@
     <!-- CTA Section -->
     <section class="py-16 px-4 bg-blue-600">
       <div class="max-w-2xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Beat Jet Lag?</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Ready to Beat Jet Lag?
+        </h2>
         <p class="text-xl text-blue-100 mb-8">
           Start planning your trip now and get your personalized adaptation plan in minutes.
         </p>
@@ -194,7 +212,7 @@ useSeoMeta({
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.pages.dev' }
-  ]
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev' },
+  ],
 })
 </script>

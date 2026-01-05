@@ -38,8 +38,10 @@
     </p>
     <ul>
       <li><strong>Internal signals:</strong> Your body clock saying it's time to sleep</li>
-      <li><strong>External signals:</strong> The sun, local meal times, and social cues saying you
-        should be awake and active</li>
+      <li>
+        <strong>External signals:</strong> The sun, local meal times, and social cues saying you
+        should be awake and active
+      </li>
     </ul>
 
     <h3>Multiple Body Systems Are Affected</h3>
@@ -213,7 +215,7 @@ const relatedTopics: RelatedTopic[] = [
     path: '/learn/circadian-rhythms',
     icon: '🕐',
     title: 'Circadian Rhythms',
-    description: "Learn about your body's internal 24-hour clock",
+    description: 'Learn about your body\'s internal 24-hour clock',
   },
   {
     path: '/learn/light-exposure',
@@ -239,7 +241,7 @@ useSeoMeta({
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/how-jet-lag-works' }
-  ]
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/how-jet-lag-works' },
+  ],
 })
 </script>

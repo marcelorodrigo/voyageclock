@@ -43,7 +43,7 @@
     <h3>Understanding Your Core Body Temperature Minimum</h3>
     <p>
       The timing of light exposure is usually referenced to your <strong>core body temperature
-      minimum (CBTmin)</strong>, which typically occurs about 2-3 hours before your natural wake
+        minimum (CBTmin)</strong>, which typically occurs about 2-3 hours before your natural wake
       time.
     </p>
     <ul>
@@ -197,8 +197,10 @@
     <ul>
       <li><strong>Minimum:</strong> 15-20 minutes of bright light</li>
       <li><strong>Optimal:</strong> 30-90 minutes for maximum effect</li>
-      <li><strong>Continuous vs. intermittent:</strong> Continuous exposure is more effective, but
-        intermittent can work</li>
+      <li>
+        <strong>Continuous vs. intermittent:</strong> Continuous exposure is more effective, but
+        intermittent can work
+      </li>
     </ul>
 
     <h3>Timing Is Critical</h3>
@@ -297,7 +299,7 @@ useSeoMeta({
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/light-exposure' }
-  ]
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/light-exposure' },
+  ],
 })
 </script>

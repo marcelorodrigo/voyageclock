@@ -2,62 +2,111 @@
   <div class="travel-day-card">
     <div class="card-header">
       <div class="header-content">
-        <h3 class="header-title">{{ formatDateLabel }}</h3>
-        <p class="header-subtitle">Your journey begins</p>
+        <h3 class="header-title">
+          {{ formatDateLabel }}
+        </h3>
+        <p class="header-subtitle">
+          Your journey begins
+        </p>
       </div>
     </div>
 
     <div class="card-body">
       <!-- Sleep Strategy -->
-      <div v-if="recommendation.sleepStrategy" class="strategy-section">
+      <div
+        v-if="recommendation.sleepStrategy"
+        class="strategy-section"
+      >
         <div class="section-header">
           <span class="section-icon">😴</span>
-          <h4 class="section-title">Sleep Strategy</h4>
+          <h4 class="section-title">
+            Sleep Strategy
+          </h4>
         </div>
-        <p class="section-content">{{ recommendation.sleepStrategy }}</p>
+        <p class="section-content">
+          {{ recommendation.sleepStrategy }}
+        </p>
       </div>
 
       <!-- Light Exposure -->
-      <div v-if="recommendation.lightExposure" class="strategy-section">
+      <div
+        v-if="recommendation.lightExposure"
+        class="strategy-section"
+      >
         <div class="section-header">
           <span class="section-icon">🌞</span>
-          <h4 class="section-title">Light Management</h4>
+          <h4 class="section-title">
+            Light Management
+          </h4>
         </div>
-        <p class="section-content">{{ recommendation.lightExposure }}</p>
+        <p class="section-content">
+          {{ recommendation.lightExposure }}
+        </p>
       </div>
 
       <!-- Meal Timing -->
-      <div v-if="recommendation.mealTiming" class="strategy-section">
+      <div
+        v-if="recommendation.mealTiming"
+        class="strategy-section"
+      >
         <div class="section-header">
           <span class="section-icon">🍽️</span>
-          <h4 class="section-title">Meal Timing</h4>
+          <h4 class="section-title">
+            Meal Timing
+          </h4>
         </div>
-        <p class="section-content">{{ recommendation.mealTiming }}</p>
+        <p class="section-content">
+          {{ recommendation.mealTiming }}
+        </p>
       </div>
 
       <!-- Hydration -->
-      <div v-if="recommendation.hydration" class="strategy-section">
+      <div
+        v-if="recommendation.hydration"
+        class="strategy-section"
+      >
         <div class="section-header">
           <span class="section-icon">💧</span>
-          <h4 class="section-title">Hydration</h4>
+          <h4 class="section-title">
+            Hydration
+          </h4>
         </div>
-        <p class="section-content">{{ recommendation.hydration }}</p>
+        <p class="section-content">
+          {{ recommendation.hydration }}
+        </p>
       </div>
 
       <!-- Movement -->
-      <div v-if="recommendation.movement" class="strategy-section">
+      <div
+        v-if="recommendation.movement"
+        class="strategy-section"
+      >
         <div class="section-header">
           <span class="section-icon">🚶</span>
-          <h4 class="section-title">Movement & Stretching</h4>
+          <h4 class="section-title">
+            Movement & Stretching
+          </h4>
         </div>
-        <p class="section-content">{{ recommendation.movement }}</p>
+        <p class="section-content">
+          {{ recommendation.movement }}
+        </p>
       </div>
 
       <!-- General Notes -->
-      <div v-if="recommendation.generalNotes && recommendation.generalNotes.length > 0" class="general-notes">
-        <h4 class="notes-title">✈️ Travel Tips</h4>
+      <div
+        v-if="recommendation.generalNotes && recommendation.generalNotes.length > 0"
+        class="general-notes"
+      >
+        <h4 class="notes-title">
+          ✈️ Travel Tips
+        </h4>
         <ul class="notes-list">
-          <li v-for="(note, index) in recommendation.generalNotes" :key="index">{{ note }}</li>
+          <li
+            v-for="(note, index) in recommendation.generalNotes"
+            :key="index"
+          >
+            {{ note }}
+          </li>
         </ul>
       </div>
     </div>
@@ -217,4 +266,3 @@ const formatDateLabel = computed(() => {
   }
 }
 </style>
-

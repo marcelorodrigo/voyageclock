@@ -39,7 +39,7 @@ export function formatTime(hours: number, minutes: number = 0): string {
  * @param timeString Time in HH:mm format
  * @returns Object with hours and minutes
  */
-export function parseTime(timeString: string): { hours: number; minutes: number } {
+export function parseTime(timeString: string): { hours: number, minutes: number } {
   const [hours = 0, minutes = 0] = timeString.split(':').map(Number)
   return { hours, minutes }
 }
@@ -85,7 +85,6 @@ export function getTodayDate(): string {
 export function getMinDepartureDate(): string {
   return getTodayDate()
 }
-
 
 /**
  * Add days to a date

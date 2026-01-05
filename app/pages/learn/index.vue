@@ -4,7 +4,10 @@
     <nav class="bg-white shadow-sm sticky top-0 z-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
-          <NuxtLink to="/" class="flex items-center gap-2 text-xl font-bold text-gray-900">
+          <NuxtLink
+            to="/"
+            class="flex items-center gap-2 text-xl font-bold text-gray-900"
+          >
             <span class="text-2xl">✈️</span>
             Voyage Clock
           </NuxtLink>
@@ -257,7 +260,9 @@
     <!-- Footer -->
     <footer class="bg-gray-900 text-gray-300 py-12 px-4">
       <div class="max-w-7xl mx-auto text-center">
-        <p class="text-lg mb-4">Ready to minimize jet lag on your next trip?</p>
+        <p class="text-lg mb-4">
+          Ready to minimize jet lag on your next trip?
+        </p>
         <NuxtLink
           to="/plan"
           class="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
@@ -291,7 +296,7 @@ useSeoMeta({
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/' }
-  ]
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/' },
+  ],
 })
 </script>

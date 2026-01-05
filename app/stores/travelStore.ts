@@ -46,10 +46,12 @@ export const useTravelStore = defineStore('travel', () => {
     if (formData.value.departureDate && formData.value.departureTime) {
       try {
         departureDateTime = new Date(`${formData.value.departureDate}T${formData.value.departureTime}`)
-      } catch {
+      }
+      catch {
         departureDateTime = new Date()
       }
-    } else {
+    }
+    else {
       departureDateTime = new Date()
     }
     return calculateTimezoneOffset(formData.value.homeTimezone, formData.value.destinationTimezone, departureDateTime)
@@ -66,12 +68,12 @@ export const useTravelStore = defineStore('travel', () => {
   // Helper to check if all required fields are filled
   function hasRequiredFields(): boolean {
     return !!(
-      formData.value.homeTimezone &&
-      formData.value.destinationTimezone &&
-      formData.value.departureDate &&
-      formData.value.departureTime &&
-      formData.value.currentBedtime &&
-      formData.value.currentWakeTime
+      formData.value.homeTimezone
+      && formData.value.destinationTimezone
+      && formData.value.departureDate
+      && formData.value.departureTime
+      && formData.value.currentBedtime
+      && formData.value.currentWakeTime
     )
   }
 
@@ -83,7 +85,7 @@ export const useTravelStore = defineStore('travel', () => {
   }
 
   function validateField(field: keyof TravelFormData) {
-    delete errors.value[field]
+    errors.value[field] = undefined
 
     switch (field) {
       case 'homeTimezone':
@@ -95,7 +97,8 @@ export const useTravelStore = defineStore('travel', () => {
       case 'destinationTimezone':
         if (!formData.value.destinationTimezone) {
           errors.value.destinationTimezone = 'Destination timezone is required'
-        } else if (formData.value.destinationTimezone === formData.value.homeTimezone) {
+        }
+        else if (formData.value.destinationTimezone === formData.value.homeTimezone) {
           errors.value.destinationTimezone = 'Destination must be different from home timezone'
         }
         break
@@ -103,7 +106,8 @@ export const useTravelStore = defineStore('travel', () => {
       case 'departureDate':
         if (!formData.value.departureDate) {
           errors.value.departureDate = 'Departure date is required'
-        } else {
+        }
+        else {
           const departureDate = new Date(formData.value.departureDate)
           const today = new Date()
           today.setHours(0, 0, 0, 0)
@@ -119,7 +123,6 @@ export const useTravelStore = defineStore('travel', () => {
         }
         break
 
-
       case 'currentBedtime':
         if (!formData.value.currentBedtime) {
           errors.value.currentBedtime = 'Bedtime is required'
@@ -129,9 +132,11 @@ export const useTravelStore = defineStore('travel', () => {
       case 'currentWakeTime':
         if (!formData.value.currentWakeTime) {
           errors.value.currentWakeTime = 'Wake time is required'
-        } else if (sleepDuration.value < 4) {
+        }
+        else if (sleepDuration.value < 4) {
           errors.value.currentWakeTime = 'Sleep duration seems too short (less than 4 hours)'
-        } else if (sleepDuration.value > 14) {
+        }
+        else if (sleepDuration.value > 14) {
           errors.value.currentWakeTime = 'Sleep duration seems too long (more than 14 hours)'
         }
         break
@@ -184,11 +189,13 @@ export const useTravelStore = defineStore('travel', () => {
 
       travelPlan.value = plan
       return true
-    } catch (error) {
+    }
+    catch (error) {
       generationError.value = error instanceof Error ? error.message : 'Failed to generate plan'
       console.error('Error generating travel plan:', error)
       return false
-    } finally {
+    }
+    finally {
       isGenerating.value = false
     }
   }

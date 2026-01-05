@@ -1,34 +1,60 @@
 <template>
   <div class="form-field">
-    <label :for="id" class="form-label">
+    <label
+      :for="id"
+      class="form-label"
+    >
       {{ label }}
-      <span v-if="required" class="text-red-500">*</span>
+      <span
+        v-if="required"
+        class="text-red-500"
+      >*</span>
     </label>
 
     <select
       :id="id"
       :value="modelValue"
-      @change="handleChange"
-      @blur="handleBlur"
       class="form-select"
       :class="{ 'form-select-error': error }"
       :aria-describedby="error ? `${id}-error` : undefined"
       :aria-invalid="!!error"
+      @change="handleChange"
+      @blur="handleBlur"
     >
-      <option value="" disabled>{{ placeholder }}</option>
+      <option
+        value=""
+        disabled
+      >
+        {{ placeholder }}
+      </option>
 
-      <optgroup v-for="region in groupedTimezones" :key="region.name" :label="region.name">
-        <option v-for="tz in region.timezones" :key="tz.value" :value="tz.value">
+      <optgroup
+        v-for="region in groupedTimezones"
+        :key="region.name"
+        :label="region.name"
+      >
+        <option
+          v-for="tz in region.timezones"
+          :key="tz.value"
+          :value="tz.value"
+        >
           {{ tz.label }} ({{ formatOffset(tz.offset) }})
         </option>
       </optgroup>
     </select>
 
-    <p v-if="error" :id="`${id}-error`" class="form-error">
+    <p
+      v-if="error"
+      :id="`${id}-error`"
+      class="form-error"
+    >
       {{ error }}
     </p>
 
-    <p v-if="helpText && !error" class="form-help">
+    <p
+      v-if="helpText && !error"
+      class="form-help"
+    >
       {{ helpText }}
     </p>
   </div>

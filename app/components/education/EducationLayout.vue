@@ -5,7 +5,10 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
           <div class="flex items-center gap-8">
-            <router-link to="/" class="flex items-center gap-2 text-xl font-bold text-gray-900">
+            <router-link
+              to="/"
+              class="flex items-center gap-2 text-xl font-bold text-gray-900"
+            >
               <span class="text-2xl">✈️</span>
               <span class="hidden sm:inline">Voyage Clock</span>
             </router-link>
@@ -40,14 +43,18 @@
           <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             {{ title }}
           </h1>
-          <p v-if="subtitle" class="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p
+            v-if="subtitle"
+            class="text-xl text-gray-600 max-w-2xl mx-auto"
+          >
             {{ subtitle }}
           </p>
         </div>
 
         <!-- Article Content -->
         <div class="bg-white rounded-xl shadow-md p-6 md:p-10">
-          <div class="prose prose-lg prose-slate max-w-none
+          <div
+            class="prose prose-lg prose-slate max-w-none
                       prose-headings:font-bold prose-headings:tracking-tight
                       prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
                       prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
@@ -61,14 +68,20 @@
                       prose-blockquote:border-l-blue-500 prose-blockquote:bg-blue-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-lg
                       prose-code:text-blue-600 prose-code:bg-blue-50 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:font-mono prose-code:text-sm
                       prose-pre:bg-gray-900 prose-pre:text-gray-100
-                      prose-img:rounded-lg prose-img:shadow-md">
+                      prose-img:rounded-lg prose-img:shadow-md"
+          >
             <slot />
           </div>
         </div>
 
         <!-- Related Topics -->
-        <div v-if="relatedTopics && relatedTopics.length > 0" class="mt-12">
-          <h2 class="text-2xl font-bold text-gray-900 mb-6">Related Topics</h2>
+        <div
+          v-if="relatedTopics && relatedTopics.length > 0"
+          class="mt-12"
+        >
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">
+            Related Topics
+          </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <router-link
               v-for="topic in relatedTopics"
@@ -91,7 +104,9 @@
 
         <!-- Call to Action -->
         <div class="mt-12 bg-blue-50 rounded-xl p-8 text-center border border-blue-100">
-          <h2 class="text-2xl font-bold text-gray-900 mb-2">Ready to Apply This Knowledge?</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-2">
+            Ready to Apply This Knowledge?
+          </h2>
           <p class="text-gray-600 mb-6">
             Create a personalized jet lag prevention plan for your next trip.
           </p>

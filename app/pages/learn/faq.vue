@@ -225,7 +225,7 @@
     <h3>I'm pregnant—what jet lag strategies are safe?</h3>
     <p>
       Most non-pharmaceutical strategies are safe: <strong>light exposure, sleep timing, meal timing,
-      exercise</strong>. However, <strong>avoid melatonin</strong> during pregnancy. Stay very well
+        exercise</strong>. However, <strong>avoid melatonin</strong> during pregnancy. Stay very well
       hydrated, wear compression socks, and move frequently during flights. Consult your OB-GYN
       before traveling.
     </p>
@@ -360,7 +360,7 @@ useSeoMeta({
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/faq' }
-  ]
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/faq' },
+  ],
 })
 </script>
