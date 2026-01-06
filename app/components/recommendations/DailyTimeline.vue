@@ -1,22 +1,22 @@
 <template>
-  <div class="daily-timeline">
-    <div class="timeline-header">
-      <div class="timeline-date">
-        <div class="day-number">
+  <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+    <div class="flex justify-between items-center p-5 bg-gradient-to-br from-gray-100 to-gray-200 border-b-2 border-gray-300 flex-wrap gap-4 max-sm:flex-col max-sm:items-start">
+      <div class="flex items-center gap-4 w-full">
+        <div class="text-sm font-bold text-indigo-500 bg-indigo-50 px-3 py-1.5 rounded-lg border border-indigo-200">
           <span v-if="phase === 'pre-travel'">Day {{ Math.abs(recommendation.dayNumber) }}</span>
           <span v-else>Day {{ recommendation.dayNumber }}</span>
         </div>
-        <div class="date-label">
+        <div class="text-base font-semibold text-gray-900">
           {{ formatDateLabel }}
         </div>
       </div>
-      <div class="sleep-summary">
-        <span class="sleep-icon">😴</span>
-        <span class="sleep-time">{{ recommendation.sleep.bedtime }} - {{ recommendation.sleep.wakeTime }}</span>
+      <div class="flex items-center gap-2 text-sm font-medium text-gray-600 bg-white px-4 py-2 rounded-lg border border-gray-300 w-full justify-center max-sm:w-full">
+        <span class="text-xl">😴</span>
+        <span>{{ recommendation.sleep.bedtime }} - {{ recommendation.sleep.wakeTime }}</span>
       </div>
     </div>
 
-    <div class="timeline-content">
+    <div class="p-6 flex flex-col gap-4 max-sm:p-4">
       <!-- Sleep -->
       <RecommendationCard
         title="Sleep Schedule"
@@ -99,15 +99,16 @@
       <!-- General Notes -->
       <div
         v-if="recommendation.generalNotes && recommendation.generalNotes.length > 0"
-        class="general-notes"
+        class="mt-2 p-4 bg-yellow-100 border border-yellow-400 rounded-lg"
       >
-        <h4 class="notes-title">
+        <h4 class="text-sm font-semibold text-yellow-900 mb-2">
           💡 Additional Tips
         </h4>
-        <ul class="notes-list">
+        <ul class="list-disc pl-6 text-yellow-800 text-sm leading-relaxed">
           <li
             v-for="(note, index) in recommendation.generalNotes"
             :key="index"
+            class="mb-1"
           >
             {{ note }}
           </li>
@@ -160,125 +161,3 @@ function capitalizeFirst(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 </script>
-
-<style scoped>
-.daily-timeline {
-  background-color: #ffffff;
-  border-radius: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e5e7eb;
-  overflow: hidden;
-}
-
-.timeline-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.25rem 1.5rem;
-  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-  border-bottom: 2px solid #d1d5db;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.timeline-date {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.day-number {
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: #6366f1;
-  background-color: #eef2ff;
-  padding: 0.375rem 0.75rem;
-  border-radius: 0.5rem;
-  border: 1px solid #c7d2fe;
-}
-
-.date-label {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #111827;
-}
-
-.sleep-summary {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #4b5563;
-  background-color: #ffffff;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid #d1d5db;
-}
-
-.sleep-icon {
-  font-size: 1.25rem;
-}
-
-.timeline-content {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.general-notes {
-  margin-top: 0.5rem;
-  padding: 1rem;
-  background-color: #fef3c7;
-  border: 1px solid #fbbf24;
-  border-radius: 0.5rem;
-}
-
-.notes-title {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #92400e;
-  margin-bottom: 0.5rem;
-}
-
-.notes-list {
-  list-style: disc;
-  padding-left: 1.5rem;
-  color: #78350f;
-  font-size: 0.875rem;
-  line-height: 1.6;
-}
-
-.notes-list li {
-  margin-bottom: 0.25rem;
-}
-
-@media (max-width: 640px) {
-  .timeline-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .timeline-date {
-    width: 100%;
-  }
-
-  .sleep-summary {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .timeline-content {
-    padding: 1rem;
-  }
-}
-
-@media print {
-  .daily-timeline {
-    box-shadow: none;
-    page-break-inside: avoid;
-    margin-bottom: 1rem;
-  }
-}
-</style>
