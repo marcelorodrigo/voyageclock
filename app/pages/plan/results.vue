@@ -2,25 +2,58 @@
   <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8">
     <div class="max-w-7xl mx-auto px-4">
       <!-- Loading State -->
-      <div v-if="travelStore.isGenerating" class="loading-container">
-        <div class="loading-spinner"></div>
-        <p class="loading-text">Generating your personalized plan...</p>
+      <div
+        v-if="travelStore.isGenerating"
+        class="loading-container"
+      >
+        <div class="loading-spinner" />
+        <p class="loading-text">
+          Generating your personalized plan...
+        </p>
       </div>
 
       <!-- Error State -->
-      <div v-else-if="travelStore.generationError" class="error-container">
-        <div class="error-icon">⚠️</div>
-        <h2 class="error-title">Unable to Generate Plan</h2>
-        <p class="error-message">{{ travelStore.generationError }}</p>
-        <button @click="goBack" class="btn btn-primary">Go Back</button>
+      <div
+        v-else-if="travelStore.generationError"
+        class="error-container"
+      >
+        <div class="error-icon">
+          ⚠️
+        </div>
+        <h2 class="error-title">
+          Unable to Generate Plan
+        </h2>
+        <p class="error-message">
+          {{ travelStore.generationError }}
+        </p>
+        <button
+          class="btn btn-primary"
+          @click="goBack"
+        >
+          Go Back
+        </button>
       </div>
 
       <!-- No Plan State -->
-      <div v-else-if="!travelStore.travelPlan" class="no-plan-container">
-        <div class="no-plan-icon">📋</div>
-        <h2 class="no-plan-title">No Plan Found</h2>
-        <p class="no-plan-message">Please fill out the travel form to generate your plan.</p>
-        <button @click="goBack" class="btn btn-primary">Create Plan</button>
+      <div
+        v-else-if="!travelStore.travelPlan"
+        class="no-plan-container"
+      >
+        <div class="no-plan-icon">
+          📋
+        </div>
+        <h2 class="no-plan-title">
+          No Plan Found
+        </h2>
+        <p class="no-plan-message">
+          Please fill out the travel form to generate your plan.
+        </p>
+        <button
+          class="btn btn-primary"
+          @click="goBack"
+        >
+          Create Plan
+        </button>
       </div>
 
       <!-- Plan Display -->
@@ -63,13 +96,13 @@ useSeoMeta({
   twitterTitle: 'Your Personalized Jet Lag Plan',
   twitterDescription: 'View your custom jet lag prevention plan with detailed recommendations for your journey.',
   twitterImage: 'https://voyageclock.pages.dev/og/results.png',
-  robots: 'noindex, nofollow'
+  robots: 'noindex, nofollow',
 })
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.pages.dev/plan/results' }
-  ]
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/plan/results' },
+  ],
 })
 </script>
 

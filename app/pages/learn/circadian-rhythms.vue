@@ -176,7 +176,7 @@ useSeoMeta({
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/circadian-rhythms' }
-  ]
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/circadian-rhythms' },
+  ],
 })
 </script>

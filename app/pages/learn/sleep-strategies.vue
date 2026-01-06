@@ -322,7 +322,7 @@ useSeoMeta({
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/sleep-strategies' }
-  ]
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/sleep-strategies' },
+  ],
 })
 </script>

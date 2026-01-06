@@ -1,7 +1,13 @@
 <template>
-  <form @submit.prevent="handleSubmit" class="travel-input-form" novalidate>
+  <form
+    class="travel-input-form"
+    novalidate
+    @submit.prevent="handleSubmit"
+  >
     <div class="form-header">
-      <h2 class="form-title">Plan Your Journey</h2>
+      <h2 class="form-title">
+        Plan Your Journey
+      </h2>
       <p class="form-subtitle">
         Enter your travel details to get personalized recommendations for minimizing jet lag.
       </p>
@@ -9,7 +15,9 @@
 
     <!-- Timezone Selection Section -->
     <section class="form-section">
-      <h3 class="section-title">Where are you traveling?</h3>
+      <h3 class="section-title">
+        Where are you traveling?
+      </h3>
 
       <TimezoneSelector
         id="home-timezone"
@@ -38,19 +46,30 @@
       />
 
       <!-- Timezone Info Display -->
-      <div v-if="showTimezoneInfo" class="timezone-info">
+      <div
+        v-if="showTimezoneInfo"
+        class="timezone-info"
+      >
         <div class="info-card">
           <span class="info-icon">{{ directionIcon }}</span>
           <div class="info-content">
-            <p class="info-label">Travel Direction</p>
-            <p class="info-value">{{ directionText }}</p>
+            <p class="info-label">
+              Travel Direction
+            </p>
+            <p class="info-value">
+              {{ directionText }}
+            </p>
           </div>
         </div>
         <div class="info-card">
           <span class="info-icon">🕐</span>
           <div class="info-content">
-            <p class="info-label">Time Difference</p>
-            <p class="info-value">{{ timeDifferenceText }}</p>
+            <p class="info-label">
+              Time Difference
+            </p>
+            <p class="info-value">
+              {{ timeDifferenceText }}
+            </p>
           </div>
         </div>
       </div>
@@ -58,7 +77,9 @@
 
     <!-- Travel Details Section -->
     <section class="form-section">
-      <h3 class="section-title">When are you traveling?</h3>
+      <h3 class="section-title">
+        When are you traveling?
+      </h3>
 
       <DateTimePicker
         id="departure"
@@ -96,8 +117,20 @@
 
     <!-- Form Actions -->
     <div class="form-actions">
-      <button type="button" @click="handleReset" class="btn btn-secondary">Reset Form</button>
-      <button type="submit" class="btn btn-primary" :disabled="!canSubmit">Generate My Plan</button>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        @click="handleReset"
+      >
+        Reset Form
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        :disabled="!canSubmit"
+      >
+        Generate My Plan
+      </button>
     </div>
   </form>
 </template>
@@ -115,10 +148,10 @@ const travelStore = useTravelStore()
 
 const showTimezoneInfo = computed(() => {
   return (
-    travelStore.formData.homeTimezone &&
-    travelStore.formData.destinationTimezone &&
-    travelStore.formData.homeTimezone !== travelStore.formData.destinationTimezone &&
-    travelStore.timezoneOffset !== 0
+    travelStore.formData.homeTimezone
+    && travelStore.formData.destinationTimezone
+    && travelStore.formData.homeTimezone !== travelStore.formData.destinationTimezone
+    && travelStore.timezoneOffset !== 0
   )
 })
 
@@ -144,17 +177,16 @@ const timeDifferenceText = computed(() => {
 
 const canSubmit = computed(() => {
   return (
-    travelStore.formData.homeTimezone !== '' &&
-    travelStore.formData.destinationTimezone !== '' &&
-    travelStore.formData.departureDate !== '' &&
-    Object.keys(travelStore.errors).length === 0
+    travelStore.formData.homeTimezone !== ''
+    && travelStore.formData.destinationTimezone !== ''
+    && travelStore.formData.departureDate !== ''
+    && Object.keys(travelStore.errors).length === 0
   )
 })
 
 function showError(field: keyof typeof travelStore.formData): boolean {
   return !!(travelStore.touched[field] && travelStore.errors[field])
 }
-
 
 async function handleSubmit() {
   if (travelStore.validateForm()) {

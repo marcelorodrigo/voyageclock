@@ -3,22 +3,43 @@
     <div class="card-header">
       <div class="card-title-group">
         <span class="card-icon">{{ icon }}</span>
-        <h3 class="card-title">{{ title }}</h3>
+        <h3 class="card-title">
+          {{ title }}
+        </h3>
       </div>
     </div>
 
     <div class="card-body">
-      <p v-if="description" class="card-description">{{ description }}</p>
+      <p
+        v-if="description"
+        class="card-description"
+      >
+        {{ description }}
+      </p>
 
-      <ul v-if="items && items.length > 0" class="card-list">
-        <li v-for="(item, index) in items" :key="index" class="card-list-item">
+      <ul
+        v-if="items && items.length > 0"
+        class="card-list"
+      >
+        <li
+          v-for="(item, index) in items"
+          :key="index"
+          class="card-list-item"
+        >
           {{ item }}
         </li>
       </ul>
 
-      <div v-if="notes" class="card-notes">
-        <p class="notes-label">Note:</p>
-        <p class="notes-text">{{ notes }}</p>
+      <div
+        v-if="notes"
+        class="card-notes"
+      >
+        <p class="notes-label">
+          Note:
+        </p>
+        <p class="notes-text">
+          {{ notes }}
+        </p>
       </div>
     </div>
   </div>
@@ -203,4 +224,3 @@ withDefaults(
   }
 }
 </style>
-

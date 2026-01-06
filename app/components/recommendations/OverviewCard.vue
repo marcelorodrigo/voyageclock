@@ -1,7 +1,9 @@
 <template>
   <div class="overview-card">
     <div class="card-header">
-      <h2 class="card-title">Trip Overview</h2>
+      <h2 class="card-title">
+        Trip Overview
+      </h2>
       <div :class="['difficulty-badge', difficultyClass]">
         {{ difficultyLabel }}
       </div>
@@ -9,59 +11,101 @@
 
     <div class="stats-grid">
       <div class="stat-item">
-        <div class="stat-icon">🏠</div>
+        <div class="stat-icon">
+          🏠
+        </div>
         <div class="stat-content">
-          <p class="stat-label">From</p>
-          <p class="stat-value">{{ formatTimezone(plan.homeTimezone) }}</p>
+          <p class="stat-label">
+            From
+          </p>
+          <p class="stat-value">
+            {{ formatTimezone(plan.homeTimezone) }}
+          </p>
         </div>
       </div>
 
       <div class="stat-item">
-        <div class="stat-icon">🌍</div>
+        <div class="stat-icon">
+          🌍
+        </div>
         <div class="stat-content">
-          <p class="stat-label">To</p>
-          <p class="stat-value">{{ formatTimezone(plan.destinationTimezone) }}</p>
+          <p class="stat-label">
+            To
+          </p>
+          <p class="stat-value">
+            {{ formatTimezone(plan.destinationTimezone) }}
+          </p>
         </div>
       </div>
 
       <div class="stat-item">
-        <div class="stat-icon">{{ directionIcon }}</div>
+        <div class="stat-icon">
+          {{ directionIcon }}
+        </div>
         <div class="stat-content">
-          <p class="stat-label">Direction</p>
-          <p class="stat-value">{{ directionText }}</p>
+          <p class="stat-label">
+            Direction
+          </p>
+          <p class="stat-value">
+            {{ directionText }}
+          </p>
         </div>
       </div>
 
       <div class="stat-item">
-        <div class="stat-icon">🕐</div>
+        <div class="stat-icon">
+          🕐
+        </div>
         <div class="stat-content">
-          <p class="stat-label">Time Difference</p>
-          <p class="stat-value">{{ timeDifferenceText }}</p>
+          <p class="stat-label">
+            Time Difference
+          </p>
+          <p class="stat-value">
+            {{ timeDifferenceText }}
+          </p>
         </div>
       </div>
 
       <div class="stat-item">
-        <div class="stat-icon">📅</div>
+        <div class="stat-icon">
+          📅
+        </div>
         <div class="stat-content">
-          <p class="stat-label">Departure</p>
-          <p class="stat-value">{{ formatDepartureDate }}</p>
+          <p class="stat-label">
+            Departure
+          </p>
+          <p class="stat-value">
+            {{ formatDepartureDate }}
+          </p>
         </div>
       </div>
 
       <div class="stat-item">
-        <div class="stat-icon">⏱️</div>
+        <div class="stat-icon">
+          ⏱️
+        </div>
         <div class="stat-content">
-          <p class="stat-label">Estimated Adjustment</p>
-          <p class="stat-value">{{ adjustmentText }}</p>
+          <p class="stat-label">
+            Estimated Adjustment
+          </p>
+          <p class="stat-value">
+            {{ adjustmentText }}
+          </p>
         </div>
       </div>
     </div>
 
     <div class="info-box">
-      <div class="info-icon">💡</div>
+      <div class="info-icon">
+        💡
+      </div>
       <div class="info-content">
-        <p class="info-title">Key Insight</p>
-        <p class="info-text">{{ keyInsight }}</p>
+        <p class="info-title">
+          Key Insight
+        </p>
+        <p class="info-text">
+          {{ keyInsight }}
+        </p>
       </div>
     </div>
   </div>
@@ -121,9 +165,9 @@ const difficultyClass = computed(() => {
 
 const difficultyLabel = computed(() => {
   const labels = {
-    easy: 'Easy Adjustment',
-    moderate: 'Moderate Adjustment',
-    hard: 'Challenging Adjustment',
+    'easy': 'Easy Adjustment',
+    'moderate': 'Moderate Adjustment',
+    'hard': 'Challenging Adjustment',
     'very-hard': 'Very Challenging',
   }
   return labels[difficultyLevel.value as keyof typeof labels]
@@ -320,4 +364,3 @@ function formatTimezone(tz: string): string {
   }
 }
 </style>
-

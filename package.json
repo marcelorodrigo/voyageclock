@@ -8,7 +8,12 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest",
+    "test:unit": "vitest --project unit",
+    "test:nuxt": "vitest --project nuxt"
   },
   "dependencies": {
     "@pinia/nuxt": "0.11.3",
@@ -20,7 +25,17 @@
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.19"
+    "@nuxt/eslint": "^1.12.1",
+    "@nuxt/eslint-config": "^1.12.1",
+    "@nuxt/test-utils": "^3.22.0",
+    "@tailwindcss/typography": "^0.5.19",
+    "@vue/test-utils": "^2.4.6",
+    "eslint": "^9.39.2",
+    "happy-dom": "^20.0.11",
+    "playwright-core": "^1.57.0",
+    "typescript": "^5.9.3",
+    "vite-plugin-eslint2": "^5.0.4",
+    "vitest": "^4.0.16"
   },
   "packageManager": "pnpm@10.26.2+sha512.0e308ff2005fc7410366f154f625f6631ab2b16b1d2e70238444dd6ae9d630a8482d92a451144debc492416896ed16f7b114a86ec68b8404b2443869e68ffda6"
 }

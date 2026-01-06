@@ -69,4 +69,16 @@ This document provides AI coding assistants with a concise knowledge base for pr
 
 ---
 
+## Required Linting Step
+
+After every change or implementation, you must run ESLint to check for formatting and issues:
+
+```
+pnpm lint
+```
+
+Resolve any reported problems before considering the change complete. This ensures code quality and consistency across the project.
+
+---
+
 **For AI agents:** Always ensure all changes conform to the domain types, and use the developer workflows above. When in doubt, reference the specific critical files above for the current project patterns.

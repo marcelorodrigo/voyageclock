@@ -6,13 +6,13 @@
           <span v-if="phase === 'pre-travel'">Day {{ Math.abs(recommendation.dayNumber) }}</span>
           <span v-else>Day {{ recommendation.dayNumber }}</span>
         </div>
-        <div class="date-label">{{ formatDateLabel }}</div>
+        <div class="date-label">
+          {{ formatDateLabel }}
+        </div>
       </div>
       <div class="sleep-summary">
         <span class="sleep-icon">😴</span>
-        <span class="sleep-time"
-          >{{ recommendation.sleep.bedtime }} - {{ recommendation.sleep.wakeTime }}</span
-        >
+        <span class="sleep-time">{{ recommendation.sleep.bedtime }} - {{ recommendation.sleep.wakeTime }}</span>
       </div>
     </div>
 
@@ -97,10 +97,20 @@
       />
 
       <!-- General Notes -->
-      <div v-if="recommendation.generalNotes && recommendation.generalNotes.length > 0" class="general-notes">
-        <h4 class="notes-title">💡 Additional Tips</h4>
+      <div
+        v-if="recommendation.generalNotes && recommendation.generalNotes.length > 0"
+        class="general-notes"
+      >
+        <h4 class="notes-title">
+          💡 Additional Tips
+        </h4>
         <ul class="notes-list">
-          <li v-for="(note, index) in recommendation.generalNotes" :key="index">{{ note }}</li>
+          <li
+            v-for="(note, index) in recommendation.generalNotes"
+            :key="index"
+          >
+            {{ note }}
+          </li>
         </ul>
       </div>
     </div>
@@ -272,4 +282,3 @@ function capitalizeFirst(str: string): string {
   }
 }
 </style>
-

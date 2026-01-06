@@ -466,7 +466,7 @@ useSeoMeta({
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/nutrition-supplements' }
-  ]
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/nutrition-supplements' },
+  ],
 })
 </script>

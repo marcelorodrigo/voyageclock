@@ -93,7 +93,7 @@ export function getCommonTimezones(): TimezoneOption[] {
   ]
 
   // Add offset to each timezone
-  return timezones.map((tz) => ({
+  return timezones.map(tz => ({
     ...tz,
     offset: getTimezoneOffset(tz.value),
   }))

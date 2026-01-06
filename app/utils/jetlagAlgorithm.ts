@@ -90,7 +90,6 @@ function calculateAdjustmentDays(timezoneOffsetHours: number): number {
   return Math.min(days, MAX_PRE_TRAVEL_DAYS)
 }
 
-
 /**
  * Calculate sleep duration in hours
  */
@@ -336,7 +335,7 @@ function generateArrivalDayNotes(timezoneOffset: number): string[] {
 
   notes.push(
     'Eat meals at normal local times and stay well hydrated.',
-    'If you need a nap, keep it short (20 minutes max) and before 3 PM local time.'
+    'If you need a nap, keep it short (20 minutes max) and before 3 PM local time.',
   )
 
   return notes
@@ -363,7 +362,8 @@ function generateLightExposureWindows(
           'Seek bright light immediately. Go outside, open curtains, or use a light therapy lamp (10,000 lux).',
       },
     ]
-  } else {
+  }
+  else {
     // For westward: evening light delays the clock
     const startTime = addHoursToTime(wakeTime, 10) // Late afternoon/evening
     const endTime = addHoursToTime(startTime, LIGHT_EXPOSURE_DURATION)
@@ -400,7 +400,8 @@ function generateLightAvoidanceWindows(
           'Dim lights, wear blue-blocking glasses, avoid screens. This helps shift your clock earlier.',
       },
     ]
-  } else {
+  }
+  else {
     // For westward: avoid early morning light
     const startTime = addHoursToTime(bedtime, -8) // Before wake time
     const endTime = addHoursToTime(startTime, LIGHT_AVOIDANCE_DURATION)
@@ -438,7 +439,8 @@ function generateExerciseRecommendation(
       notes:
         'Morning exercise combined with light exposure is powerful for advancing your clock. Even a 20-minute walk helps.',
     }
-  } else {
+  }
+  else {
     // Evening exercise helps delay the clock
     const startTime = addHoursToTime(wakeTime, 9)
     const endTime = addHoursToTime(startTime, 1)
@@ -513,7 +515,6 @@ function generateSleepNotes(dayNumber: number, direction: 'east' | 'west', shift
   return `Shift your sleep ${formattedShiftRate} hours ${action} than usual. This gradual adjustment reduces jet lag.`
 }
 
-
 /**
  * Generate general notes for pre-travel phase
  */
@@ -530,7 +531,8 @@ function generatePreTravelNotes(
     notes.push(
       'Eastward travel tip: The key is advancing your clock gradually with morning light and early bedtimes.',
     )
-  } else {
+  }
+  else {
     notes.push(
       'Westward travel tip: The key is delaying your clock with evening light and staying up later.',
     )
@@ -543,14 +545,13 @@ function generatePreTravelNotes(
   return notes
 }
 
-
 /**
  * Generate travel day notes
  */
 function generateTravelDayNotes(timezoneOffset: number): string[] {
   const notes: string[] = [
     'Travel day! Your main goal is to start thinking in destination time.',
-    'Set your watch/phone to destination time as soon as you board.'
+    'Set your watch/phone to destination time as soon as you board.',
   ]
 
   if (Math.abs(timezoneOffset) >= 6) {
@@ -574,7 +575,8 @@ function generateFlightSleepStrategy(timezoneOffset: number, direction: 'east' |
 
   if (direction === 'east') {
     return `Eastward flight: Try to sleep on the plane if it's nighttime at your destination. Use eye mask, earplugs, and neck pillow. Avoid sleep if it's daytime at destination.`
-  } else {
+  }
+  else {
     return `Westward flight: Stay awake during the flight if possible. If you must sleep, keep it short (1-2 hours max). Watch movies, read, walk around.`
   }
 }
@@ -585,7 +587,8 @@ function generateFlightSleepStrategy(timezoneOffset: number, direction: 'east' |
 function generateFlightLightStrategy(direction: 'east' | 'west'): string {
   if (direction === 'east') {
     return 'Wear sunglasses during the first half of the flight. Remove them and seek light during the second half as you approach destination morning.'
-  } else {
+  }
+  else {
     return 'Keep lights bright during the flight. Read, watch screens. Avoid darkness until close to landing if it will be nighttime.'
   }
 }
@@ -594,7 +597,7 @@ function generateFlightLightStrategy(direction: 'east' | 'west'): string {
  * Generate flight meal strategy
  */
 function generateFlightMealStrategy(): string {
-  return "Eat meals according to destination time, not your home time. Decline meal service if it's not mealtime at your destination. Stay hydrated with water."
+  return 'Eat meals according to destination time, not your home time. Decline meal service if it\'s not mealtime at your destination. Stay hydrated with water.'
 }
 
 /**
@@ -603,4 +606,3 @@ function generateFlightMealStrategy(): string {
 function generatePlanId(): string {
   return `plan-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`
 }
-
