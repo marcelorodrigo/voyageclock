@@ -1,12 +1,12 @@
 <template>
-  <div class="sleep-schedule-input">
-    <h3 class="section-title">
+  <div class="space-y-4">
+    <h3 class="text-lg font-semibold text-neutral-900 mb-1">
       Your Current Sleep Schedule
     </h3>
-    <p class="section-description">
+    <p class="text-sm text-gray-600">
       This helps us create personalized recommendations for adapting to your destination timezone.
     </p>
-    <div class="sleep-inputs">
+    <div class="grid gap-4 md:grid-cols-2">
       <SleepTimeInput
         :id="`${id}-bedtime`"
         :model-value="bedtime"
@@ -85,28 +85,3 @@ function onWakeTimeChange(value: string) {
   emit('update:wakeTime', value)
 }
 </script>
-
-<style scoped>
-.sleep-schedule-input > * + * {
-  margin-top: 1rem;
-}
-.section-title {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #111827;
-}
-.section-description {
-  font-size: 0.875rem;
-  color: #4b5563;
-}
-.sleep-inputs {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-@media (min-width: 768px) {
-  .sleep-inputs {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-</style>

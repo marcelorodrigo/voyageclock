@@ -1,8 +1,8 @@
 <template>
-  <div class="form-field">
+  <div class="mb-0">
     <label
       :for="id"
-      class="form-label"
+      class="block text-sm font-medium text-gray-700 mb-2"
     >
       {{ label }}
       <span
@@ -14,8 +14,10 @@
       :id="id"
       type="time"
       :value="modelValue"
-      class="form-input"
-      :class="{ 'form-input-error': error }"
+      :class="[
+        'w-full px-3 py-2 border rounded-md shadow-sm transition focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 bg-white',
+        error ? 'border-red-500' : 'border-gray-300',
+      ]"
       :aria-describedby="error ? `${id}-error` : undefined"
       :aria-invalid="!!error"
       @input="onInput"
@@ -24,7 +26,7 @@
     <p
       v-if="error"
       :id="`${id}-error`"
-      class="form-error"
+      class="mt-2 text-sm text-red-600"
     >
       {{ error }}
     </p>
@@ -49,40 +51,3 @@ function onInput(event: Event) {
   emit('update:modelValue', (event.target as HTMLInputElement).value)
 }
 </script>
-
-<style scoped>
-.form-field {
-  margin-bottom: 0; /* mb-0 */
-}
-.form-label {
-  display: block;
-  font-size: 0.875rem; /* text-sm */
-  font-weight: 500;
-  color: #374151; /* gray-700 */
-  margin-bottom: 0.5rem;
-}
-.form-input {
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-  background-color: #fff;
-}
-.form-input:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
-}
-.form-input-error {
-  border-color: #ef4444;
-}
-.form-error {
-  margin-top: 0.5rem;
-  font-size: 0.875rem;
-  color: #dc2626;
-}
-</style>
