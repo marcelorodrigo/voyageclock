@@ -1,8 +1,8 @@
 <template>
-  <div class="form-field">
+  <div class="mb-6">
     <label
       :for="id"
-      class="form-label"
+      class="block text-sm font-medium text-gray-700 mb-2"
     >
       {{ label }}
       <span
@@ -11,15 +11,17 @@
       >*</span>
     </label>
 
-    <div class="datetime-inputs">
-      <div class="datetime-input-group">
+    <div class="flex gap-3">
+      <div class="flex-1">
         <input
           :id="id"
           type="date"
           :value="dateValue"
           :min="minDate"
-          class="form-input"
-          :class="{ 'form-input-error': error }"
+          :class="[
+            'w-full px-3 py-2 border rounded-md shadow-sm transition focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 bg-white',
+            error ? 'border-red-500' : 'border-gray-300',
+          ]"
           :aria-describedby="error ? `${id}-error` : undefined"
           :aria-invalid="!!error"
           @input="handleDateChange"
@@ -29,14 +31,16 @@
 
       <div
         v-if="includeTime"
-        class="datetime-input-group"
+        class="flex-1"
       >
         <input
           :id="`${id}-time`"
           type="time"
           :value="timeValue"
-          class="form-input"
-          :class="{ 'form-input-error': error }"
+          :class="[
+            'w-full px-3 py-2 border rounded-md shadow-sm transition focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 bg-white',
+            error ? 'border-red-500' : 'border-gray-300',
+          ]"
           @input="handleTimeChange"
           @blur="handleBlur"
         >
@@ -46,14 +50,14 @@
     <p
       v-if="error"
       :id="`${id}-error`"
-      class="form-error"
+      class="mt-2 text-sm text-red-600"
     >
       {{ error }}
     </p>
 
     <p
       v-if="helpText && !error"
-      class="form-help"
+      class="mt-2 text-sm text-gray-500"
     >
       {{ helpText }}
     </p>
@@ -102,60 +106,3 @@ function handleBlur() {
   emit('blur')
 }
 </script>
-
-<style scoped>
-.form-field {
-  margin-bottom: 1.5rem; /* mb-6 */
-}
-
-.form-label {
-  display: block;
-  font-size: 0.875rem; /* text-sm */
-  font-weight: 500;
-  color: #374151; /* gray-700 */
-  margin-bottom: 0.5rem;
-}
-
-.datetime-inputs {
-  display: flex;
-  gap: 0.75rem; /* gap-3 */
-}
-
-.datetime-input-group {
-  flex: 1 1 0%; /* flex-1 */
-}
-
-.form-input {
-  width: 100%;
-  padding: 0.5rem 0.75rem; /* px-3 py-2 */
-  border: 1px solid #d1d5db; /* gray-300 */
-  border-radius: 0.375rem; /* rounded-md */
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03); /* shadow-sm */
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-  background-color: #ffffff;
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: #3b82f6; /* blue-500 */
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08);
-}
-
-.form-input-error {
-  border-color: #ef4444; /* red-500 */
-}
-
-.form-error {
-  margin-top: 0.5rem;
-  font-size: 0.875rem;
-  color: #dc2626; /* red-600 */
-}
-
-.form-help {
-  margin-top: 0.5rem;
-  font-size: 0.875rem;
-  color: #6b7280; /* gray-500 */
-}
-</style>
