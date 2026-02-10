@@ -176,11 +176,12 @@ const timeDifferenceText = computed(() => {
 })
 
 const canSubmit = computed(() => {
+  const hasActualErrors = Object.values(travelStore.errors).some(error => error !== undefined)
   return (
     travelStore.formData.homeTimezone !== ''
     && travelStore.formData.destinationTimezone !== ''
     && travelStore.formData.departureDate !== ''
-    && Object.keys(travelStore.errors).length === 0
+    && !hasActualErrors
   )
 })
 
