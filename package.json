@@ -37,5 +37,5 @@
     "vite-plugin-eslint2": "^5.0.4",
     "vitest": "^4.0.18"
   },
-  "packageManager": "pnpm@10.29.2"
+  "packageManager": "pnpm@10.29.2+sha512-vvQ/p1nZH9LaSzGaWg0T73pFu5haPXNCBYRw+dIFGjuoZ05ilnJlRobvlEOtE6gtor657rPgIhyHuBVP/510uA=="
 }
