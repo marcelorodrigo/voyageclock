@@ -16,7 +16,11 @@ jobs:
       - uses: pnpm/action-setup@v4
         name: Configure PNPM
         with:
-          enable-corepack: true
+          version: 10
+      - name: Enable Corepack
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.29.2 --activate
       - name: Setup node env 🏗
         uses: actions/setup-node@v6
         with:
