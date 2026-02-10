@@ -62,7 +62,8 @@ export const useTravelStore = defineStore('travel', () => {
   })
 
   const isFormValid = computed(() => {
-    return Object.keys(errors.value).length === 0 && hasRequiredFields()
+    const hasActualErrors = Object.values(errors.value).some(error => error !== undefined)
+    return !hasActualErrors && hasRequiredFields()
   })
 
   // Helper to check if all required fields are filled
