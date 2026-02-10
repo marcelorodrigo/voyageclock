@@ -15,6 +15,8 @@ jobs:
           show-progress: false
       - uses: pnpm/action-setup@v4
         name: Configure PNPM
+        with:
+          enable-corepack: true
       - name: Setup node env 🏗
         uses: actions/setup-node@v6
         with:
