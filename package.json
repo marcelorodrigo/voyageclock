@@ -25,7 +25,7 @@
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^1.12.1",
+    "@nuxt/eslint": "^1.15.1",
     "@nuxt/eslint-config": "^1.15.1",
     "@nuxt/test-utils": "^4.0.0",
     "@tailwindcss/typography": "^0.5.19",
