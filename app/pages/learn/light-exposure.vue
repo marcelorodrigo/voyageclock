@@ -284,16 +284,17 @@ const relatedTopics: RelatedTopic[] = [
 ]
 
 useSeoMeta({
-  title: 'Light Exposure Science - Strategic Light for Jet Lag Prevention | Voyage Clock',
-  description: 'Learn how to use light—the most powerful circadian tool—to minimize jet lag. Discover phase response curves, optimal timing, light intensity, and blue light blocking strategies for travelers.',
-  ogTitle: 'Light Exposure Science - Master Circadian Rhythm Shifting | Voyage Clock',
-  ogDescription: 'Discover how strategic light exposure is the most effective tool for shifting your body clock and preventing jet lag.',
+  title: 'Light Exposure Science - Jet Lag Prevention',
+  description: 'Learn how to use light—the most powerful circadian tool—to minimize jet lag. Discover phase response curves, optimal timing, and light strategies.',
+  ogTitle: 'Light Exposure Science - Master Circadian Rhythm',
+  ogDescription: 'Discover how strategic light exposure is the most effective tool for shifting your body clock.',
   ogImage: 'https://voyageclock.pages.dev/og/light.png',
   ogUrl: 'https://voyageclock.pages.dev/learn/light-exposure',
   ogType: 'article',
+  ogLocale: 'en_US',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Light Exposure Science for Jet Lag Prevention',
-  twitterDescription: 'Master the use of light—the most powerful tool for adjusting your circadian rhythm and minimizing jet lag.',
+  twitterDescription: 'Master the use of light—the most powerful tool for adjusting your circadian rhythm.',
   twitterImage: 'https://voyageclock.pages.dev/og/light.png',
 })
 
@@ -301,5 +302,24 @@ useHead({
   link: [
     { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/light-exposure' },
   ],
+})
+
+useJsonld({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': 'Light Exposure Science',
+  'description': 'Learn how to use light—the most powerful circadian tool—to minimize jet lag.',
+  'url': 'https://voyageclock.pages.dev/learn/light-exposure',
+  'image': 'https://voyageclock.pages.dev/og/light.png',
+  'datePublished': '2025-01-01',
+  'dateModified': '2026-03-01',
+  'author': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
 })
 </script>

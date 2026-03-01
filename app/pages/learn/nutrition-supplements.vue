@@ -451,16 +451,17 @@ const relatedTopics: RelatedTopic[] = [
 ]
 
 useSeoMeta({
-  title: 'Nutrition & Supplements for Jet Lag Prevention | Voyage Clock',
-  description: 'Learn strategic meal timing, caffeine management, melatonin supplementation, and nutritional approaches to minimize jet lag. Discover evidence-based eating strategies, hydration tips, and supplement guidance for travelers.',
-  ogTitle: 'Nutrition & Supplements - Jet Lag Prevention | Voyage Clock',
-  ogDescription: 'Master meal timing, caffeine strategies, and melatonin use to support your circadian rhythm adjustment and minimize jet lag symptoms.',
+  title: 'Nutrition & Supplements for Jet Lag',
+  description: 'Learn meal timing, caffeine management, melatonin use, and nutritional approaches to minimize jet lag. Evidence-based eating strategies for travelers.',
+  ogTitle: 'Nutrition & Supplements - Jet Lag Prevention',
+  ogDescription: 'Master meal timing, caffeine strategies, and melatonin use to support circadian adjustment.',
   ogImage: 'https://voyageclock.pages.dev/og/nutrition.png',
   ogUrl: 'https://voyageclock.pages.dev/learn/nutrition-supplements',
   ogType: 'article',
+  ogLocale: 'en_US',
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Nutrition & Supplements for Jet Lag Prevention',
-  twitterDescription: 'Discover how meal timing, caffeine, melatonin, and nutrition can help minimize jet lag and support circadian adjustment.',
+  twitterTitle: 'Nutrition & Supplements for Jet Lag',
+  twitterDescription: 'Discover how meal timing, caffeine, melatonin, and nutrition can help minimize jet lag.',
   twitterImage: 'https://voyageclock.pages.dev/og/nutrition.png',
 })
 
@@ -468,5 +469,24 @@ useHead({
   link: [
     { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/nutrition-supplements' },
   ],
+})
+
+useJsonld({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': 'Nutrition & Supplements for Jet Lag',
+  'description': 'Learn strategic meal timing, caffeine management, and melatonin supplementation for jet lag.',
+  'url': 'https://voyageclock.pages.dev/learn/nutrition-supplements',
+  'image': 'https://voyageclock.pages.dev/og/nutrition.png',
+  'datePublished': '2025-01-01',
+  'dateModified': '2026-03-01',
+  'author': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
 })
 </script>

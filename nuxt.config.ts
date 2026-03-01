@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
 
-  modules: ['@nuxt/eslint', '@nuxt/test-utils/module'],
+  modules: ['@nuxt/eslint', '@nuxt/test-utils/module', 'nuxt-jsonld'],
   devtools: { enabled: true },
 
   app: {
@@ -34,5 +34,10 @@ export default defineNuxtConfig({
     config: {
       stylistic: true, // turn on code formatting
     },
+  },
+
+  jsonld: {
+    inject: true,
+    compact: true,
   },
 })

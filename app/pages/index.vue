@@ -197,16 +197,17 @@
 <script setup lang="ts">
 // Home page - landing page for the application
 useSeoMeta({
-  title: 'Voyage Clock - Science-Based Jet Lag Prevention & Travel Planning',
-  description: 'Minimize jet lag with personalized, science-based travel recommendations. Get customized light exposure timing, sleep schedule adjustments, and evidence-based strategies for your trip.',
+  title: 'Voyage Clock: Beat Jet Lag with Science',
+  description: 'Personalized, science-based jet lag prevention plans. Light exposure timing, sleep schedules, and evidence-based travel strategies.',
   ogTitle: 'Voyage Clock - Beat Jet Lag with Science',
-  ogDescription: 'Get a personalized adaptation plan with light exposure timing, sleep adjustments, and proven strategies to feel your best when traveling across time zones.',
+  ogDescription: 'Get a personalized adaptation plan with light exposure timing, sleep adjustments, and proven strategies to feel your best when traveling.',
   ogImage: 'https://voyageclock.pages.dev/og/home.png',
   ogUrl: 'https://voyageclock.pages.dev',
   ogType: 'website',
+  ogLocale: 'en_US',
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Voyage Clock - Science-Based Jet Lag Prevention',
-  twitterDescription: 'Minimize jet lag with personalized, evidence-based travel recommendations. Get your customized adaptation plan today.',
+  twitterTitle: 'Voyage Clock: Beat Jet Lag with Science',
+  twitterDescription: 'Minimize jet lag with personalized, evidence-based travel recommendations.',
   twitterImage: 'https://voyageclock.pages.dev/og/home.png',
 })
 
@@ -214,5 +215,25 @@ useHead({
   link: [
     { rel: 'canonical', href: 'https://voyageclock.pages.dev' },
   ],
+})
+
+useJsonld({
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  'name': 'Voyage Clock',
+  'description': 'Science-based jet lag prevention and personalized travel adaptation plans.',
+  'url': 'https://voyageclock.pages.dev',
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
+  'potentialAction': {
+    '@type': 'SearchAction',
+    'target': {
+      '@type': 'EntryPoint',
+      'urlTemplate': 'https://voyageclock.pages.dev/plan',
+    },
+    'query-input': 'required name=travel-details',
+  },
 })
 </script>

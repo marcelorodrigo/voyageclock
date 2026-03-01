@@ -110,16 +110,17 @@ const relatedTopics: RelatedTopic[] = [
 ]
 
 useSeoMeta({
-  title: 'Travel Day Tips - Practical Flight Management Strategies | Voyage Clock',
-  description: 'Get practical strategies for managing long flights and minimizing jet lag on your journey. Learn expert tips for before departure, during flight, and after arrival to optimize your travel experience.',
-  ogTitle: 'Travel Day Tips - Managing Long Flights | Voyage Clock',
-  ogDescription: 'Master the art of long-haul travel with practical tips for sleep management, hydration, comfort, and arrival strategies.',
+  title: 'Travel Day Tips - Flight Management',
+  description: 'Get practical strategies for managing long flights and minimizing jet lag. Expert tips for before departure, during flight, and after arrival.',
+  ogTitle: 'Travel Day Tips - Managing Long Flights',
+  ogDescription: 'Master the art of long-haul travel with practical tips for sleep, hydration, and arrival.',
   ogImage: 'https://voyageclock.pages.dev/og/travel-tips.png',
   ogUrl: 'https://voyageclock.pages.dev/learn/travel-day-tips',
   ogType: 'article',
+  ogLocale: 'en_US',
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Travel Day Tips for Jet Lag Prevention',
-  twitterDescription: 'Practical advice for managing sleep, hydration, and comfort during long flights to minimize jet lag.',
+  twitterTitle: 'Travel Day Tips for Jet Lag',
+  twitterDescription: 'Practical advice for managing sleep and comfort during long flights.',
   twitterImage: 'https://voyageclock.pages.dev/og/travel-tips.png',
 })
 
@@ -127,5 +128,24 @@ useHead({
   link: [
     { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/travel-day-tips' },
   ],
+})
+
+useJsonld({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': 'Travel Day Tips',
+  'description': 'Practical strategies for managing long flights and minimizing jet lag.',
+  'url': 'https://voyageclock.pages.dev/learn/travel-day-tips',
+  'image': 'https://voyageclock.pages.dev/og/travel-tips.png',
+  'datePublished': '2025-01-01',
+  'dateModified': '2026-03-01',
+  'author': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
 })
 </script>

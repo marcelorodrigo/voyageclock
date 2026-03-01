@@ -458,16 +458,17 @@ const relatedTopics = [
 ]
 
 useSeoMeta({
-  title: 'Scientific References - Research Behind Jet Lag Prevention | Voyage Clock',
-  description: 'Explore peer-reviewed research, sleep medicine guidelines, and circadian rhythm studies that form the foundation of our jet lag prevention recommendations. Evidence-based travel strategies backed by science.',
-  ogTitle: 'Scientific References - The Research Behind Our Recommendations | Voyage Clock',
-  ogDescription: 'Discover the peer-reviewed studies and circadian rhythm research supporting our evidence-based jet lag prevention strategies.',
+  title: 'Scientific References - Research Behind Jet Lag Prevention',
+  description: 'Explore peer-reviewed research and circadian rhythm studies that form the foundation of our jet lag prevention recommendations.',
+  ogTitle: 'Scientific References - The Research Behind Our Recommendations',
+  ogDescription: 'Discover the peer-reviewed studies and circadian rhythm research supporting our jet lag strategies.',
   ogImage: 'https://voyageclock.pages.dev/og/references.png',
   ogUrl: 'https://voyageclock.pages.dev/learn/scientific-references',
   ogType: 'article',
+  ogLocale: 'en_US',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Scientific References for Jet Lag Prevention',
-  twitterDescription: 'Explore the peer-reviewed research and sleep science behind evidence-based jet lag prevention strategies.',
+  twitterDescription: 'Explore the peer-reviewed research and sleep science behind evidence-based jet lag prevention.',
   twitterImage: 'https://voyageclock.pages.dev/og/references.png',
 })
 
@@ -475,5 +476,24 @@ useHead({
   link: [
     { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/scientific-references' },
   ],
+})
+
+useJsonld({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': 'Scientific References',
+  'description': 'Peer-reviewed research and studies that form the foundation of jet lag prevention recommendations.',
+  'url': 'https://voyageclock.pages.dev/learn/scientific-references',
+  'image': 'https://voyageclock.pages.dev/og/references.png',
+  'datePublished': '2025-01-01',
+  'dateModified': '2026-03-01',
+  'author': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
 })
 </script>
