@@ -126,7 +126,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import type { TravelPlan } from '~/types/travel'
 import OverviewCard from './OverviewCard.vue'
 import DailyTimeline from './DailyTimeline.vue'
@@ -137,13 +137,14 @@ defineProps<{
 }>()
 
 const router = useRouter()
+const route = useRoute()
 
 function printPlan() {
   globalThis.print()
 }
 
 function editPlan() {
-  router.push({ name: 'plan' })
+  router.push({ name: 'plan', query: route.query })
 }
 </script>
 
