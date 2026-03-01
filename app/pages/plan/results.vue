@@ -101,10 +101,5 @@ useSeoMeta({
   twitterImage: 'https://voyageclock.pages.dev/og/results.png',
   robots: 'noindex, nofollow',
 })
-
-useHead({
-  link: [
-    { rel: 'canonical', href: 'https://voyageclock.pages.dev/plan/' },
-  ],
-})
 </script>
+
