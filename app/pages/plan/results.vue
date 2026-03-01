@@ -73,7 +73,7 @@ const travelPlan = useTravelPlan()
 
 onMounted(async () => {
   if (!travelPlan.hasValidParams()) {
-    router.push({ name: 'plan-input' })
+    router.push({ name: 'plan' })
     return
   }
 
@@ -83,7 +83,7 @@ onMounted(async () => {
 })
 
 function goBack() {
-  router.push({ name: 'plan-input' })
+  router.push({ name: 'plan' })
 }
 
 useSeoMeta({

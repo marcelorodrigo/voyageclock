@@ -154,7 +154,7 @@ function printPlan() {
 }
 
 function editPlan() {
-  router.push({ name: 'plan-input' })
+  router.push({ name: 'plan' })
 }
 </script>
 
