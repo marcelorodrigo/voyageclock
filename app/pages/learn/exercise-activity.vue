@@ -378,16 +378,17 @@ const relatedTopics: RelatedTopic[] = [
 ]
 
 useSeoMeta({
-  title: 'Exercise & Physical Activity for Jet Lag Prevention | Voyage Clock',
-  description: 'Learn how exercise timing and physical activity can help shift your circadian rhythm and reduce jet lag. Discover optimal workout timing, intensity levels, and movement strategies for travelers.',
-  ogTitle: 'Exercise & Physical Activity - Jet Lag Prevention | Voyage Clock',
-  ogDescription: 'Discover how strategic exercise timing can complement light exposure and sleep strategies to accelerate circadian rhythm adjustment.',
+  title: 'Exercise & Physical Activity for Jet Lag',
+  description: 'Learn how exercise timing helps shift your circadian rhythm and reduce jet lag. Discover optimal workout timing and movement strategies for travelers.',
+  ogTitle: 'Exercise & Physical Activity - Jet Lag Prevention',
+  ogDescription: 'Discover how strategic exercise timing can complement light exposure and sleep strategies.',
   ogImage: 'https://voyageclock.pages.dev/og/exercise.png',
   ogUrl: 'https://voyageclock.pages.dev/learn/exercise-activity',
   ogType: 'article',
+  ogLocale: 'en_US',
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Exercise & Physical Activity for Jet Lag Prevention',
-  twitterDescription: 'Learn how exercise timing affects your circadian rhythm and how to use physical activity to minimize jet lag.',
+  twitterTitle: 'Exercise & Physical Activity for Jet Lag',
+  twitterDescription: 'Learn how exercise timing affects your circadian rhythm and minimizes jet lag.',
   twitterImage: 'https://voyageclock.pages.dev/og/exercise.png',
 })
 
@@ -395,5 +396,24 @@ useHead({
   link: [
     { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/exercise-activity' },
   ],
+})
+
+useJsonld({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': 'Exercise & Physical Activity for Jet Lag',
+  'description': 'Learn how exercise timing and physical activity can help shift your circadian rhythm.',
+  'url': 'https://voyageclock.pages.dev/learn/exercise-activity',
+  'image': 'https://voyageclock.pages.dev/og/exercise.png',
+  'datePublished': '2025-01-01',
+  'dateModified': '2025-03-01',
+  'author': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
 })
 </script>

@@ -281,13 +281,14 @@
 <script setup lang="ts">
 // Education hub page - links to all educational content
 useSeoMeta({
-  title: 'Learn About Jet Lag & Circadian Rhythms - Educational Resources | Voyage Clock',
-  description: 'Explore comprehensive, science-based educational resources on jet lag, circadian rhythms, light exposure, sleep strategies, nutrition, and evidence-based travel health strategies.',
-  ogTitle: 'Understanding Jet Lag & Circadian Rhythms | Voyage Clock',
-  ogDescription: 'Discover the science behind jet lag and learn evidence-based strategies including light exposure, sleep optimization, exercise timing, and nutrition for better travel.',
+  title: 'Learn About Jet Lag & Circadian Rhythms',
+  description: 'Explore science-based educational resources on jet lag, circadian rhythms, light exposure, sleep strategies, and evidence-based travel health.',
+  ogTitle: 'Understanding Jet Lag & Circadian Rhythms',
+  ogDescription: 'Discover the science behind jet lag and learn evidence-based strategies including light exposure, sleep optimization, and nutrition.',
   ogImage: 'https://voyageclock.pages.dev/og/learn.png',
   ogUrl: 'https://voyageclock.pages.dev/learn/',
   ogType: 'website',
+  ogLocale: 'en_US',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Learn About Jet Lag & Circadian Rhythms',
   twitterDescription: 'Explore science-based educational resources on jet lag prevention and circadian rhythm optimization.',
@@ -298,5 +299,13 @@ useHead({
   link: [
     { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/' },
   ],
+})
+
+useJsonld({
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  'name': 'Jet Lag Education Center',
+  'description': 'Comprehensive educational resources about jet lag prevention, circadian rhythms, and science-based travel health strategies.',
+  'url': 'https://voyageclock.pages.dev/learn/',
 })
 </script>

@@ -345,16 +345,17 @@ const relatedTopics: RelatedTopic[] = [
 ]
 
 useSeoMeta({
-  title: 'Jet Lag FAQ - Common Questions Answered | Voyage Clock',
-  description: 'Get answers to frequently asked questions about jet lag, circadian rhythms, and travel health. Learn about eastward vs westward travel, adjustment times, melatonin use, and evidence-based strategies.',
-  ogTitle: 'Frequently Asked Questions About Jet Lag | Voyage Clock',
-  ogDescription: 'Quick answers to common questions about jet lag severity, recovery time, prevention strategies, and circadian rhythm science.',
+  title: 'Jet Lag FAQ - Common Questions Answered',
+  description: 'Get answers to common jet lag questions about eastward vs westward travel, recovery time, melatonin use, and evidence-based prevention strategies.',
+  ogTitle: 'Frequently Asked Questions About Jet Lag',
+  ogDescription: 'Quick answers to common questions about jet lag severity, recovery time, and prevention.',
   ogImage: 'https://voyageclock.pages.dev/og/faq.png',
   ogUrl: 'https://voyageclock.pages.dev/learn/faq',
   ogType: 'article',
+  ogLocale: 'en_US',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Jet Lag FAQ - Your Questions Answered',
-  twitterDescription: 'Find answers to common jet lag questions about symptoms, recovery, prevention, and travel strategies.',
+  twitterDescription: 'Find answers to common jet lag questions about symptoms, recovery, and prevention.',
   twitterImage: 'https://voyageclock.pages.dev/og/faq.png',
 })
 
@@ -362,5 +363,24 @@ useHead({
   link: [
     { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/faq' },
   ],
+})
+
+useJsonld({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': 'Jet Lag FAQ',
+  'description': 'Quick answers to common questions about jet lag, circadian rhythms, and travel health.',
+  'url': 'https://voyageclock.pages.dev/learn/faq',
+  'image': 'https://voyageclock.pages.dev/og/faq.png',
+  'datePublished': '2025-01-01',
+  'dateModified': '2025-03-01',
+  'author': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
 })
 </script>

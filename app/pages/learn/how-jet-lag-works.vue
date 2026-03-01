@@ -226,13 +226,14 @@ const relatedTopics: RelatedTopic[] = [
 ]
 
 useSeoMeta({
-  title: 'How Jet Lag Works - Understanding Desynchronosis | Voyage Clock',
-  description: 'Understand the science behind jet lag and why traveling across time zones disrupts your body. Learn about symptoms, causes, and why eastward travel is harder than westward.',
-  ogTitle: 'How Jet Lag Works - The Science of Time Zone Disruption | Voyage Clock',
-  ogDescription: 'Discover why crossing time zones causes circadian misalignment, affects multiple body systems, and why some people experience more severe symptoms.',
+  title: 'How Jet Lag Works - Understanding Time Zone Disruption',
+  description: 'Understand the science behind jet lag and why crossing time zones disrupts your body. Learn about symptoms, causes, and why eastward travel is harder.',
+  ogTitle: 'How Jet Lag Works - The Science of Time Zone Disruption',
+  ogDescription: 'Discover why crossing time zones causes circadian misalignment and why some people experience more severe symptoms.',
   ogImage: 'https://voyageclock.pages.dev/og/jetlag.png',
   ogUrl: 'https://voyageclock.pages.dev/learn/how-jet-lag-works',
   ogType: 'article',
+  ogLocale: 'en_US',
   twitterCard: 'summary_large_image',
   twitterTitle: 'How Jet Lag Works - Understanding Time Zone Disruption',
   twitterDescription: 'Learn the science behind jet lag, why it happens, and what factors influence its severity.',
@@ -243,5 +244,24 @@ useHead({
   link: [
     { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/how-jet-lag-works' },
   ],
+})
+
+useJsonld({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': 'How Jet Lag Works',
+  'description': 'Understand the science behind jet lag and why traveling across time zones disrupts your body.',
+  'url': 'https://voyageclock.pages.dev/learn/how-jet-lag-works',
+  'image': 'https://voyageclock.pages.dev/og/jetlag.png',
+  'datePublished': '2025-01-01',
+  'dateModified': '2025-03-01',
+  'author': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
 })
 </script>

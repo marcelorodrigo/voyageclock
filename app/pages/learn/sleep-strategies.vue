@@ -307,16 +307,17 @@ const relatedTopics: RelatedTopic[] = [
 ]
 
 useSeoMeta({
-  title: 'Sleep Strategies for Jet Lag Prevention - Optimize Sleep Timing | Voyage Clock',
-  description: 'Master sleep timing and quality before, during, and after travel. Learn pre-travel adjustment, in-flight sleep tactics, sleep hygiene, napping strategies, and circadian sleep optimization to minimize jet lag.',
-  ogTitle: 'Sleep Strategies for Jet Lag Prevention | Voyage Clock',
-  ogDescription: 'Optimize your sleep schedule before departure and maintain quality sleep during travel. Learn evidence-based sleep strategies to prevent jet lag.',
+  title: 'Sleep Strategies for Jet Lag Prevention',
+  description: 'Master sleep timing and quality for travel. Learn pre-travel adjustment, in-flight tactics, sleep hygiene, and circadian optimization.',
+  ogTitle: 'Sleep Strategies for Jet Lag Prevention',
+  ogDescription: 'Optimize your sleep schedule before departure and maintain quality sleep during travel.',
   ogImage: 'https://voyageclock.pages.dev/og/sleep.png',
   ogUrl: 'https://voyageclock.pages.dev/learn/sleep-strategies',
   ogType: 'article',
+  ogLocale: 'en_US',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Sleep Strategies for Jet Lag Prevention',
-  twitterDescription: 'Learn how to adjust your sleep timing before travel and optimize sleep quality during and after your journey.',
+  twitterDescription: 'Learn how to adjust your sleep timing before travel and optimize sleep quality.',
   twitterImage: 'https://voyageclock.pages.dev/og/sleep.png',
 })
 
@@ -324,5 +325,24 @@ useHead({
   link: [
     { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/sleep-strategies' },
   ],
+})
+
+useJsonld({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': 'Sleep Strategies for Jet Lag Prevention',
+  'description': 'Master sleep timing and quality before, during, and after travel.',
+  'url': 'https://voyageclock.pages.dev/learn/sleep-strategies',
+  'image': 'https://voyageclock.pages.dev/og/sleep.png',
+  'datePublished': '2025-01-01',
+  'dateModified': '2025-03-01',
+  'author': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
 })
 </script>

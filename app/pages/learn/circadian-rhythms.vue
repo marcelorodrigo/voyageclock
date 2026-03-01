@@ -161,16 +161,17 @@ const relatedTopics: RelatedTopic[] = [
 ]
 
 useSeoMeta({
-  title: 'Understanding Circadian Rhythms - Your Body\'s Internal Clock | Voyage Clock',
-  description: 'Learn how your body\'s internal 24-hour clock regulates sleep, alertness, body temperature, hormones, metabolism, and health. Discover the science of circadian rhythms and how they impact travel and jet lag.',
-  ogTitle: 'Understanding Circadian Rhythms | Voyage Clock',
-  ogDescription: 'Discover how your body master clock controls sleep-wake patterns, hormone production, metabolism, and more. Learn the science behind circadian rhythms.',
+  title: 'Understanding Circadian Rhythms - Body Internal Clock',
+  description: 'Learn how your body internal 24-hour clock regulates sleep, alertness, hormones, and metabolism. Discover circadian rhythm science for travel.',
+  ogTitle: 'Understanding Circadian Rhythms',
+  ogDescription: 'Discover how your body master clock controls sleep-wake patterns, hormone production, and metabolism.',
   ogImage: 'https://voyageclock.pages.dev/og/circadian.png',
   ogUrl: 'https://voyageclock.pages.dev/learn/circadian-rhythms',
   ogType: 'article',
+  ogLocale: 'en_US',
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Understanding Circadian Rhythms - Your Body\'s Internal Clock',
-  twitterDescription: 'Learn how your internal 24-hour clock regulates sleep, hormones, metabolism, and countless biological processes.',
+  twitterTitle: 'Understanding Circadian Rhythms - Body Internal Clock',
+  twitterDescription: 'Learn how your internal 24-hour clock regulates sleep, hormones, and metabolism.',
   twitterImage: 'https://voyageclock.pages.dev/og/circadian.png',
 })
 
@@ -178,5 +179,24 @@ useHead({
   link: [
     { rel: 'canonical', href: 'https://voyageclock.pages.dev/learn/circadian-rhythms' },
   ],
+})
+
+useJsonld({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': 'Understanding Circadian Rhythms',
+  'description': 'Learn how your body internal 24-hour clock regulates sleep, alertness, and biological processes.',
+  'url': 'https://voyageclock.pages.dev/learn/circadian-rhythms',
+  'image': 'https://voyageclock.pages.dev/og/circadian.png',
+  'datePublished': '2025-01-01',
+  'dateModified': '2025-03-01',
+  'author': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'Voyage Clock',
+  },
 })
 </script>

@@ -87,23 +87,24 @@ function goBack() {
 }
 
 useSeoMeta({
-  title: 'Your Personalized Jet Lag Plan - Results | Voyage Clock',
-  description: 'View your customized jet lag prevention plan with detailed recommendations for sleep timing, light exposure, nutrition, and travel day strategies tailored to your specific journey.',
-  ogTitle: 'Your Personalized Jet Lag Plan | Voyage Clock',
-  ogDescription: 'Your custom adaptation plan with day-by-day recommendations to minimize jet lag and feel your best when you arrive.',
+  title: 'Your Personalized Jet Lag Plan Results',
+  description: 'View your customized jet lag prevention plan with recommendations for sleep timing, light exposure, nutrition, and travel strategies.',
+  ogTitle: 'Your Personalized Jet Lag Plan',
+  ogDescription: 'Your custom adaptation plan with day-by-day recommendations to minimize jet lag and feel your best.',
   ogImage: 'https://voyageclock.pages.dev/og/results.png',
   ogUrl: 'https://voyageclock.pages.dev/plan/results',
   ogType: 'website',
+  ogLocale: 'en_US',
   twitterCard: 'summary_large_image',
   twitterTitle: 'Your Personalized Jet Lag Plan',
-  twitterDescription: 'View your custom jet lag prevention plan with detailed recommendations for your journey.',
+  twitterDescription: 'View your custom jet lag prevention plan with detailed recommendations.',
   twitterImage: 'https://voyageclock.pages.dev/og/results.png',
   robots: 'noindex, nofollow',
 })
 
 useHead({
   link: [
-    { rel: 'canonical', href: 'https://voyageclock.pages.dev/plan/results' },
+    { rel: 'canonical', href: 'https://voyageclock.pages.dev/plan/' },
   ],
 })
 </script>
