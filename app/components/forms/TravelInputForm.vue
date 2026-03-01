@@ -191,7 +191,7 @@ function showError(field: keyof typeof travelForm.formData): boolean {
 
 async function handleSubmit() {
   if (travelForm.validateForm()) {
-    router.push({ name: 'plan-results', query: travelForm.formData })
+    router.push({ name: 'plan-results', query: travelForm.formData.value })
   }
 }
 
