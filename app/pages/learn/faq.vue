@@ -367,7 +367,7 @@ useHead({
 
 useJsonld({
   '@context': 'https://schema.org',
-  '@type': 'Article',
+  '@type': 'FAQPage',
   'headline': 'Jet Lag FAQ',
   'description': 'Quick answers to common questions about jet lag, circadian rhythms, and travel health.',
   'url': 'https://voyageclock.pages.dev/learn/faq',
@@ -382,5 +382,271 @@ useJsonld({
     '@type': 'Organization',
     'name': 'Voyage Clock',
   },
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'How many time zones do I need to cross to get jet lag?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Most people begin experiencing jet lag symptoms when crossing 3 or more time zones. Crossing 1-2 zones typically causes minimal disruption. The severity increases with the number of zones crossed.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Why is traveling east harder than traveling west?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Your natural circadian rhythm runs slightly longer than 24 hours (about 24.2 hours), making it easier to delay your schedule (westward) than to advance it (eastward). Additionally, most people find it easier to stay up late than to go to bed and wake up early.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'How long does jet lag last?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'A general rule of thumb is about one day per time zone crossed, though this varies by individual and travel direction. Eastward travel often takes 50% longer to adjust than westward. With strategic intervention (light exposure, sleep timing), you can reduce this significantly.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Can I completely prevent jet lag?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'For large time zone changes, you cannot completely eliminate jet lag, but you can significantly reduce its severity and duration. Pre-travel adjustment, strategic light exposure, and proper sleep timing can reduce recovery time by 30-50% or more.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Is jet lag dangerous?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Jet lag itself is not dangerous for healthy individuals, though it is uncomfortable and reduces performance. However, the disruption to circadian rhythms in frequent flyers may have long-term health implications. Acute risks include impaired judgment, slower reaction times (relevant for driving), and increased accident risk.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Do some people not get jet lag?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Everyone experiences circadian misalignment when crossing time zones, but individual sensitivity varies widely. Factors include age, chronotype, overall health, stress levels, and previous experience with travel. Some people are simply more resilient.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Does indoor light work for adjusting my circadian rhythm?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Indoor lighting (100-500 lux) is much less effective than outdoor daylight (10,000+ lux). However, it is better than nothing. For best results, use a light therapy lamp (10,000 lux) or spend time outside.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'How long do I need to be in bright light?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Minimum 20-30 minutes of bright light (10,000 lux) can shift your circadian rhythm. Longer exposure (60-90 minutes) is more effective. The timing is more critical than the duration.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Do sunglasses reduce jet lag by blocking light?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Sunglasses are useful for avoiding light at the wrong times, which is as important as seeking light at the right times. However, blocking light when you should be getting it will worsen jet lag.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Do blue light blocking glasses help with jet lag?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Yes, amber-tinted glasses that block blue light can be helpful in the evening when you need to avoid light exposure. They are particularly useful for westward travel when you need to delay your rhythm, or when you must be in bright environments during your "avoid light" windows.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Can I use my phone or tablet for light therapy?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Screens emit blue light but at much lower intensity than needed for effective circadian shifting. They are not a substitute for proper light therapy, but avoiding screens before bed can help prevent melatonin suppression.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Should I nap when I arrive at my destination?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Avoid napping if possible, especially long naps. If you absolutely must nap, keep it to 20-30 minutes maximum in the early afternoon local time, and set an alarm. Long naps will make nighttime sleep more difficult.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Should I try to sleep on the plane?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Sleep when it is nighttime at your destination, stay awake when it is daytime there. This single principle is one of the most effective jet lag strategies.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What if I cannot fall asleep on the plane?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Do not stress—rest is still beneficial. Close your eyes, practice relaxation techniques, and avoid screens. You will still get some recovery even without full sleep. Plan for a shorter wake window after arrival if needed.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Is it better to sleep on my home schedule for short trips?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'For trips shorter than 2-3 days, staying on home time can be a valid strategy. You avoid adjusting twice (there and back) and can use naps and caffeine to manage performance. Schedule important activities for times when you are naturally alert on home time.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Can I "bank" sleep before a trip?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'You cannot stockpile sleep, but starting well-rested is crucial. Avoid pulling all-nighters before travel. Being sleep-deprived before departure worsens jet lag symptoms significantly.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Does melatonin really help with jet lag?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Yes, melatonin can be effective for jet lag, especially for eastward travel. Multiple studies support its use. However, timing is critical—taking it at the wrong time can worsen jet lag.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'When should I take melatonin?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'For eastward travel, take melatonin in the early evening (6-8 PM) at your destination for the first 3-4 nights. For westward travel, melatonin is generally less helpful. Always consult with a healthcare provider about appropriate timing and dosage for your specific situation.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What dose of melatonin should I take?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': '0.5-3mg is typically sufficient. More is not necessarily better—high doses (10mg+) do not improve effectiveness and may cause more side effects. Start with a lower dose (0.5-1mg) and adjust if needed.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Is melatonin safe?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'For most healthy adults, short-term melatonin use is safe. However, consult your doctor, especially if you are pregnant, nursing, have autoimmune conditions, take medications (blood thinners, diabetes meds), or plan to give it to children.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Why do I feel groggy after taking melatonin?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Some people experience residual drowsiness, especially with higher doses. Try lowering the dose or taking it earlier in the evening. Morning grogginess can also indicate you are taking it at the wrong time for your circadian rhythm.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Does the "jet lag diet" (feast-fast) really work?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'The Argonne Anti-Jet Lag Diet has mixed evidence. Modern research suggests meal timing is more important than feast/fast cycling. Simply eating meals according to destination schedule is effective without the complicated feast-fast protocol.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Should I avoid alcohol completely when traveling?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Alcohol disrupts sleep quality and causes dehydration, both of which worsen jet lag. It is best to avoid or minimize it, especially on the flight. If you do drink, limit it to one drink early in the flight and compensate with extra water.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'How much water should I drink on a plane?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Aim for about 8 ounces (240ml) per hour of flight. Cabin humidity is very low (10-20%), leading to dehydration. Bring an empty water bottle through security and fill it frequently.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Does caffeine help or hurt jet lag?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Caffeine can be helpful if used strategically. Use it to promote alertness when you need to stay awake, but cut off 6-8 hours before bedtime. Excessive or poorly timed caffeine can interfere with sleep and delay adjustment.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'When should I exercise when dealing with jet lag?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Morning exercise helps advance your rhythm (eastward travel). Evening exercise helps delay your rhythm (westward travel). Even light activity like walking is beneficial. Avoid intense exercise within 3-4 hours of bedtime.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Should I exercise even if I am exhausted from jet lag?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Yes, but start with light activity. Even a 15-minute walk can boost energy and alertness. Listen to your body—do not push for intense workouts if you are severely jet-lagged, but gentle movement almost always helps.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'How do I handle jet lag with kids?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Children\'s circadian rhythms are more flexible than adults\'. Apply the same principles: gradual schedule shifts, appropriate light exposure, destination-time meals. Maintain consistent routines. Be patient—behavior and mood are affected before sleep normalizes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'I am pregnant—what jet lag strategies are safe?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Most non-pharmaceutical strategies are safe: light exposure, sleep timing, meal timing, exercise. However, avoid melatonin during pregnancy. Stay very well hydrated, wear compression socks, and move frequently during flights. Consult your OB-GYN before traveling.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Does age affect jet lag?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Yes, older adults often experience more severe and prolonged jet lag. Circadian rhythm amplitude decreases with age, and sleep quality is often already compromised. Older travelers should allow more adjustment time and may benefit more from gradual pre-travel shifting.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'I have a sleep disorder—what should I know?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Consult your sleep specialist before travel. Existing sleep disorders (insomnia, sleep apnea, restless leg syndrome) can worsen with jet lag. Bring necessary equipment (CPAP machine), maintain medications, and consider more gradual adjustment strategies.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What about crossing the International Date Line?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Crossing the date line is disorienting but follows the same circadian principles. Focus on the direction of shift needed (advance or delay) rather than the calendar change. Flights like Los Angeles to Tokyo require advancing your rhythm even though you "lose" a day.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Do business or first class really help with jet lag?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Premium cabins help primarily through better sleep opportunity (flat beds, reduced noise, decreased cabin pressure), not through any circadian-specific benefit. The ability to lie down and sleep properly is the biggest advantage. However, strategic sleep timing matters more than ticket class.',
+      },
+    },
+  ],
 })
 </script>
