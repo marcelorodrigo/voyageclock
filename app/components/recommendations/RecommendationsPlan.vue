@@ -14,14 +14,6 @@
       <div class="plan-actions">
         <button
           class="btn btn-outline"
-          title="Print plan"
-          @click="printPlan"
-        >
-          <span class="btn-icon">🖨️</span>
-          <span class="btn-text">Print</span>
-        </button>
-        <button
-          class="btn btn-outline"
           title="Edit inputs"
           @click="editPlan"
         >
@@ -133,7 +125,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import type { TravelPlan } from '~/types/travel'
 import OverviewCard from './OverviewCard.vue'
 import DailyTimeline from './DailyTimeline.vue'
@@ -144,13 +136,10 @@ defineProps<{
 }>()
 
 const router = useRouter()
-
-function printPlan() {
-  globalThis.print()
-}
+const route = useRoute()
 
 function editPlan() {
-  router.push({ name: 'plan' })
+  router.push({ name: 'plan', query: route.query })
 }
 </script>
 
