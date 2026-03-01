@@ -38,10 +38,5 @@ useJsonld({
   'url': 'https://voyageclock.pages.dev/plan/',
   'applicationCategory': 'HealthApplication',
   'operatingSystem': 'Web Browser',
-  'offers': {
-    '@type': 'Offer',
-    'price': '0',
-    'priceCurrency': 'USD',
-  },
 })
 </script>
