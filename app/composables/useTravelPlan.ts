@@ -9,9 +9,9 @@ import { useTravelForm } from './useTravelForm'
 export function useTravelPlan() {
   const travelForm = useTravelForm()
 
-  // Generated travel plan
+  // Generated travel plan; start in loading state when params are already present
   const travelPlan = ref<TravelPlan | null>(null)
-  const isGenerating = ref(false)
+  const isGenerating = ref(travelForm.hasValidParams())
   const generationError = ref<string | null>(null)
 
   // Generate plan if valid params exist
@@ -50,7 +50,7 @@ export function useTravelPlan() {
     generationError.value = null
   }
 
-  return {
+  return reactive({
     // From form composable
     formData: travelForm.formData,
     errors: travelForm.errors,
@@ -72,5 +72,5 @@ export function useTravelPlan() {
     generationError,
     generatePlan,
     clearPlan,
-  }
+  })
 }
