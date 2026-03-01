@@ -162,9 +162,9 @@ const relatedTopics: RelatedTopic[] = [
 
 useSeoMeta({
   title: 'Understanding Circadian Rhythms - Body Internal Clock',
-  description: 'Learn how your body internal 24-hour clock regulates sleep, alertness, hormones, and metabolism. Discover circadian rhythm science for travel.',
+  description: 'Learn how your body\'s internal 24-hour clock regulates sleep, alertness, hormones, and metabolism. Discover circadian rhythm science for travel.',
   ogTitle: 'Understanding Circadian Rhythms',
-  ogDescription: 'Discover how your body master clock controls sleep-wake patterns, hormone production, and metabolism.',
+  ogDescription: 'Discover how your body\'s master clock controls sleep-wake patterns, hormone production, and metabolism.',
   ogImage: 'https://voyageclock.pages.dev/og/circadian.png',
   ogUrl: 'https://voyageclock.pages.dev/learn/circadian-rhythms',
   ogType: 'article',

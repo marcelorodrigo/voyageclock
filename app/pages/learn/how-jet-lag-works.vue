@@ -255,6 +255,7 @@ useJsonld({
   'image': 'https://voyageclock.pages.dev/og/jetlag.png',
   'datePublished': '2025-01-01',
   'dateModified': '2026-03-01',
+  'mainEntityOfPage': 'https://voyageclock.pages.dev/learn/how-jet-lag-works',
   'author': {
     '@type': 'Organization',
     'name': 'Voyage Clock',
@@ -262,6 +263,10 @@ useJsonld({
   'publisher': {
     '@type': 'Organization',
     'name': 'Voyage Clock',
+    'logo': {
+      '@type': 'ImageObject',
+      'url': 'https://voyageclock.pages.dev/favicon.ico',
+    },
   },
 })
 </script>
