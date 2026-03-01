@@ -15,8 +15,10 @@ export function useTravelForm() {
   const router = useRouter()
 
   // Initialize form data from URL params or defaults
-  const formData = ref<TravelFormData>({
-    homeTimezone: (route.query.home as string) || getCurrentTimezone(),
+  // homeTimezone intentionally starts empty to avoid SSR/client hydration mismatches;
+  // it is set to the detected browser timezone in onMounted below.
+  const formData = reactive<TravelFormData>({
+    homeTimezone: (route.query.home as string) || '',
     destinationTimezone: (route.query.dest as string) || '',
     departureDate: (route.query.date as string) || getTodayDate(),
     departureTime: (route.query.time as string) || '09:00',
@@ -25,22 +27,29 @@ export function useTravelForm() {
   })
 
   // Form validation state
-  const errors = ref<Partial<Record<keyof TravelFormData, string>>>({})
-  const touched = ref<Partial<Record<keyof TravelFormData, boolean>>>({})
+  const errors = reactive<Partial<Record<keyof TravelFormData, string>>>({})
+  const touched = reactive<Partial<Record<keyof TravelFormData, boolean>>>({})
+
+  // Detect and apply the user's browser timezone only on the client, after hydration
+  onMounted(() => {
+    if (!formData.homeTimezone) {
+      formData.homeTimezone = getCurrentTimezone()
+    }
+  })
 
   // Computed values
   const sleepDuration = computed(() => {
-    return calculateSleepDuration(formData.value.currentBedtime, formData.value.currentWakeTime)
+    return calculateSleepDuration(formData.currentBedtime, formData.currentWakeTime)
   })
 
   const timezoneOffset = computed(() => {
-    if (!formData.value.homeTimezone || !formData.value.destinationTimezone) {
+    if (!formData.homeTimezone || !formData.destinationTimezone) {
       return 0
     }
     let departureDateTime: Date
-    if (formData.value.departureDate && formData.value.departureTime) {
+    if (formData.departureDate && formData.departureTime) {
       try {
-        departureDateTime = new Date(`${formData.value.departureDate}T${formData.value.departureTime}`)
+        departureDateTime = new Date(`${formData.departureDate}T${formData.departureTime}`)
       }
       catch {
         departureDateTime = new Date()
@@ -49,7 +58,7 @@ export function useTravelForm() {
     else {
       departureDateTime = new Date()
     }
-    return calculateTimezoneOffset(formData.value.homeTimezone, formData.value.destinationTimezone, departureDateTime)
+    return calculateTimezoneOffset(formData.homeTimezone, formData.destinationTimezone, departureDateTime)
   })
 
   const travelDirection = computed(() => {
@@ -57,87 +66,87 @@ export function useTravelForm() {
   })
 
   const isFormValid = computed(() => {
-    const hasActualErrors = Object.values(errors.value).some(error => error !== undefined)
+    const hasActualErrors = Object.values(errors).some(error => error !== undefined)
     return !hasActualErrors && hasRequiredFields()
   })
 
   // Helper to check if all required fields are filled
   function hasRequiredFields(): boolean {
     return !!(
-      formData.value.homeTimezone
-      && formData.value.destinationTimezone
-      && formData.value.departureDate
-      && formData.value.departureTime
-      && formData.value.currentBedtime
-      && formData.value.currentWakeTime
+      formData.homeTimezone
+      && formData.destinationTimezone
+      && formData.departureDate
+      && formData.departureTime
+      && formData.currentBedtime
+      && formData.currentWakeTime
     )
   }
 
   // Update field and sync to URL
   function updateField<K extends keyof TravelFormData>(field: K, value: TravelFormData[K]) {
-    formData.value[field] = value
-    touched.value[field] = true
+    formData[field] = value
+    touched[field] = true
     validateField(field)
     syncToUrl()
   }
 
   // Validate single field
   function validateField(field: keyof TravelFormData) {
-    errors.value[field] = undefined
+    errors[field] = undefined
 
     switch (field) {
       case 'homeTimezone':
-        if (!formData.value.homeTimezone) {
-          errors.value.homeTimezone = 'Home timezone is required'
+        if (!formData.homeTimezone) {
+          errors.homeTimezone = 'Home timezone is required'
         }
         break
 
       case 'destinationTimezone':
-        if (!formData.value.destinationTimezone) {
-          errors.value.destinationTimezone = 'Destination timezone is required'
+        if (!formData.destinationTimezone) {
+          errors.destinationTimezone = 'Destination timezone is required'
         }
-        else if (formData.value.destinationTimezone === formData.value.homeTimezone) {
-          errors.value.destinationTimezone = 'Destination must be different from home timezone'
+        else if (formData.destinationTimezone === formData.homeTimezone) {
+          errors.destinationTimezone = 'Destination must be different from home timezone'
         }
         break
 
       case 'departureDate':
-        if (!formData.value.departureDate) {
-          errors.value.departureDate = 'Departure date is required'
+        if (!formData.departureDate) {
+          errors.departureDate = 'Departure date is required'
         }
         else {
-          const dateParts = formData.value.departureDate.split('-').map(Number)
+          const dateParts = formData.departureDate.split('-').map(Number)
           const [year, month, day] = dateParts as [number, number, number]
           const departureDate = new Date(year, month - 1, day)
           const today = new Date()
           today.setHours(0, 0, 0, 0)
           if (departureDate < today) {
-            errors.value.departureDate = 'Departure date cannot be in the past'
+            errors.departureDate = 'Departure date cannot be in the past'
           }
         }
         break
 
       case 'departureTime':
-        if (!formData.value.departureTime) {
-          errors.value.departureTime = 'Departure time is required'
+        if (!formData.departureTime) {
+          errors.departureTime = 'Departure time is required'
         }
         break
 
       case 'currentBedtime':
-        if (!formData.value.currentBedtime) {
-          errors.value.currentBedtime = 'Bedtime is required'
+        if (!formData.currentBedtime) {
+          errors.currentBedtime = 'Bedtime is required'
         }
         break
 
       case 'currentWakeTime':
-        if (!formData.value.currentWakeTime) {
-          errors.value.currentWakeTime = 'Wake time is required'
+        if (!formData.currentWakeTime) {
+          errors.currentWakeTime = 'Wake time is required'
         }
         else if (sleepDuration.value < 4) {
-          errors.value.currentWakeTime = 'Sleep duration seems too short (less than 4 hours)'
+          errors.currentWakeTime = 'Sleep duration seems too short (less than 4 hours)'
         }
         else if (sleepDuration.value > 14) {
-          errors.value.currentWakeTime = 'Sleep duration seems too long (more than 14 hours)'
+          errors.currentWakeTime = 'Sleep duration seems too long (more than 14 hours)'
         }
         break
     }
@@ -145,8 +154,8 @@ export function useTravelForm() {
 
   // Validate entire form
   function validateForm(): boolean {
-    Object.keys(formData.value).forEach((key) => {
-      touched.value[key as keyof TravelFormData] = true
+    Object.keys(formData).forEach((key) => {
+      touched[key as keyof TravelFormData] = true
       validateField(key as keyof TravelFormData)
     })
     return isFormValid.value
@@ -154,34 +163,38 @@ export function useTravelForm() {
 
   // Reset form to defaults (clear URL params)
   function resetForm() {
-    formData.value = {
+    Object.assign(formData, {
       homeTimezone: getCurrentTimezone(),
       destinationTimezone: '',
       departureDate: getTodayDate(),
       departureTime: '09:00',
       currentBedtime: '23:00',
       currentWakeTime: '07:00',
-    }
-    errors.value = {}
-    touched.value = {}
+    })
+    Object.keys(errors).forEach((k) => {
+      errors[k as keyof TravelFormData] = undefined
+    })
+    Object.keys(touched).forEach((k) => {
+      touched[k as keyof TravelFormData] = undefined
+    })
     syncToUrl()
   }
 
   // Mark field as touched
   function markFieldTouched(field: keyof TravelFormData) {
-    touched.value[field] = true
+    touched[field] = true
     validateField(field)
   }
 
   // Sync form data to URL query params
   function syncToUrl() {
     const query = {
-      home: formData.value.homeTimezone,
-      dest: formData.value.destinationTimezone,
-      date: formData.value.departureDate,
-      time: formData.value.departureTime,
-      bed: formData.value.currentBedtime,
-      wake: formData.value.currentWakeTime,
+      home: formData.homeTimezone,
+      dest: formData.destinationTimezone,
+      date: formData.departureDate,
+      time: formData.departureTime,
+      bed: formData.currentBedtime,
+      wake: formData.currentWakeTime,
     }
     router.replace({ query })
   }
@@ -189,10 +202,10 @@ export function useTravelForm() {
   // Check if params are valid
   function hasValidParams(): boolean {
     return !!(
-      formData.value.homeTimezone
-      && formData.value.destinationTimezone
-      && formData.value.departureDate
-      && formData.value.departureTime
+      formData.homeTimezone
+      && formData.destinationTimezone
+      && formData.departureDate
+      && formData.departureTime
     )
   }
 

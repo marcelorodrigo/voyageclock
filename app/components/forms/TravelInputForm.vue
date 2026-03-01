@@ -137,6 +137,9 @@
 
 <script setup lang="ts">
 import { useTravelForm } from '~/composables/useTravelForm'
+import TimezoneSelector from './TimezoneSelector.vue'
+import DateTimePicker from './DateTimePicker.vue'
+import SleepScheduleInput from './SleepScheduleInput.vue'
 
 const router = useRouter()
 const travelForm = useTravelForm()
@@ -146,20 +149,20 @@ const showTimezoneInfo = computed(() => {
     travelForm.formData.homeTimezone
     && travelForm.formData.destinationTimezone
     && travelForm.formData.homeTimezone !== travelForm.formData.destinationTimezone
-    && travelForm.timezoneOffset !== 0
+    && travelForm.timezoneOffset.value !== 0
   )
 })
 
 const directionIcon = computed(() => {
-  return travelForm.travelDirection === 'east' ? '➡️' : '⬅️'
+  return travelForm.travelDirection.value === 'east' ? '➡️' : '⬅️'
 })
 
 const directionText = computed(() => {
-  return travelForm.travelDirection === 'east' ? 'Traveling Eastward' : 'Traveling Westward'
+  return travelForm.travelDirection.value === 'east' ? 'Traveling Eastward' : 'Traveling Westward'
 })
 
 const timeDifferenceText = computed(() => {
-  const offset = Math.abs(travelForm.timezoneOffset)
+  const offset = Math.abs(travelForm.timezoneOffset.value)
   const hours = Math.floor(offset)
   const minutes = Math.round((offset - hours) * 60)
 
@@ -186,7 +189,7 @@ function showError(field: keyof typeof travelForm.formData): boolean {
 
 async function handleSubmit() {
   if (travelForm.validateForm()) {
-    router.push({ name: 'plan-results', query: travelForm.formData.value })
+    router.push({ name: 'plan-results', query: travelForm.formData })
   }
 }
 
