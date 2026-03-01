@@ -12,7 +12,6 @@
         </p>
       </div>
       <div class="plan-actions">
-
         <button
           class="btn btn-outline"
           title="Edit inputs"
@@ -138,10 +137,6 @@ defineProps<{
 
 const router = useRouter()
 const route = useRoute()
-
-function printPlan() {
-  globalThis.print()
-}
 
 function editPlan() {
   router.push({ name: 'plan', query: route.query })
