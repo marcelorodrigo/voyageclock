@@ -30,7 +30,7 @@ export function useTravelPlan() {
     generationError.value = null
 
     try {
-      const plan = generateTravelPlan(travelForm.formData.value, travelForm.timezoneOffset.value)
+      const plan = generateTravelPlan(travelForm.formData, travelForm.timezoneOffset.value)
       travelPlan.value = plan
       return true
     }

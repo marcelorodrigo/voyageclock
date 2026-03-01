@@ -18,12 +18,12 @@ export function useTravelForm() {
   // homeTimezone intentionally starts empty to avoid SSR/client hydration mismatches;
   // it is set to the detected browser timezone in onMounted below.
   const formData = reactive<TravelFormData>({
-    homeTimezone: (route.query.home as string) || '',
-    destinationTimezone: (route.query.dest as string) || '',
-    departureDate: (route.query.date as string) || getTodayDate(),
-    departureTime: (route.query.time as string) || '09:00',
-    currentBedtime: (route.query.bed as string) || '23:00',
-    currentWakeTime: (route.query.wake as string) || '07:00',
+    homeTimezone: (route.query.homeTimezone as string) || '',
+    destinationTimezone: (route.query.destinationTimezone as string) || '',
+    departureDate: (route.query.departureDate as string) || getTodayDate(),
+    departureTime: (route.query.departureTime as string) || '09:00',
+    currentBedtime: (route.query.currentBedtime as string) || '23:00',
+    currentWakeTime: (route.query.currentWakeTime as string) || '07:00',
   })
 
   // Form validation state
@@ -189,12 +189,12 @@ export function useTravelForm() {
   // Sync form data to URL query params
   function syncToUrl() {
     const query = {
-      home: formData.homeTimezone,
-      dest: formData.destinationTimezone,
-      date: formData.departureDate,
-      time: formData.departureTime,
-      bed: formData.currentBedtime,
-      wake: formData.currentWakeTime,
+      homeTimezone: formData.homeTimezone,
+      destinationTimezone: formData.destinationTimezone,
+      departureDate: formData.departureDate,
+      departureTime: formData.departureTime,
+      currentBedtime: formData.currentBedtime,
+      currentWakeTime: formData.currentWakeTime,
     }
     router.replace({ query })
   }
