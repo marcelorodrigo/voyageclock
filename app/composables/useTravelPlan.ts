@@ -2,7 +2,6 @@
  * Composable for generating and managing travel plans from URL parameters
  */
 
-import { ref } from 'vue'
 import type { TravelPlan } from '~/types/travel'
 import { generateTravelPlan } from '~/utils/jetlagAlgorithm'
 import { useTravelForm } from './useTravelForm'
@@ -31,7 +30,7 @@ export function useTravelPlan() {
     generationError.value = null
 
     try {
-      const plan = generateTravelPlan(travelForm.formData, travelForm.timezoneOffset)
+      const plan = generateTravelPlan(travelForm.formData.value, travelForm.timezoneOffset.value)
       travelPlan.value = plan
       return true
     }

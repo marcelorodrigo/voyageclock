@@ -65,8 +65,6 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { useRouter } from 'vue-router'
 import { useTravelPlan } from '~/composables/useTravelPlan'
 import RecommendationsPlan from '~/components/recommendations/RecommendationsPlan.vue'
 

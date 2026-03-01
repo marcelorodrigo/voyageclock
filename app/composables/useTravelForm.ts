@@ -2,8 +2,6 @@
  * Composable for managing travel form state via URL query parameters
  */
 
-import { computed, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
 import type { TravelFormData } from '~/types/travel'
 import {
   getCurrentTimezone,
@@ -108,7 +106,9 @@ export function useTravelForm() {
           errors.value.departureDate = 'Departure date is required'
         }
         else {
-          const departureDate = new Date(formData.value.departureDate)
+          const dateParts = formData.value.departureDate.split('-').map(Number)
+          const [year, month, day] = dateParts as [number, number, number]
+          const departureDate = new Date(year, month - 1, day)
           const today = new Date()
           today.setHours(0, 0, 0, 0)
           if (departureDate < today) {

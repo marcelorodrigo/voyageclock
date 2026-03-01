@@ -1,3 +1,4 @@
+# TODO: monorepo package globs will be added later
 onlyBuiltDependencies:
   - '@parcel/watcher'
   - esbuild

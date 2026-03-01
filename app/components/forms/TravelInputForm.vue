@@ -136,12 +136,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
 import { useTravelForm } from '~/composables/useTravelForm'
-import TimezoneSelector from './TimezoneSelector.vue'
-import DateTimePicker from './DateTimePicker.vue'
-import SleepScheduleInput from './SleepScheduleInput.vue'
 
 const router = useRouter()
 const travelForm = useTravelForm()
