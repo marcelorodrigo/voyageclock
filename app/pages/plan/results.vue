@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4">
       <!-- Loading State -->
       <div
-        v-if="travelStore.isGenerating"
+        v-if="travelPlan.isGenerating"
         class="loading-container"
       >
         <div class="loading-spinner" />
@@ -14,7 +14,7 @@
 
       <!-- Error State -->
       <div
-        v-else-if="travelStore.generationError"
+        v-else-if="travelPlan.generationError"
         class="error-container"
       >
         <div class="error-icon">
@@ -24,7 +24,7 @@
           Unable to Generate Plan
         </h2>
         <p class="error-message">
-          {{ travelStore.generationError }}
+          {{ travelPlan.generationError }}
         </p>
         <button
           class="btn btn-primary"
@@ -36,7 +36,7 @@
 
       <!-- No Plan State -->
       <div
-        v-else-if="!travelStore.travelPlan"
+        v-else-if="!travelPlan.travelPlan"
         class="no-plan-container"
       >
         <div class="no-plan-icon">
@@ -58,7 +58,7 @@
 
       <!-- Plan Display -->
       <div v-else>
-        <RecommendationsPlan :plan="travelStore.travelPlan" />
+        <RecommendationsPlan :plan="travelPlan.travelPlan" />
       </div>
     </div>
   </div>
@@ -67,16 +67,20 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useTravelStore } from '~/stores/travelStore'
+import { useTravelPlan } from '~/composables/useTravelPlan'
 import RecommendationsPlan from '~/components/recommendations/RecommendationsPlan.vue'
 
 const router = useRouter()
-const travelStore = useTravelStore()
+const travelPlan = useTravelPlan()
 
-onMounted(() => {
-  // If no plan exists and not generating, redirect to input form
-  if (!travelStore.travelPlan && !travelStore.isGenerating) {
+onMounted(async () => {
+  if (!travelPlan.hasValidParams()) {
     router.push({ name: 'plan-input' })
+    return
+  }
+
+  if (!travelPlan.travelPlan) {
+    await travelPlan.generatePlan()
   }
 })
 

@@ -22,27 +22,27 @@
       <TimezoneSelector
         id="home-timezone"
         label="Your Current Location"
-        :model-value="travelStore.formData.homeTimezone"
+        :model-value="travelForm.formData.homeTimezone"
         placeholder="Select your home timezone"
-        :error="showError('homeTimezone') ? travelStore.errors.homeTimezone : undefined"
+        :error="showError('homeTimezone') ? travelForm.errors.homeTimezone : undefined"
         help-text="We've auto-detected your timezone, but you can change it if needed."
         required
-        @update:model-value="(value) => travelStore.updateField('homeTimezone', value)"
-        @blur="() => travelStore.markFieldTouched('homeTimezone')"
+        @update:model-value="(value) => travelForm.updateField('homeTimezone', value)"
+        @blur="() => travelForm.markFieldTouched('homeTimezone')"
       />
 
       <TimezoneSelector
         id="destination-timezone"
         label="Your Destination"
-        :model-value="travelStore.formData.destinationTimezone"
+        :model-value="travelForm.formData.destinationTimezone"
         placeholder="Select your destination timezone"
         :error="
-          showError('destinationTimezone') ? travelStore.errors.destinationTimezone : undefined
+          showError('destinationTimezone') ? travelForm.errors.destinationTimezone : undefined
         "
         help-text="Choose the timezone where you'll be spending most of your time."
         required
-        @update:model-value="(value) => travelStore.updateField('destinationTimezone', value)"
-        @blur="() => travelStore.markFieldTouched('destinationTimezone')"
+        @update:model-value="(value) => travelForm.updateField('destinationTimezone', value)"
+        @blur="() => travelForm.markFieldTouched('destinationTimezone')"
       />
 
       <!-- Timezone Info Display -->
@@ -84,15 +84,15 @@
       <DateTimePicker
         id="departure"
         label="Departure Date & Time"
-        :date-value="travelStore.formData.departureDate"
-        :time-value="travelStore.formData.departureTime"
+        :date-value="travelForm.formData.departureDate"
+        :time-value="travelForm.formData.departureTime"
         :include-time="true"
-        :error="showError('departureDate') ? travelStore.errors.departureDate : undefined"
+        :error="showError('departureDate') ? travelForm.errors.departureDate : undefined"
         help-text="Local time at your departure location"
         required
-        @update:date-value="(value) => travelStore.updateField('departureDate', value)"
-        @update:time-value="(value) => travelStore.updateField('departureTime', value)"
-        @blur="() => travelStore.markFieldTouched('departureDate')"
+        @update:date-value="(value) => travelForm.updateField('departureDate', value)"
+        @update:time-value="(value) => travelForm.updateField('departureTime', value)"
+        @blur="() => travelForm.markFieldTouched('departureDate')"
       />
     </section>
 
@@ -100,17 +100,17 @@
     <section class="mb-10 p-6 bg-white rounded-lg shadow-sm border border-gray-200">
       <SleepScheduleInput
         id="sleep-schedule"
-        :bedtime="travelStore.formData.currentBedtime"
-        :wake-time="travelStore.formData.currentWakeTime"
-        :bedtime-error="showError('currentBedtime') ? travelStore.errors.currentBedtime : undefined"
+        :bedtime="travelForm.formData.currentBedtime"
+        :wake-time="travelForm.formData.currentWakeTime"
+        :bedtime-error="showError('currentBedtime') ? travelForm.errors.currentBedtime : undefined"
         :wake-time-error="
-          showError('currentWakeTime') ? travelStore.errors.currentWakeTime : undefined
+          showError('currentWakeTime') ? travelForm.errors.currentWakeTime : undefined
         "
-        @update:bedtime="(value) => travelStore.updateField('currentBedtime', value)"
-        @update:wake-time="(value) => travelStore.updateField('currentWakeTime', value)"
+        @update:bedtime="(value) => travelForm.updateField('currentBedtime', value)"
+        @update:wake-time="(value) => travelForm.updateField('currentWakeTime', value)"
         @blur="
           (field) =>
-            travelStore.markFieldTouched(field === 'bedtime' ? 'currentBedtime' : 'currentWakeTime')
+            travelForm.markFieldTouched(field === 'bedtime' ? 'currentBedtime' : 'currentWakeTime')
         "
       />
     </section>
@@ -138,33 +138,33 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useTravelStore } from '~/stores/travelStore'
+import { useTravelForm } from '~/composables/useTravelForm'
 import TimezoneSelector from './TimezoneSelector.vue'
 import DateTimePicker from './DateTimePicker.vue'
 import SleepScheduleInput from './SleepScheduleInput.vue'
 
 const router = useRouter()
-const travelStore = useTravelStore()
+const travelForm = useTravelForm()
 
 const showTimezoneInfo = computed(() => {
   return (
-    travelStore.formData.homeTimezone
-    && travelStore.formData.destinationTimezone
-    && travelStore.formData.homeTimezone !== travelStore.formData.destinationTimezone
-    && travelStore.timezoneOffset !== 0
+    travelForm.formData.homeTimezone
+    && travelForm.formData.destinationTimezone
+    && travelForm.formData.homeTimezone !== travelForm.formData.destinationTimezone
+    && travelForm.timezoneOffset !== 0
   )
 })
 
 const directionIcon = computed(() => {
-  return travelStore.travelDirection === 'east' ? '➡️' : '⬅️'
+  return travelForm.travelDirection === 'east' ? '➡️' : '⬅️'
 })
 
 const directionText = computed(() => {
-  return travelStore.travelDirection === 'east' ? 'Traveling Eastward' : 'Traveling Westward'
+  return travelForm.travelDirection === 'east' ? 'Traveling Eastward' : 'Traveling Westward'
 })
 
 const timeDifferenceText = computed(() => {
-  const offset = Math.abs(travelStore.timezoneOffset)
+  const offset = Math.abs(travelForm.timezoneOffset)
   const hours = Math.floor(offset)
   const minutes = Math.round((offset - hours) * 60)
 
@@ -176,31 +176,28 @@ const timeDifferenceText = computed(() => {
 })
 
 const canSubmit = computed(() => {
-  const hasActualErrors = Object.values(travelStore.errors).some(error => error !== undefined)
+  const hasActualErrors = Object.values(travelForm.errors).some(error => error !== undefined)
   return (
-    travelStore.formData.homeTimezone !== ''
-    && travelStore.formData.destinationTimezone !== ''
-    && travelStore.formData.departureDate !== ''
+    travelForm.formData.homeTimezone !== ''
+    && travelForm.formData.destinationTimezone !== ''
+    && travelForm.formData.departureDate !== ''
     && !hasActualErrors
   )
 })
 
-function showError(field: keyof typeof travelStore.formData): boolean {
-  return !!(travelStore.touched[field] && travelStore.errors[field])
+function showError(field: keyof typeof travelForm.formData): boolean {
+  return !!(travelForm.touched[field] && travelForm.errors[field])
 }
 
 async function handleSubmit() {
-  if (travelStore.validateForm()) {
-    const success = await travelStore.generatePlan()
-    if (success) {
-      router.push({ name: 'plan-results' })
-    }
+  if (travelForm.validateForm()) {
+    router.push({ name: 'plan-results', query: travelForm.formData })
   }
 }
 
 function handleReset() {
   if (confirm('Are you sure you want to reset the form? All your entries will be lost.')) {
-    travelStore.resetForm()
+    travelForm.resetForm()
   }
 }
 </script>

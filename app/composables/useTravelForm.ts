@@ -1,37 +1,34 @@
 /**
- * Pinia store for managing travel plan form state
+ * Composable for managing travel form state via URL query parameters
  */
 
-import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
-import type { TravelFormData, TravelPlan } from '~/types/travel'
+import { computed, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import type { TravelFormData } from '~/types/travel'
 import {
   getCurrentTimezone,
   calculateTimezoneOffset,
   getTravelDirection,
 } from '~/utils/timezoneService'
 import { calculateSleepDuration, getTodayDate } from '~/utils/dateTimeUtils'
-import { generateTravelPlan } from '~/utils/jetlagAlgorithm'
 
-export const useTravelStore = defineStore('travel', () => {
-  // Form data
+export function useTravelForm() {
+  const route = useRoute()
+  const router = useRouter()
+
+  // Initialize form data from URL params or defaults
   const formData = ref<TravelFormData>({
-    homeTimezone: getCurrentTimezone(),
-    destinationTimezone: '',
-    departureDate: getTodayDate(),
-    departureTime: '09:00',
-    currentBedtime: '23:00',
-    currentWakeTime: '07:00',
+    homeTimezone: (route.query.home as string) || getCurrentTimezone(),
+    destinationTimezone: (route.query.dest as string) || '',
+    departureDate: (route.query.date as string) || getTodayDate(),
+    departureTime: (route.query.time as string) || '09:00',
+    currentBedtime: (route.query.bed as string) || '23:00',
+    currentWakeTime: (route.query.wake as string) || '07:00',
   })
 
   // Form validation state
   const errors = ref<Partial<Record<keyof TravelFormData, string>>>({})
   const touched = ref<Partial<Record<keyof TravelFormData, boolean>>>({})
-
-  // Generated travel plan
-  const travelPlan = ref<TravelPlan | null>(null)
-  const isGenerating = ref(false)
-  const generationError = ref<string | null>(null)
 
   // Computed values
   const sleepDuration = computed(() => {
@@ -78,13 +75,15 @@ export const useTravelStore = defineStore('travel', () => {
     )
   }
 
-  // Actions
+  // Update field and sync to URL
   function updateField<K extends keyof TravelFormData>(field: K, value: TravelFormData[K]) {
     formData.value[field] = value
     touched.value[field] = true
     validateField(field)
+    syncToUrl()
   }
 
+  // Validate single field
   function validateField(field: keyof TravelFormData) {
     errors.value[field] = undefined
 
@@ -144,16 +143,16 @@ export const useTravelStore = defineStore('travel', () => {
     }
   }
 
+  // Validate entire form
   function validateForm(): boolean {
-    // Mark all fields as touched
     Object.keys(formData.value).forEach((key) => {
       touched.value[key as keyof TravelFormData] = true
       validateField(key as keyof TravelFormData)
     })
-
     return isFormValid.value
   }
 
+  // Reset form to defaults (clear URL params)
   function resetForm() {
     formData.value = {
       homeTimezone: getCurrentTimezone(),
@@ -165,48 +164,36 @@ export const useTravelStore = defineStore('travel', () => {
     }
     errors.value = {}
     touched.value = {}
+    syncToUrl()
   }
 
+  // Mark field as touched
   function markFieldTouched(field: keyof TravelFormData) {
     touched.value[field] = true
     validateField(field)
   }
 
-  /**
-   * Generate travel plan from form data
-   */
-  async function generatePlan(): Promise<boolean> {
-    // First validate the form
-    if (!validateForm()) {
-      return false
+  // Sync form data to URL query params
+  function syncToUrl() {
+    const query = {
+      home: formData.value.homeTimezone,
+      dest: formData.value.destinationTimezone,
+      date: formData.value.departureDate,
+      time: formData.value.departureTime,
+      bed: formData.value.currentBedtime,
+      wake: formData.value.currentWakeTime,
     }
-
-    isGenerating.value = true
-    generationError.value = null
-
-    try {
-      // Generate the plan using the algorithm with timezone offset
-      const plan = generateTravelPlan(formData.value, timezoneOffset.value)
-
-      travelPlan.value = plan
-      return true
-    }
-    catch (error) {
-      generationError.value = error instanceof Error ? error.message : 'Failed to generate plan'
-      console.error('Error generating travel plan:', error)
-      return false
-    }
-    finally {
-      isGenerating.value = false
-    }
+    router.replace({ query })
   }
 
-  /**
-   * Clear the generated plan
-   */
-  function clearPlan() {
-    travelPlan.value = null
-    generationError.value = null
+  // Check if params are valid
+  function hasValidParams(): boolean {
+    return !!(
+      formData.value.homeTimezone
+      && formData.value.destinationTimezone
+      && formData.value.departureDate
+      && formData.value.departureTime
+    )
   }
 
   return {
@@ -214,9 +201,6 @@ export const useTravelStore = defineStore('travel', () => {
     formData,
     errors,
     touched,
-    travelPlan,
-    isGenerating,
-    generationError,
 
     // Computed
     sleepDuration,
@@ -230,7 +214,7 @@ export const useTravelStore = defineStore('travel', () => {
     validateForm,
     resetForm,
     markFieldTouched,
-    generatePlan,
-    clearPlan,
+    syncToUrl,
+    hasValidParams,
   }
-})
+}
