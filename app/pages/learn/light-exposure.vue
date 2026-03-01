@@ -312,7 +312,7 @@ useJsonld({
   'url': 'https://voyageclock.pages.dev/learn/light-exposure',
   'image': 'https://voyageclock.pages.dev/og/light.png',
   'datePublished': '2025-01-01',
-  'dateModified': '2025-03-01',
+  'dateModified': '2026-03-01',
   'author': {
     '@type': 'Organization',
     'name': 'Voyage Clock',

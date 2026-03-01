@@ -406,7 +406,7 @@ useJsonld({
   'url': 'https://voyageclock.pages.dev/learn/exercise-activity',
   'image': 'https://voyageclock.pages.dev/og/exercise.png',
   'datePublished': '2025-01-01',
-  'dateModified': '2025-03-01',
+  'dateModified': '2026-03-01',
   'author': {
     '@type': 'Organization',
     'name': 'Voyage Clock',
