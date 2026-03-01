@@ -12,14 +12,7 @@
         </p>
       </div>
       <div class="plan-actions">
-        <button
-          class="btn btn-outline"
-          title="Print plan"
-          @click="printPlan"
-        >
-          <span class="btn-icon">🖨️</span>
-          <span class="btn-text">Print</span>
-        </button>
+
         <button
           class="btn btn-outline"
           title="Edit inputs"
