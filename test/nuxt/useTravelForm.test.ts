@@ -19,18 +19,18 @@ describe('useTravelForm', () => {
     it('should initialize with default values', () => {
       const { formData } = useTravelForm()
 
-      expect(formData.value.homeTimezone).toBeDefined()
-      expect(formData.value.destinationTimezone).toBe('')
-      expect(formData.value.departureDate).toBeDefined()
-      expect(formData.value.departureTime).toBe('09:00')
-      expect(formData.value.currentBedtime).toBe('23:00')
-      expect(formData.value.currentWakeTime).toBe('07:00')
+      expect(formData.homeTimezone).toBeDefined()
+      expect(formData.destinationTimezone).toBe('')
+      expect(formData.departureDate).toBeDefined()
+      expect(formData.departureTime).toBe('09:00')
+      expect(formData.currentBedtime).toBe('23:00')
+      expect(formData.currentWakeTime).toBe('07:00')
     })
 
     it('should initialize with no errors', () => {
       const { errors } = useTravelForm()
 
-      expect(Object.keys(errors.value)).toHaveLength(0)
+      expect(Object.keys(errors)).toHaveLength(0)
     })
 
     it('should initialize with isFormValid as false', () => {
@@ -44,27 +44,27 @@ describe('useTravelForm', () => {
       const { updateField, formData } = useTravelForm()
 
       updateField('destinationTimezone', 'Europe/London')
-      expect(formData.value.destinationTimezone).toBe('Europe/London')
+      expect(formData.destinationTimezone).toBe('Europe/London')
 
       updateField('departureTime', '14:00')
-      expect(formData.value.departureTime).toBe('14:00')
+      expect(formData.departureTime).toBe('14:00')
     })
 
     it('should mark field as touched', () => {
       const { updateField, touched } = useTravelForm()
 
       updateField('homeTimezone', 'America/New_York')
-      expect(touched.value.homeTimezone).toBe(true)
+      expect(touched.homeTimezone).toBe(true)
     })
 
     it('should validate the field after update', () => {
       const { updateField, errors } = useTravelForm()
 
       updateField('homeTimezone', '')
-      expect(errors.value.homeTimezone).toBe('Home timezone is required')
+      expect(errors.homeTimezone).toBe('Home timezone is required')
 
       updateField('homeTimezone', 'America/New_York')
-      expect(errors.value.homeTimezone).toBeUndefined()
+      expect(errors.homeTimezone).toBeUndefined()
     })
   })
 
@@ -72,75 +72,75 @@ describe('useTravelForm', () => {
     it('should validate homeTimezone is required', () => {
       const { updateField, errors } = useTravelForm()
       updateField('homeTimezone', '')
-      expect(errors.value.homeTimezone).toBe('Home timezone is required')
+      expect(errors.homeTimezone).toBe('Home timezone is required')
       updateField('homeTimezone', 'America/New_York')
-      expect(errors.value.homeTimezone).toBeUndefined()
+      expect(errors.homeTimezone).toBeUndefined()
     })
 
     it('should validate destinationTimezone is required', () => {
       const { formData, updateField, errors } = useTravelForm()
 
-      formData.value.homeTimezone = 'America/New_York'
+      formData.homeTimezone = 'America/New_York'
 
       updateField('destinationTimezone', '')
-      expect(errors.value.destinationTimezone).toBe('Destination timezone is required')
+      expect(errors.destinationTimezone).toBe('Destination timezone is required')
 
       updateField('destinationTimezone', 'America/New_York')
-      expect(errors.value.destinationTimezone).toBe('Destination must be different from home timezone')
+      expect(errors.destinationTimezone).toBe('Destination must be different from home timezone')
 
       updateField('destinationTimezone', 'Europe/London')
-      expect(errors.value.destinationTimezone).toBeUndefined()
+      expect(errors.destinationTimezone).toBeUndefined()
     })
 
     it('should validate departureDate is required and not in past', () => {
       const { updateField, errors } = useTravelForm()
 
       updateField('departureDate', '')
-      expect(errors.value.departureDate).toBe('Departure date is required')
+      expect(errors.departureDate).toBe('Departure date is required')
 
       updateField('departureDate', '2020-01-01')
-      expect(errors.value.departureDate).toBeTruthy()
-      expect(errors.value.departureDate).toContain('past')
+      expect(errors.departureDate).toBeTruthy()
+      expect(errors.departureDate).toContain('past')
 
       const futureDate = new Date()
       futureDate.setDate(futureDate.getDate() + 7)
       updateField('departureDate', futureDate.toISOString().split('T')[0] as string)
-      expect(errors.value.departureDate).toBeUndefined()
+      expect(errors.departureDate).toBeUndefined()
     })
 
     it('should validate departureTime is required', () => {
       const { updateField, errors } = useTravelForm()
       updateField('departureTime', '')
-      expect(errors.value.departureTime).toBe('Departure time is required')
+      expect(errors.departureTime).toBe('Departure time is required')
       updateField('departureTime', '09:00')
-      expect(errors.value.departureTime).toBeUndefined()
+      expect(errors.departureTime).toBeUndefined()
     })
 
     it('should validate currentBedtime is required', () => {
       const { updateField, errors } = useTravelForm()
       updateField('currentBedtime', '')
-      expect(errors.value.currentBedtime).toBe('Bedtime is required')
+      expect(errors.currentBedtime).toBe('Bedtime is required')
       updateField('currentBedtime', '23:00')
-      expect(errors.value.currentBedtime).toBeUndefined()
+      expect(errors.currentBedtime).toBeUndefined()
     })
 
     it('should validate currentWakeTime is required and sleep duration', () => {
       const { updateField, errors } = useTravelForm()
 
       updateField('currentWakeTime', '')
-      expect(errors.value.currentWakeTime).toBe('Wake time is required')
+      expect(errors.currentWakeTime).toBe('Wake time is required')
 
       updateField('currentBedtime', '22:00')
       updateField('currentWakeTime', '01:59')
-      expect(errors.value.currentWakeTime).toContain('too short')
+      expect(errors.currentWakeTime).toContain('too short')
 
       updateField('currentBedtime', '20:00')
       updateField('currentWakeTime', '14:00')
-      expect(errors.value.currentWakeTime).toContain('too long')
+      expect(errors.currentWakeTime).toContain('too long')
 
       updateField('currentBedtime', '23:00')
       updateField('currentWakeTime', '07:00')
-      expect(errors.value.currentWakeTime).toBeUndefined()
+      expect(errors.currentWakeTime).toBeUndefined()
     })
   })
 
@@ -185,8 +185,8 @@ describe('useTravelForm', () => {
       const isValid = validateForm()
 
       expect(isValid).toBe(false)
-      expect(touched.value.homeTimezone).toBe(true)
-      expect(errors.value.homeTimezone).toBeDefined()
+      expect(touched.homeTimezone).toBe(true)
+      expect(errors.homeTimezone).toBeDefined()
     })
   })
 
@@ -200,13 +200,13 @@ describe('useTravelForm', () => {
 
       resetForm()
 
-      expect(formData.value.homeTimezone).toBeDefined()
-      expect(formData.value.destinationTimezone).toBe('')
-      expect(formData.value.departureTime).toBe('09:00')
-      expect(formData.value.currentBedtime).toBe('23:00')
-      expect(formData.value.currentWakeTime).toBe('07:00')
-      expect(Object.keys(errors.value)).toHaveLength(0)
-      expect(Object.keys(touched.value)).toHaveLength(0)
+      expect(formData.homeTimezone).toBeDefined()
+      expect(formData.destinationTimezone).toBe('')
+      expect(formData.departureTime).toBe('09:00')
+      expect(formData.currentBedtime).toBe('23:00')
+      expect(formData.currentWakeTime).toBe('07:00')
+      expect(Object.keys(errors)).toHaveLength(0)
+      expect(Object.keys(touched)).toHaveLength(0)
     })
   })
 

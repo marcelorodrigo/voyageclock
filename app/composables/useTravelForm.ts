@@ -92,7 +92,8 @@ export function useTravelForm() {
 
   // Validate single field
   function validateField(field: keyof TravelFormData) {
-    errors[field] = undefined
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+    delete errors[field]
 
     switch (field) {
       case 'homeTimezone':
@@ -172,10 +173,12 @@ export function useTravelForm() {
       currentWakeTime: '07:00',
     })
     Object.keys(errors).forEach((k) => {
-      errors[k as keyof TravelFormData] = undefined
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+      delete errors[k as keyof TravelFormData]
     })
     Object.keys(touched).forEach((k) => {
-      touched[k as keyof TravelFormData] = undefined
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+      delete touched[k as keyof TravelFormData]
     })
     syncToUrl()
   }
