@@ -10,6 +10,12 @@ vi.mock('vue-router', async (importOriginal) => {
   }
 })
 
+vi.mock('~/utils/timezoneService', () => ({
+  getCurrentTimezone: vi.fn().mockReturnValue(''),
+  calculateTimezoneOffset: vi.fn(() => 0),
+  getTravelDirection: vi.fn(() => 'east'),
+}))
+
 describe('useTravelForm', () => {
   beforeEach(() => {
     vi.clearAllMocks()
@@ -253,7 +259,10 @@ describe('useTravelForm', () => {
 
   describe('hasValidParams', () => {
     it('should return false when required params are missing', () => {
-      const { hasValidParams } = useTravelForm()
+      const { hasValidParams, formData } = useTravelForm()
+
+      formData.homeTimezone = ''
+      formData.destinationTimezone = ''
 
       expect(hasValidParams()).toBe(false)
     })
