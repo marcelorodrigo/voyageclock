@@ -15,8 +15,8 @@ export function useTravelForm() {
   const router = useRouter()
 
   // Initialize form data from URL params or defaults
-  // homeTimezone intentionally starts empty to avoid SSR/client hydration mismatches;
-  // it is set to the detected browser timezone in onMounted below.
+  // homeTimezone is set from the URL if present, or left empty to avoid SSR/client hydration mismatches.
+  // The client-side timezone detection is handled by useClientTimezone in the consuming component.
   const formData = reactive<TravelFormData>({
     homeTimezone: (route.query.homeTimezone as string) || '',
     destinationTimezone: (route.query.destinationTimezone as string) || '',
@@ -29,13 +29,6 @@ export function useTravelForm() {
   // Form validation state
   const errors = reactive<Partial<Record<keyof TravelFormData, string>>>({})
   const touched = reactive<Partial<Record<keyof TravelFormData, boolean>>>({})
-
-  // Detect and apply the user's browser timezone only on the client, after hydration
-  onMounted(() => {
-    if (!formData.homeTimezone) {
-      formData.homeTimezone = getCurrentTimezone()
-    }
-  })
 
   // Computed values
   const sleepDuration = computed(() => {
