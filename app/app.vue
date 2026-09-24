@@ -2,6 +2,13 @@
 const localeHead = useLocaleHead({
   seo: { canonicalQueries: [] },
 })
+const {
+  isReady: isLanguagePreferenceReady,
+  suggestedLocale,
+  suggestedLocaleName,
+  selectLocale,
+  dismissSuggestion,
+} = useLanguagePreference()
 
 useHead({
   bodyAttrs: {
@@ -21,6 +28,12 @@ useHead({
   <div class="site-shell box-border min-h-screen [&_*]:box-border [&_a]:text-inherit [&_button]:font-[inherit] [&_input]:font-[inherit] [&_select]:font-[inherit]">
     <NuxtRouteAnnouncer />
     <SiteHeader />
+    <LanguageSuggestion
+      v-if="isLanguagePreferenceReady && suggestedLocale && suggestedLocaleName"
+      :language="suggestedLocaleName"
+      @accept="selectLocale(suggestedLocale)"
+      @dismiss="dismissSuggestion"
+    />
     <main><NuxtPage /></main>
     <footer class="mx-auto mt-16 flex w-[min(1120px,calc(100%-3rem))] items-center justify-between border-t border-[#e4e9e1] py-6 pb-8 text-[.85rem] text-muted max-[560px]:w-[min(calc(100%-2rem),1120px)] max-[560px]:items-start max-[560px]:flex-col max-[560px]:gap-[.7rem]">
       <NuxtLinkLocale class="inline-flex items-center gap-[.55rem] font-display text-[1.1rem] font-extrabold tracking-[-.04em] text-ink no-underline hover:text-green" to="/"><span class="grid size-[1.8rem] place-items-center rounded-full bg-[#e7efe4] text-green text-[1.2rem]">◷</span> voyageclock</NuxtLinkLocale>
