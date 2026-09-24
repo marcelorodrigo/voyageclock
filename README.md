@@ -38,13 +38,21 @@ pnpm test:nuxt
 
 ## Production
 
-Build the application for production:
+Generate the production SPA as static files:
 
 ```bash
 pnpm build
 ```
 
-Locally preview production build:
+The generated site is written to `.output/public`. Deploy the contents of this directory to a static host; a Nuxt application server is not required at runtime. `pnpm generate` runs the same static generation command.
+
+Set `NUXT_SITE_URL` to the canonical public URL when generating the production site (for example, `https://voyageclock.example`). If it is not set, Nuxt uses `http://localhost:3000`, the default local host and port, for site metadata and the generated sitemap.
+
+Configure the host to serve the SPA entry point for client-side routes such as `/plan` and `/science` on direct visits and refreshes. Nuxt generates a `200.html` fallback for this purpose; the exact rewrite or fallback configuration depends on the host.
+
+Because this is a client-rendered SPA, page-specific metadata is set in the browser rather than included in prerendered route HTML, and the app does not receive the SEO benefits of server-rendered pages.
+
+Locally preview the generated site:
 
 ```bash
 pnpm preview
