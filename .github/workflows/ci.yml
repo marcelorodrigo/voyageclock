@@ -1,4 +1,4 @@
-name: CI
+name: Build
 
 on:
   pull_request:
@@ -8,11 +8,12 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
   checks:
     name: Lint and test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -35,4 +36,18 @@ jobs:
         run: pnpm lint
 
       - name: Test
-        run: pnpm exec vitest run
+        run: pnpm test:coverage
+
+      - name: Verify LCOV coverage report
+        run: test -s coverage/lcov.info
+
+      - name: SonarQube Scan
+        if: >-
+          github.event_name == 'push' || (
+            github.event_name == 'pull_request' &&
+            github.event.pull_request.head.repo.full_name == github.repository &&
+            github.event.pull_request.user.login != 'dependabot[bot]'
+          )
+        uses: SonarSource/sonarqube-scan-action@ba9859eae8dd6bd29e412f25ddbbef3d032000f4 # v8.2.2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
