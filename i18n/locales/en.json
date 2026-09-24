@@ -7,7 +7,10 @@
     "tagline": "Travel well. Arrive in rhythm.",
     "language": "Language",
     "openMenu": "Open navigation menu",
-    "closeMenu": "Close navigation menu"
+    "closeMenu": "Close navigation menu",
+    "languageSuggestion": "Your browser is set to {language}. Would you like to switch languages?",
+    "switchToLanguage": "Switch to {language}",
+    "dismissLanguageSuggestion": "No thanks"
   },
   "movements": {
     "earlier": "earlier",

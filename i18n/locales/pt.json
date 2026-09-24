@@ -1,5 +1,5 @@
 {
-  "app": { "home": "Página inicial do VoyageClock", "navigation": "Navegação principal", "science": "A ciência", "planTrip": "Planeje sua viagem", "tagline": "Viaje bem. Chegue no seu ritmo.", "language": "Idioma", "openMenu": "Abrir menu de navegação", "closeMenu": "Fechar menu de navegação" },
+  "app": { "home": "Página inicial do VoyageClock", "navigation": "Navegação principal", "science": "A ciência", "planTrip": "Planeje sua viagem", "tagline": "Viaje bem. Chegue no seu ritmo.", "language": "Idioma", "openMenu": "Abrir menu de navegação", "closeMenu": "Fechar menu de navegação", "languageSuggestion": "Seu navegador está configurado para {language}. Gostaria de mudar o idioma?", "switchToLanguage": "Mudar para {language}", "dismissLanguageSuggestion": "Agora não" },
   "movements": { "earlier": "mais cedo", "later": "mais tarde" },
   "home": {
     "title": "VoyageClock — chegue no seu ritmo", "description": "Um plano personalizado e baseado na ciência para sono, luz e cafeína na sua próxima viagem entre fusos horários.",
