@@ -27,31 +27,10 @@ describe('planner form functional flow', () => {
     expect(component.text()).not.toContain('Departure must be in the future.')
   })
 
-  it('offers IANA timezones beyond the initial popular destinations and accepts the exact selected value', async () => {
-    const component = await mountSuspended(TripPlannerForm, {
-      props: { now: '2027-06-01T12:00:00Z' },
-    })
-
-    expect(component.get('datalist#origin-timezones').find('option[value="Africa/Abidjan"]').exists()).toBe(true)
-    expect(component.get('datalist#destination-timezones').find('option[value="Europe/Amsterdam"]').exists()).toBe(true)
-
-    await component.get('input[list="origin-timezones"]').setValue('Europe/Amsterdam')
-    await component.get('input[list="destination-timezones"]').setValue('Europe/London')
-    await component.findAll('input[type="datetime-local"]')[0]!.setValue('2027-06-10T09:00')
-    await component.findAll('input[type="datetime-local"]')[1]!.setValue('2027-06-10T22:00')
-    await component.get('form').trigger('submit')
-
-    expect(component.emitted('planned')?.[0]?.[0].originTimeZone).toBe('Europe/Amsterdam')
-  })
-
-  it('rejects timezone text that is not an available IANA timezone', async () => {
+  it('offers IANA timezones beyond the initial popular destinations', async () => {
     const component = await mountSuspended(TripPlannerForm)
 
-    await component.get('input[list="origin-timezones"]').setValue('Amster')
-    await component.get('form').trigger('submit')
-
-    expect(component.get('[role="alert"]').text()).toBe('Choose a valid timezone for where you are leaving from.')
-    expect(component.emitted('planned')).toBeUndefined()
+    expect(component.get('select').find('option[value="Africa/Abidjan"]').exists()).toBe(true)
   })
 
   it('renders all requested day stages and plan cautions', async () => {

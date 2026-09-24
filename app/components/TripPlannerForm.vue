@@ -53,17 +53,6 @@ onMounted(() => {
 
 function submit(): void {
   error.value = ''
-
-  if (!timeZones.value.includes(input.value.originTimeZone)) {
-    error.value = 'Choose a valid timezone for where you are leaving from.'
-    return
-  }
-
-  if (!timeZones.value.includes(input.value.destinationTimeZone)) {
-    error.value = 'Choose a valid timezone for where you are going.'
-    return
-  }
-
   try {
     const plan = generatePlan(input.value, Temporal.Instant.from(props.now ?? Temporal.Now.instant().toString()))
     emit('planned', plan)
@@ -78,17 +67,15 @@ function submit(): void {
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
       <label class="grid gap-2 text-[.9rem] font-[650] text-ink">
         <span>Where are you leaving from?</span>
-        <input v-model="input.originTimeZone" class="min-h-12 w-full rounded-[.7rem] border border-[#d8dfd5] bg-white px-[.8rem] py-[.7rem] font-[inherit] text-ink focus:border-green focus:outline-[3px] focus:outline-[#b6d6b0]" list="origin-timezones" required>
-        <datalist id="origin-timezones">
+        <select v-model="input.originTimeZone" class="min-h-12 w-full rounded-[.7rem] border border-[#d8dfd5] bg-white px-[.8rem] py-[.7rem] font-[inherit] text-ink focus:border-green focus:outline-[3px] focus:outline-[#b6d6b0]" required>
           <option v-for="zone in timeZones" :key="`origin-${zone}`" :value="zone">{{ zone.replaceAll('_', ' ') }}</option>
-        </datalist>
+        </select>
       </label>
       <label class="grid gap-2 text-[.9rem] font-[650] text-ink">
         <span>Where are you going?</span>
-        <input v-model="input.destinationTimeZone" class="min-h-12 w-full rounded-[.7rem] border border-[#d8dfd5] bg-white px-[.8rem] py-[.7rem] font-[inherit] text-ink focus:border-green focus:outline-[3px] focus:outline-[#b6d6b0]" list="destination-timezones" required>
-        <datalist id="destination-timezones">
+        <select v-model="input.destinationTimeZone" class="min-h-12 w-full rounded-[.7rem] border border-[#d8dfd5] bg-white px-[.8rem] py-[.7rem] font-[inherit] text-ink focus:border-green focus:outline-[3px] focus:outline-[#b6d6b0]" required>
           <option v-for="zone in timeZones" :key="`destination-${zone}`" :value="zone">{{ zone.replaceAll('_', ' ') }}</option>
-        </datalist>
+        </select>
       </label>
       <label class="grid gap-2 text-[.9rem] font-[650] text-ink">
         <span>Departure date and local time</span>
