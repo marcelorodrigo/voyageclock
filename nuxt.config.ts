@@ -1,9 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+const siteUrl = process.env.NUXT_SITE_URL || process.env.CF_PAGES_URL
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   ssr: false,
   site: {
-    url: process.env.NUXT_SITE_URL || 'http://localhost:3000',
+    url: siteUrl || 'http://localhost:3000',
     name: 'VoyageClock',
   },
   devtools: { enabled: true },
@@ -24,7 +26,7 @@ export default defineNuxtConfig({
     defaultLocale: 'en',
     langDir: 'locales',
     detectBrowserLanguage: false,
-    baseUrl: process.env.NUXT_SITE_URL,
+    baseUrl: siteUrl,
     locales: [
       { code: 'en', language: 'en', name: 'English', file: 'en.json' },
       { code: 'pt', language: 'pt-BR', name: 'Português (Brasil)', file: 'pt.json' },
