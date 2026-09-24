@@ -1,3 +1,8 @@
+[![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=marcelorodrigo_voyageclock&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=marcelorodrigo_voyageclock)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=marcelorodrigo_voyageclock&metric=coverage)](https://sonarcloud.io/summary/new_code?id=marcelorodrigo_voyageclock)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=marcelorodrigo_voyageclock&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=marcelorodrigo_voyageclock)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=marcelorodrigo_voyageclock&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=marcelorodrigo_voyageclock)
+
 # VoyageClock
 
 VoyageClock helps adult travelers prepare for a timezone change with a personalized, day-by-day sleep and adaptation plan. Enter your departure and arrival times, origin and destination timezones, usual bedtime and wake time, and whether you use caffeine. The planner turns those details into practical guidance for the days before travel, arrival day, and the day after arrival.

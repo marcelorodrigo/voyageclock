@@ -43,6 +43,19 @@ describe('generatePlan', () => {
     expect(plan.days[0]?.guidance.explanation).not.toContain('30 minutes')
   })
 
+  it('shifts preparation sleep times later for a westward trip', () => {
+    const plan = generatePlan({
+      ...trip,
+      originTimeZone: 'Europe/London',
+      destinationTimeZone: 'America/New_York',
+    }, now)
+
+    expect(plan.direction).toBe('westward')
+    expect(plan.days[0]?.guidance.sleep).toContain('23:30')
+    expect(plan.days[0]?.guidance.wake).toContain('07:30')
+    expect(plan.days[0]?.guidance.explanation).toContain('30 minutes later')
+  })
+
   it('starts preparation with actual available days for an imminent trip', () => {
     const plan = generatePlan({ ...trip, departureLocal: '2027-06-02T09:00', arrivalLocal: '2027-06-02T21:00' }, now)
     expect(plan.days.map(day => day.stage)).toEqual(['preflight', 'arrival', 'postArrival'])
