@@ -1,5 +1,7 @@
-# TODO: monorepo package globs will be added later
+packages:
+  - .
+
 onlyBuiltDependencies:
-  - '@parcel/watcher'
   - esbuild
-  - unrs-resolver
+allowBuilds:
+  esbuild: true
