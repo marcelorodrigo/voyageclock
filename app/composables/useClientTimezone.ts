@@ -5,10 +5,15 @@
 import type { TravelFormData } from '~/types/travel'
 import { getCurrentTimezone } from '~/utils/timezoneService'
 
-export function useClientTimezone(formData: TravelFormData) {
+export interface ClientTimezoneForm {
+  formData: TravelFormData
+  updateField: <K extends keyof TravelFormData>(field: K, value: TravelFormData[K]) => void
+}
+
+export function useClientTimezone(form: ClientTimezoneForm) {
   onMounted(() => {
-    if (!formData.homeTimezone) {
-      formData.homeTimezone = getCurrentTimezone()
+    if (!form.formData.homeTimezone) {
+      form.updateField('homeTimezone', getCurrentTimezone())
     }
   })
 }

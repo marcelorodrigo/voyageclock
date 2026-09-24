@@ -144,7 +144,7 @@ import SleepScheduleInput from './SleepScheduleInput.vue'
 
 const router = useRouter()
 const travelForm = useTravelForm()
-useClientTimezone(travelForm.formData)
+useClientTimezone(travelForm)
 
 const showTimezoneInfo = computed(() => {
   return (
