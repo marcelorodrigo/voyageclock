@@ -13,6 +13,9 @@ export default defineNuxtConfig({
     url: siteUrl,
     name: 'VoyageClock',
   },
+  sitemap: {
+    zeroRuntime: true,
+  },
   devtools: { enabled: true },
   modules: ['@nuxt/test-utils', '@nuxtjs/seo', '@nuxt/eslint', '@nuxtjs/i18n'],
   css: ['~/assets/css/tailwind.css'],
