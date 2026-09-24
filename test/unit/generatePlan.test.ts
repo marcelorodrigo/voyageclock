@@ -28,7 +28,7 @@ describe('generatePlan', () => {
     const plan = generatePlan(trip, now)
     const arrival = plan.days.find(day => day.stage === 'arrival')
 
-    expect(arrival?.guidance.sleep).toContain('23:00–07:00')
+    expect(arrival?.guidance.sleep).toMatchObject({ key: 'guidance.sleepOpportunity', params: { bedtime: '23:00', wakeTime: '07:00' } })
   })
 
   it('does not recommend a 30-minute shift for a minimal timezone difference', () => {
@@ -39,8 +39,7 @@ describe('generatePlan', () => {
     }, now)
 
     expect(plan.direction).toBe('minimal')
-    expect(plan.days[0]?.guidance.explanation).toContain('Keep your usual sleep schedule')
-    expect(plan.days[0]?.guidance.explanation).not.toContain('30 minutes')
+    expect(plan.days[0]?.guidance.explanation).toEqual({ key: 'guidance.preparationMinimal' })
   })
 
   it('shifts preparation sleep times later for a westward trip', () => {
@@ -51,15 +50,15 @@ describe('generatePlan', () => {
     }, now)
 
     expect(plan.direction).toBe('westward')
-    expect(plan.days[0]?.guidance.sleep).toContain('23:30')
-    expect(plan.days[0]?.guidance.wake).toContain('07:30')
-    expect(plan.days[0]?.guidance.explanation).toContain('30 minutes later')
+    expect(plan.days[0]?.guidance.sleep).toMatchObject({ key: 'guidance.sleepShift', params: { bedtime: '23:30', wakeTime: '07:30', movement: { key: 'movements.later' } } })
+    expect(plan.days[0]?.guidance.wake).toMatchObject({ key: 'guidance.wake', params: { wakeTime: '07:30' } })
+    expect(plan.days[0]?.guidance.explanation).toMatchObject({ key: 'guidance.preparationShift', params: { movement: { key: 'movements.later' } } })
   })
 
   it('starts preparation with actual available days for an imminent trip', () => {
     const plan = generatePlan({ ...trip, departureLocal: '2027-06-02T09:00', arrivalLocal: '2027-06-02T21:00' }, now)
     expect(plan.days.map(day => day.stage)).toEqual(['preflight', 'arrival', 'postArrival'])
-    expect(plan.limitations[0]).toContain('Only 1 preflight preparation day')
+    expect(plan.limitations[0]).toEqual({ key: 'guidance.limitedPreparation', params: { count: 1 } })
   })
 
   it('does not shift sleep times when departure is today and no preparation day remains', () => {
@@ -70,7 +69,7 @@ describe('generatePlan', () => {
     }, now)
 
     expect(plan.days.map(day => day.stage)).toEqual(['arrival', 'postArrival'])
-    expect(plan.days[0]?.guidance.sleep).toContain('23:00–07:00')
+    expect(plan.days[0]?.guidance.sleep).toMatchObject({ key: 'guidance.sleepOpportunity', params: { bedtime: '23:00', wakeTime: '07:00' } })
   })
 
   it('avoids precise light timing for a large timezone change', () => {
@@ -79,8 +78,8 @@ describe('generatePlan', () => {
       destinationTimeZone: 'Asia/Tokyo',
       arrivalLocal: '2027-06-11T22:00',
     }, now)
-    expect(plan.limitations.some(note => note.includes('Precise light seek/avoid times'))).toBe(true)
-    expect(plan.days.at(-1)?.guidance.light).toContain('Exact light timing is uncertain')
+    expect(plan.limitations.some(note => note.key === 'guidance.lightLimitation')).toBe(true)
+    expect(plan.days.at(-1)?.guidance.light).toEqual({ key: 'guidance.lightUncertain' })
   })
 
   it('marks a date-line-sized change uncertain', () => {

@@ -13,7 +13,7 @@ function validateClockTime(value: string, field: string): void {
   try {
     Temporal.PlainTime.from(value)
   } catch {
-    throw new InvalidTripInput(`${field} must be a valid time.`)
+    throw new InvalidTripInput('invalidTime', { field })
   }
 }
 
@@ -22,7 +22,7 @@ export function validateTrip(input: TripInput, now: Temporal.Instant): Validated
   const arrival = resolveLocalDateTime(input.arrivalLocal, input.destinationTimeZone, 'Arrival')
 
   if (Temporal.Instant.compare(arrival.toInstant(), departure.toInstant()) <= 0) {
-    throw new InvalidTripInput('Arrival must be after departure.')
+    throw new InvalidTripInput('arrivalBeforeDeparture')
   }
 
   if (Temporal.Instant.compare(departure.toInstant(), now) <= 0) {
@@ -34,11 +34,11 @@ export function validateTrip(input: TripInput, now: Temporal.Instant): Validated
 
   const sleepOpportunity = minutesBetweenTimes(input.usualBedtime, input.usualWakeTime)
   if (sleepOpportunity < 240 || sleepOpportunity > 960) {
-    throw new InvalidTripInput('Usual sleep schedule should allow between 4 and 16 hours of sleep.')
+    throw new InvalidTripInput('sleepDuration')
   }
 
   if (typeof input.usesCaffeine !== 'boolean') {
-    throw new InvalidTripInput('Choose whether you use caffeine.')
+    throw new InvalidTripInput('caffeineChoice')
   }
 
   return { input, departure, arrival }

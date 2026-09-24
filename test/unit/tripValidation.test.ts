@@ -25,7 +25,8 @@ describe('validateTrip', () => {
   })
 
   it('rejects arrival before or equal to departure', () => {
-    expect(() => validateTrip({ ...validTrip, arrivalLocal: '2027-06-10T14:00' }, now)).toThrow('Arrival must be after departure')
+    expect(() => validateTrip({ ...validTrip, arrivalLocal: '2027-06-10T14:00' }, now))
+      .toThrowError(expect.objectContaining({ descriptor: { key: 'errors.arrivalBeforeDeparture' } }))
   })
 
   it('rejects a departure in the past', () => {
@@ -38,6 +39,7 @@ describe('validateTrip', () => {
   })
 
   it('rejects an invalid caffeine preference', () => {
-    expect(() => validateTrip({ ...validTrip, usesCaffeine: undefined as unknown as boolean }, now)).toThrow('Choose whether you use caffeine')
+    expect(() => validateTrip({ ...validTrip, usesCaffeine: undefined as unknown as boolean }, now))
+      .toThrowError(expect.objectContaining({ descriptor: { key: 'errors.caffeineChoice' } }))
   })
 })

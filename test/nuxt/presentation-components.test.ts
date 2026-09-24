@@ -23,20 +23,20 @@ describe('presentation components', () => {
       date: '2027-06-11',
       timeZone: 'America/New_York',
       stage: 'arrival',
-      label: 'Arrival day',
+      label: { key: 'stages.arrival' },
       guidance: {
-        sleep: 'Aim to sleep around 23:00.',
-        wake: 'Wake around 07:00 local time.',
-        light: 'Get outdoor light during destination daytime.',
-        caffeine: 'Avoid caffeine after 15:00.',
-        explanation: 'Follow destination-local time.',
+        sleep: { key: 'guidance.sleepOpportunity', params: { bedtime: '23:00', wakeTime: '07:00' } },
+        wake: { key: 'guidance.wake', params: { wakeTime: '07:00' } },
+        light: { key: 'guidance.lightDestination' },
+        caffeine: { key: 'guidance.caffeine', params: { cutoff: '15:00' } },
+        explanation: { key: 'guidance.tripDirectional' },
       },
     }
     const component = await mountSuspended(PlanDayCard, { props: { day } })
 
     expect(component.get('li time').text()).toBe('Friday, Jun 11')
     expect(component.text()).toContain('America/New York local time')
-    expect(component.text()).toContain('Avoid caffeine after 15:00.')
+    expect(component.text()).toContain('avoid it from 15:00 onward')
   })
 
   it('omits caffeine guidance when the day has no caffeine recommendation', async () => {
@@ -44,12 +44,12 @@ describe('presentation components', () => {
       date: '2027-06-11',
       timeZone: 'UTC',
       stage: 'arrival',
-      label: 'Arrival day',
+      label: { key: 'stages.arrival' },
       guidance: {
-        sleep: 'Aim to sleep around 23:00.',
-        wake: 'Wake around 07:00 local time.',
-        light: 'Get outdoor light during destination daytime.',
-        explanation: 'Follow destination-local time.',
+        sleep: { key: 'guidance.sleepOpportunity', params: { bedtime: '23:00', wakeTime: '07:00' } },
+        wake: { key: 'guidance.wake', params: { wakeTime: '07:00' } },
+        light: { key: 'guidance.lightDestination' },
+        explanation: { key: 'guidance.tripDirectional' },
       },
     }
     const component = await mountSuspended(PlanDayCard, { props: { day } })

@@ -2,7 +2,7 @@ import { Temporal } from '@js-temporal/polyfill'
 import { createGuidance } from './guidance'
 import { validateTrip } from './tripValidation'
 import { calculateOffsetChangeHours, getPlanDirection } from './timeZones'
-import type { AdaptationPlan, PlanDay, PlanDirection, TripInput } from '~/types/travel'
+import type { AdaptationPlan, MessageDescriptor, PlanDay, PlanDirection, TripInput } from '~/types/travel'
 
 const MAX_PREPARATION_DAYS = 3
 const SHIFT_PER_DAY_MINUTES = 30
@@ -17,38 +17,38 @@ function getShiftSign(direction: PlanDirection): number {
   return 0
 }
 
-function getTripExplanation(direction: PlanDirection): string {
+function getTripExplanation(direction: PlanDirection): MessageDescriptor {
   if (direction === 'uncertain') {
-    return 'This trip crosses a date-line-sized offset change, so a simple east/west adaptation direction could be misleading.'
+    return { key: 'guidance.tripUncertain' }
   }
 
   if (direction === 'minimal') {
-    return 'The timezone difference is small, so a major sleep shift may not be useful.'
+    return { key: 'guidance.tripMinimal' }
   }
 
-  return 'Circadian timing varies between people; these gradual schedule changes are estimates, not a measurement of your body clock.'
+  return { key: 'guidance.tripDirectional' }
 }
 
-function getPreparationExplanation(direction: PlanDirection): string {
+function getPreparationExplanation(direction: PlanDirection): MessageDescriptor {
   if (direction === 'minimal') {
-    return 'Keep your usual sleep schedule today; the timezone difference is small and does not call for a 30-minute shift.'
+    return { key: 'guidance.preparationMinimal' }
   }
 
   const movement = direction === 'eastward' ? 'earlier' : 'later'
-  return `Move the schedule by about 30 minutes ${movement} today. Keep your normal sleep opportunity; do not cut sleep short to follow the plan.`
+  return { key: 'guidance.preparationShift', params: { movement: { key: `movements.${movement}` } } }
 }
 
 function makeDay(options: {
   date: Temporal.PlainDate
   timeZone: string
   stage: PlanDay['stage']
-  label: string
+  label: MessageDescriptor
   bedtime: string
   wakeTime: string
   direction: PlanDirection
   usesCaffeine: boolean
   lightTimingUncertain: boolean
-  explanation: string
+  explanation: MessageDescriptor
 }): PlanDay {
   return {
     date: options.date.toString(),
@@ -89,7 +89,7 @@ export function generatePlan(input: TripInput, now: Temporal.Instant): Adaptatio
       date,
       timeZone: input.originTimeZone,
       stage: 'preflight',
-      label: `Preparation day ${index + 1}`,
+      label: { key: 'stages.preparation', params: { day: index + 1 } },
       bedtime,
       wakeTime,
       direction,
@@ -106,37 +106,37 @@ export function generatePlan(input: TripInput, now: Temporal.Instant): Adaptatio
       date: destinationArrivalDate,
       timeZone: input.destinationTimeZone,
       stage: 'arrival',
-      label: 'Arrival day',
+      label: { key: 'stages.arrival' },
       bedtime: input.usualBedtime,
       wakeTime: input.usualWakeTime,
       direction,
       usesCaffeine: input.usesCaffeine,
       lightTimingUncertain,
-      explanation: `${explanation} Follow destination-local clock times and use these suggestions only where they fit safely with the flight and your sleep needs.`,
+      explanation: { key: 'guidance.arrival', params: { explanation } },
     }),
     makeDay({
       date: destinationArrivalDate.add({ days: 1 }),
       timeZone: input.destinationTimeZone,
       stage: 'postArrival',
-      label: 'Day after arrival',
+      label: { key: 'stages.postArrival' },
       bedtime: input.usualBedtime,
       wakeTime: input.usualWakeTime,
       direction,
       usesCaffeine: input.usesCaffeine,
       lightTimingUncertain,
-      explanation: `${explanation} A consistent local sleep and wake schedule supports adjustment.`,
+      explanation: { key: 'guidance.postArrival', params: { explanation } },
     }),
   ]
 
-  const limitations = [
+  const limitations: MessageDescriptor[] = [
     ...(daysBeforeDeparture < MAX_PREPARATION_DAYS
-      ? [`Only ${preparationDays} preflight preparation day${preparationDays === 1 ? ' is' : 's are'} available; the plan does not make up missed days with larger shifts.`]
+      ? [{ key: preparationDays === 1 ? 'guidance.limitedPreparation' : 'guidance.limitedPreparationPlural', params: { count: preparationDays } }]
       : []),
     ...(lightTimingUncertain
-      ? ['Precise light seek/avoid times are not estimated for this timezone change because biological circadian phase is unknown.']
+      ? [{ key: 'guidance.lightLimitation' }]
       : []),
     ...(direction === 'minimal'
-      ? ['The estimated timezone difference is under one hour; focus on adequate sleep and local routine rather than a major shift.']
+      ? [{ key: 'guidance.minimalLimitation' }]
       : []),
   ]
 

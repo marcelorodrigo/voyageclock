@@ -1,5 +1,5 @@
 import { formatClockTime } from './timeZones'
-import type { PlanDirection, PlanGuidance } from '~/types/travel'
+import type { MessageDescriptor, PlanDirection, PlanGuidance } from '~/types/travel'
 
 export function createGuidance(options: {
   bedtime: string
@@ -8,30 +8,30 @@ export function createGuidance(options: {
   stage: 'preflight' | 'destination'
   usesCaffeine: boolean
   lightTimingUncertain: boolean
-  explanation: string
+  explanation: MessageDescriptor
 }): PlanGuidance {
   const { bedtime, wakeTime, direction, stage, usesCaffeine, lightTimingUncertain, explanation } = options
   const movement = direction === 'eastward' ? 'earlier' : 'later'
   const sleep = stage === 'preflight' && (direction === 'eastward' || direction === 'westward')
-    ? `Aim to sleep around ${bedtime} and wake around ${wakeTime}, shifting your usual schedule ${movement} gradually.`
-    : `Aim for a sleep opportunity around ${bedtime}–${wakeTime} local time while protecting your usual sleep duration.`
+    ? { key: 'guidance.sleepShift', params: { bedtime, wakeTime, movement: { key: `movements.${movement}` } } }
+    : { key: 'guidance.sleepOpportunity', params: { bedtime, wakeTime } }
 
-  let light: string
+  let light: MessageDescriptor
   if (direction === 'minimal') {
-    light = 'Spend time outdoors during local daytime and keep your usual sleep routine.'
+    light = { key: 'guidance.lightMinimal' }
   } else if (lightTimingUncertain) {
-    light = 'Exact light timing is uncertain for this timezone change. Favor ordinary daytime outdoor light, dim light before sleep, and avoid using bright-light devices to force a shift.'
+    light = { key: 'guidance.lightUncertain' }
   } else if (stage === 'preflight') {
     light = direction === 'eastward'
-      ? 'After waking, get ordinary outdoor light when practical; dim bright indoor light before your earlier bedtime.'
-      : 'Keep ordinary evening light while shifting later; make your sleep environment dark at bedtime.'
+      ? { key: 'guidance.lightPreflightEast' }
+      : { key: 'guidance.lightPreflightWest' }
   } else {
-    light = 'Get outdoor light during destination daytime when practical and keep light low as you approach planned sleep. Exact biological timing cannot be measured from these inputs.'
+    light = { key: 'guidance.lightDestination' }
   }
 
   const caffeine = usesCaffeine
-    ? `If you choose caffeine, use it earlier in your waking period; avoid it from ${formatClockTime(bedtime, -480)} onward (8 hours before planned sleep).`
+    ? { key: 'guidance.caffeine', params: { cutoff: formatClockTime(bedtime, -480) } }
     : undefined
 
-  return { sleep, wake: `Wake around ${wakeTime} local time.`, light, caffeine, explanation }
+  return { sleep, wake: { key: 'guidance.wake', params: { wakeTime } }, light, caffeine, explanation }
 }

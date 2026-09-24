@@ -1,27 +1,49 @@
+import type { MessageDescriptor } from '~/types/travel'
+
+const fieldKeys: Record<string, string> = {
+  Departure: 'departure',
+  Arrival: 'arrival',
+  'Usual bedtime': 'bedtime',
+  'Usual wake time': 'wakeTime',
+}
+
+function getFieldDescriptor(field: string): string {
+  if (field.startsWith('fields.')) return field
+  return `fields.${fieldKeys[field] ?? field}`
+}
+
 export class InvalidTripInput extends Error {
-  constructor(message: string) {
-    super(message)
+  readonly descriptor: MessageDescriptor
+
+  constructor(key: string, params?: Record<string, string | number>) {
+    const translatedParams = params && 'field' in params && typeof params.field === 'string'
+      ? { ...params, field: getFieldDescriptor(params.field) }
+      : params
+    super(key === 'invalidDateTime' || key === 'invalidTime' || key === 'invalidTimezone'
+      ? `${key}:${String(params?.field ?? '')}`
+      : key)
     this.name = 'InvalidTripInput'
+    this.descriptor = { key: `errors.${key}`, ...(translatedParams ? { params: translatedParams } : {}) }
   }
 }
 
 export class NonexistentLocalTime extends InvalidTripInput {
   constructor(field: string) {
-    super(`${field} does not exist because of a daylight-saving time change.`)
+    super('nonexistentTime', { field })
     this.name = 'NonexistentLocalTime'
   }
 }
 
 export class AmbiguousLocalTime extends InvalidTripInput {
   constructor(field: string) {
-    super(`${field} occurs twice because of a daylight-saving time change. Choose another time.`)
+    super('ambiguousTime', { field })
     this.name = 'AmbiguousLocalTime'
   }
 }
 
 export class DepartureInPast extends InvalidTripInput {
   constructor() {
-    super('Departure must be in the future.')
+    super('departureInPast')
     this.name = 'DepartureInPast'
   }
 }

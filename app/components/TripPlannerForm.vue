@@ -23,7 +23,7 @@ const input = ref<TripInput>({
   usualWakeTime: '07:00',
   usesCaffeine: true,
 })
-const error = ref('')
+const error = ref<{ key: string, params?: Record<string, string | number> }>()
 
 onMounted(() => {
   const detectedZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'
@@ -52,12 +52,15 @@ onMounted(() => {
 })
 
 function submit(): void {
-  error.value = ''
+  error.value = undefined
   try {
     const plan = generatePlan(input.value, Temporal.Instant.from(props.now ?? Temporal.Now.instant().toString()))
     emit('planned', plan)
   } catch (error_) {
-    error.value = error_ instanceof Error ? error_.message : 'We could not create this plan. Check your trip details.'
+    const descriptor = error_ && typeof error_ === 'object' && 'descriptor' in error_
+      ? error_.descriptor as { key: string, params?: Record<string, string | number> }
+      : { key: 'errors.generic' }
+    error.value = descriptor
   }
 }
 </script>
@@ -66,43 +69,43 @@ function submit(): void {
   <form class="grid gap-6" @submit.prevent="submit">
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
       <label class="grid gap-2 text-[.9rem] font-[650] text-ink">
-        <span>Where are you leaving from?</span>
+        <span>{{ $t('form.origin') }}</span>
         <select v-model="input.originTimeZone" class="min-h-12 w-full rounded-[.7rem] border border-[#d8dfd5] bg-white px-[.8rem] py-[.7rem] font-[inherit] text-ink focus:border-green focus:outline-[3px] focus:outline-[#b6d6b0]" required>
           <option v-for="zone in timeZones" :key="`origin-${zone}`" :value="zone">{{ zone.replaceAll('_', ' ') }}</option>
         </select>
       </label>
       <label class="grid gap-2 text-[.9rem] font-[650] text-ink">
-        <span>Where are you going?</span>
+        <span>{{ $t('form.destination') }}</span>
         <select v-model="input.destinationTimeZone" class="min-h-12 w-full rounded-[.7rem] border border-[#d8dfd5] bg-white px-[.8rem] py-[.7rem] font-[inherit] text-ink focus:border-green focus:outline-[3px] focus:outline-[#b6d6b0]" required>
           <option v-for="zone in timeZones" :key="`destination-${zone}`" :value="zone">{{ zone.replaceAll('_', ' ') }}</option>
         </select>
       </label>
       <label class="grid gap-2 text-[.9rem] font-[650] text-ink">
-        <span>Departure date and local time</span>
+        <span>{{ $t('form.departure') }}</span>
         <input v-model="input.departureLocal" class="min-h-12 w-full rounded-[.7rem] border border-[#d8dfd5] bg-white px-[.8rem] py-[.7rem] font-[inherit] text-ink focus:border-green focus:outline-[3px] focus:outline-[#b6d6b0]" type="datetime-local" required>
       </label>
       <label class="grid gap-2 text-[.9rem] font-[650] text-ink">
-        <span>Arrival date and local time</span>
+        <span>{{ $t('form.arrival') }}</span>
         <input v-model="input.arrivalLocal" class="min-h-12 w-full rounded-[.7rem] border border-[#d8dfd5] bg-white px-[.8rem] py-[.7rem] font-[inherit] text-ink focus:border-green focus:outline-[3px] focus:outline-[#b6d6b0]" type="datetime-local" required>
       </label>
       <label class="grid gap-2 text-[.9rem] font-[650] text-ink">
-        <span>Your usual bedtime</span>
+        <span>{{ $t('form.bedtime') }}</span>
         <input v-model="input.usualBedtime" class="min-h-12 w-full rounded-[.7rem] border border-[#d8dfd5] bg-white px-[.8rem] py-[.7rem] font-[inherit] text-ink focus:border-green focus:outline-[3px] focus:outline-[#b6d6b0]" type="time" required>
       </label>
       <label class="grid gap-2 text-[.9rem] font-[650] text-ink">
-        <span>Your usual wake time</span>
+        <span>{{ $t('form.wakeTime') }}</span>
         <input v-model="input.usualWakeTime" class="min-h-12 w-full rounded-[.7rem] border border-[#d8dfd5] bg-white px-[.8rem] py-[.7rem] font-[inherit] text-ink focus:border-green focus:outline-[3px] focus:outline-[#b6d6b0]" type="time" required>
       </label>
     </div>
 
     <fieldset class="flex flex-wrap gap-[1.2rem] border-0 p-0">
-      <legend class="mb-[.7rem] w-full font-bold">Do you usually have caffeine?</legend>
-      <label class="flex items-center gap-2 text-[.9rem] font-[650] text-ink"><input v-model="input.usesCaffeine" class="size-[1.1rem] accent-green" type="radio" :value="true"> Yes</label>
-      <label class="flex items-center gap-2 text-[.9rem] font-[650] text-ink"><input v-model="input.usesCaffeine" class="size-[1.1rem] accent-green" type="radio" :value="false"> No</label>
+      <legend class="mb-[.7rem] w-full font-bold">{{ $t('form.caffeineQuestion') }}</legend>
+      <label class="flex items-center gap-2 text-[.9rem] font-[650] text-ink"><input v-model="input.usesCaffeine" class="size-[1.1rem] accent-green" type="radio" :value="true"> {{ $t('form.yes') }}</label>
+      <label class="flex items-center gap-2 text-[.9rem] font-[650] text-ink"><input v-model="input.usesCaffeine" class="size-[1.1rem] accent-green" type="radio" :value="false"> {{ $t('form.no') }}</label>
     </fieldset>
 
-    <p v-if="error" class="m-0 font-[650] text-[#9c3429]" role="alert">{{ error }}</p>
-    <button class="inline-flex min-h-[3.2rem] cursor-pointer items-center justify-center gap-3 rounded-xl border-0 bg-green px-5 py-[.8rem] font-bold text-white hover:bg-green-dark" type="submit">Build my adaptation plan <span aria-hidden="true">→</span></button>
-    <p class="-mt-2 mb-0 text-[.82rem] text-muted">Your trip details stay in this browser and are not saved to an account.</p>
+    <p v-if="error" class="m-0 font-[650] text-[#9c3429]" role="alert">{{ $t(error.key, error.params ?? {}) }}</p>
+    <button class="inline-flex min-h-[3.2rem] cursor-pointer items-center justify-center gap-3 rounded-xl border-0 bg-green px-5 py-[.8rem] font-bold text-white hover:bg-green-dark" type="submit">{{ $t('form.submit') }} <span aria-hidden="true">→</span></button>
+    <p class="-mt-2 mb-0 text-[.82rem] text-muted">{{ $t('form.privacy') }}</p>
   </form>
 </template>
