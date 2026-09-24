@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/test-utils', '@nuxtjs/seo'],
+  modules: ['@nuxt/test-utils', '@nuxtjs/seo', '@nuxtjs/tailwindcss'],
+  tailwindcss: { cssPath: '~/assets/css/tailwind.css' },
   ogImage: { enabled: false }
 })
