@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     name: 'VoyageClock',
   },
   devtools: { enabled: true },
-  modules: ['@nuxt/test-utils', '@nuxtjs/seo', '@nuxtjs/tailwindcss'],
+  modules: ['@nuxt/test-utils', '@nuxtjs/seo', '@nuxtjs/tailwindcss', '@nuxt/eslint'],
   tailwindcss: { cssPath: '~/assets/css/tailwind.css' },
   ogImage: { enabled: false }
 })
