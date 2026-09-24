@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://voyageclock.pages.dev/sitemap.xml
