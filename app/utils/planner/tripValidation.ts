@@ -1,7 +1,7 @@
 import { Temporal } from '@js-temporal/polyfill'
 import { DepartureInPast, InvalidTripInput } from './errors'
 import { minutesBetweenTimes, resolveLocalDateTime } from './timeZones'
-import type { TripInput } from './types'
+import type { TripInput } from '~/types/travel'
 
 export interface ValidatedTrip {
   input: TripInput

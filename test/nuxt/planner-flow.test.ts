@@ -7,7 +7,7 @@ import HomePage from '../../app/pages/index.vue'
 import PlanPage from '../../app/pages/plan.vue'
 import SciencePage from '../../app/pages/science.vue'
 import { generatePlan } from '../../app/utils/planner/generatePlan'
-import type { TripInput } from '../../app/utils/planner/types'
+import type { TripInput } from '../../app/types/travel'
 
 describe('planner form functional flow', () => {
   it('creates a trip plan and reports invalid trip input to travelers', async () => {

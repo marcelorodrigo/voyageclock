@@ -2,7 +2,7 @@ import { Temporal } from '@js-temporal/polyfill'
 import { describe, expect, it } from 'vitest'
 import { DepartureInPast, InvalidTripInput } from '../../app/utils/planner/errors'
 import { validateTrip } from '../../app/utils/planner/tripValidation'
-import type { TripInput } from '../../app/utils/planner/types'
+import type { TripInput } from '../../app/types/travel'
 
 const validTrip: TripInput = {
   originTimeZone: 'America/New_York',

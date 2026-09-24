@@ -1,16 +1,11 @@
 import { Temporal } from '@js-temporal/polyfill'
 import { createGuidance } from './guidance'
 import { validateTrip } from './tripValidation'
-import type { AdaptationPlan, PlanDay, PlanDirection, TripInput } from './types'
+import { calculateOffsetChangeHours, getPlanDirection } from './timeZones'
+import type { AdaptationPlan, PlanDay, PlanDirection, TripInput } from '~/types/travel'
 
 const MAX_PREPARATION_DAYS = 3
 const SHIFT_PER_DAY_MINUTES = 30
-
-function getDirection(offsetChangeHours: number): PlanDirection {
-  if (Math.abs(offsetChangeHours) < 1) return 'minimal'
-  if (Math.abs(offsetChangeHours) >= 12) return 'uncertain'
-  return offsetChangeHours > 0 ? 'eastward' : 'westward'
-}
 
 function getDateDifference(start: Temporal.PlainDate, end: Temporal.PlainDate): number {
   return start.until(end, { largestUnit: 'day' }).days
@@ -47,16 +42,13 @@ function makeDay(options: {
 
 export function generatePlan(input: TripInput, now: Temporal.Instant): AdaptationPlan {
   const { departure, arrival } = validateTrip(input, now)
-  const originOffsetMinutes = departure.offsetNanoseconds / 60_000_000_000
-  const destinationOffsetMinutes = arrival.offsetNanoseconds / 60_000_000_000
-  const offsetChangeHours = (destinationOffsetMinutes - originOffsetMinutes) / 60
-  const direction = getDirection(offsetChangeHours)
+  const offsetChangeHours = calculateOffsetChangeHours(departure, arrival)
+  const direction = getPlanDirection(offsetChangeHours)
   const lightTimingUncertain = direction === 'uncertain' || Math.abs(offsetChangeHours) > 6
   const nowAtOrigin = now.toZonedDateTimeISO(input.originTimeZone).toPlainDate()
   const daysBeforeDeparture = getDateDifference(nowAtOrigin, departure.toPlainDate())
   const preparationDays = Math.min(MAX_PREPARATION_DAYS, Math.max(0, daysBeforeDeparture))
   const sign = direction === 'eastward' ? -1 : direction === 'westward' ? 1 : 0
-  const totalShift = preparationDays * SHIFT_PER_DAY_MINUTES * sign
   const explanation = direction === 'uncertain'
     ? 'This trip crosses a date-line-sized offset change, so a simple east/west adaptation direction could be misleading.'
     : direction === 'minimal'
@@ -80,20 +72,20 @@ export function generatePlan(input: TripInput, now: Temporal.Instant): Adaptatio
       direction,
       usesCaffeine: input.usesCaffeine,
       lightTimingUncertain,
-      explanation: `Move the schedule by about 30 minutes ${direction === 'eastward' ? 'earlier' : direction === 'westward' ? 'later' : 'only if comfortable'} today. Keep your normal sleep opportunity; do not cut sleep short to follow the plan.`,
+      explanation: direction === 'minimal'
+        ? 'Keep your usual sleep schedule today; the timezone difference is small and does not call for a 30-minute shift.'
+        : `Move the schedule by about 30 minutes ${direction === 'eastward' ? 'earlier' : 'later'} today. Keep your normal sleep opportunity; do not cut sleep short to follow the plan.`,
     }))
   }
 
-  const arrivalBedtime = Temporal.PlainTime.from(input.usualBedtime).add({ minutes: totalShift }).toString({ smallestUnit: 'minute' })
-  const arrivalWakeTime = Temporal.PlainTime.from(input.usualWakeTime).add({ minutes: totalShift }).toString({ smallestUnit: 'minute' })
   const destinationArrivalDate = arrival.toPlainDate()
   days.push(makeDay({
     date: destinationArrivalDate,
     timeZone: input.destinationTimeZone,
     stage: 'arrival',
     label: 'Arrival day',
-    bedtime: arrivalBedtime,
-    wakeTime: arrivalWakeTime,
+    bedtime: input.usualBedtime,
+    wakeTime: input.usualWakeTime,
     direction,
     usesCaffeine: input.usesCaffeine,
     lightTimingUncertain,
@@ -104,8 +96,8 @@ export function generatePlan(input: TripInput, now: Temporal.Instant): Adaptatio
     timeZone: input.destinationTimeZone,
     stage: 'postArrival',
     label: 'Day after arrival',
-    bedtime: arrivalBedtime,
-    wakeTime: arrivalWakeTime,
+    bedtime: input.usualBedtime,
+    wakeTime: input.usualWakeTime,
     direction,
     usesCaffeine: input.usesCaffeine,
     lightTimingUncertain,

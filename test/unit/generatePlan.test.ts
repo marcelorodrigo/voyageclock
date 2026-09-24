@@ -1,7 +1,7 @@
 import { Temporal } from '@js-temporal/polyfill'
 import { describe, expect, it } from 'vitest'
 import { generatePlan } from '../../app/utils/planner/generatePlan'
-import type { TripInput } from '../../app/utils/planner/types'
+import type { TripInput } from '../../app/types/travel'
 
 const now = Temporal.Instant.from('2027-06-01T12:00Z')
 const trip: TripInput = {
@@ -22,6 +22,25 @@ describe('generatePlan', () => {
     expect(plan.days.map(day => day.stage)).toEqual(['preflight', 'preflight', 'preflight', 'arrival', 'postArrival'])
     expect(plan.days.at(-2)?.date).toBe('2027-06-10')
     expect(plan.days.at(-1)?.date).toBe('2027-06-11')
+  })
+
+  it('uses the usual sleep schedule for arrival after three preparation days', () => {
+    const plan = generatePlan(trip, now)
+    const arrival = plan.days.find(day => day.stage === 'arrival')
+
+    expect(arrival?.guidance.sleep).toContain('23:00–07:00')
+  })
+
+  it('does not recommend a 30-minute shift for a minimal timezone difference', () => {
+    const plan = generatePlan({
+      ...trip,
+      destinationTimeZone: 'America/New_York',
+      arrivalLocal: '2027-06-10T21:00',
+    }, now)
+
+    expect(plan.direction).toBe('minimal')
+    expect(plan.days[0]?.guidance.explanation).toContain('Keep your usual sleep schedule')
+    expect(plan.days[0]?.guidance.explanation).not.toContain('30 minutes')
   })
 
   it('starts preparation with actual available days for an imminent trip', () => {

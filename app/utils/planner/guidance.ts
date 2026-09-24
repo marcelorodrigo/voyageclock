@@ -1,5 +1,5 @@
 import { formatClockTime } from './timeZones'
-import type { PlanDirection, PlanGuidance } from './types'
+import type { PlanDirection, PlanGuidance } from '~/types/travel'
 
 export function createGuidance(options: {
   bedtime: string

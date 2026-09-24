@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { AmbiguousLocalTime, NonexistentLocalTime } from '../../app/utils/planner/errors'
-import { formatClockTime, formatInTimeZone, minutesBetweenTimes, resolveLocalDateTime } from '../../app/utils/planner/timeZones'
+import { calculateOffsetChangeHours, formatClockTime, formatInTimeZone, getPlanDirection, minutesBetweenTimes, resolveLocalDateTime } from '../../app/utils/planner/timeZones'
 
 describe('timeZones', () => {
   it('resolves a local time in an IANA timezone', () => {
@@ -25,5 +25,14 @@ describe('timeZones', () => {
 
   it('formats an instant in the requested timezone', () => {
     expect(formatInTimeZone('2027-03-08T14:30:00Z', 'America/New_York')).toContain('9:30')
+  })
+
+  it('calculates the offset delta and plan direction', () => {
+    const departure = resolveLocalDateTime('2027-06-10T09:00', 'America/New_York', 'Departure')
+    const arrival = resolveLocalDateTime('2027-06-10T21:00', 'Europe/London', 'Arrival')
+
+    expect(calculateOffsetChangeHours(departure, arrival)).toBe(5)
+    expect(getPlanDirection(5)).toBe('eastward')
+    expect(getPlanDirection(0.5)).toBe('minimal')
   })
 })

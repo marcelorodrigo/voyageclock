@@ -1,38 +1,30 @@
+<script setup lang="ts">
+useHead({
+  bodyAttrs: {
+    class: 'm-0 min-w-[320px] bg-paper font-sans text-ink [font-synthesis:none] [text-rendering:optimizeLegibility]',
+  },
+  link: [
+    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap' },
+  ],
+})
+</script>
+
 <template>
-  <div class="site-shell">
+  <div class="site-shell box-border min-h-screen [&_*]:box-border [&_a]:text-inherit [&_button]:font-[inherit] [&_input]:font-[inherit] [&_select]:font-[inherit]">
     <NuxtRouteAnnouncer />
-    <header class="site-header">
-      <NuxtLink class="brand" to="/" aria-label="VoyageClock home"><span class="brand-icon">◷</span> voyageclock</NuxtLink>
-      <nav aria-label="Main navigation">
-        <NuxtLink to="/science">The science</NuxtLink>
-        <NuxtLink class="nav-cta" to="/plan">Plan your trip <span aria-hidden="true">↗</span></NuxtLink>
+    <header class="mx-auto flex h-[78px] w-[min(1120px,calc(100%-3rem))] items-center justify-between max-[560px]:w-[min(calc(100%-2rem),1120px)]">
+      <NuxtLink class="inline-flex items-center gap-[.55rem] font-display text-[1.1rem] font-extrabold tracking-[-.04em] no-underline" to="/" aria-label="VoyageClock home"><span class="grid size-[1.8rem] place-items-center rounded-full bg-[#e7efe4] text-green text-[1.2rem]">◷</span> voyageclock</NuxtLink>
+      <nav class="flex items-center gap-[1.8rem] max-[560px]:gap-[.8rem]" aria-label="Main navigation">
+        <NuxtLink class="text-[.9rem] font-[650] no-underline hover:text-green max-[560px]:text-[.82rem]" to="/science">The science</NuxtLink>
+        <NuxtLink class="rounded-full border border-[#cbd9c9] px-4 py-[.65rem] text-[.9rem] font-[650] no-underline hover:text-green max-[560px]:text-[.82rem]" to="/plan">Plan your trip <span aria-hidden="true">↗</span></NuxtLink>
       </nav>
     </header>
     <main><NuxtPage /></main>
-    <footer class="site-footer"><NuxtLink class="brand" to="/"><span class="brand-icon">◷</span> voyageclock</NuxtLink><span>Travel well. Arrive in rhythm.</span></footer>
+    <footer class="mx-auto mt-16 flex w-[min(1120px,calc(100%-3rem))] items-center justify-between border-t border-[#e4e9e1] py-6 pb-8 text-[.85rem] text-muted max-[560px]:w-[min(calc(100%-2rem),1120px)] max-[560px]:items-start max-[560px]:flex-col max-[560px]:gap-[.7rem]">
+      <NuxtLink class="inline-flex items-center gap-[.55rem] font-display text-[1.1rem] font-extrabold tracking-[-.04em] text-ink no-underline hover:text-green" to="/"><span class="grid size-[1.8rem] place-items-center rounded-full bg-[#e7efe4] text-green text-[1.2rem]">◷</span> voyageclock</NuxtLink>
+      <span>Travel well. Arrive in rhythm.</span>
+    </footer>
   </div>
 </template>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
-:root { font-family: 'DM Sans', sans-serif; color: #20352d; background: #f7f8f3; font-synthesis: none; text-rendering: optimizeLegibility; --ink: #20352d; --muted: #718077; --green: #397853; --green-dark: #265d3f; --display: 'Manrope', sans-serif; }
-* { box-sizing: border-box; }
-body { margin: 0; min-width: 320px; }
-a { color: inherit; }
-button, input, select { font: inherit; }
-.site-shell { min-height: 100vh; }
-.site-header, .site-footer { display: flex; align-items: center; justify-content: space-between; width: min(1120px, calc(100% - 3rem)); margin: 0 auto; }
-.site-header { height: 78px; }
-.brand { display: inline-flex; align-items: center; gap: .55rem; text-decoration: none; font-family: var(--display); font-size: 1.1rem; font-weight: 800; letter-spacing: -.04em; }
-.brand-icon { display: grid; place-items: center; width: 1.8rem; height: 1.8rem; border-radius: 50%; background: #e7efe4; color: var(--green); font-size: 1.2rem; }
-.site-header nav { display: flex; align-items: center; gap: 1.8rem; }
-.site-header nav a { text-decoration: none; font-size: .9rem; font-weight: 650; }
-.site-header nav a:hover, .site-footer a:hover { color: var(--green); }
-.site-header nav .nav-cta { padding: .65rem 1rem; border: 1px solid #cbd9c9; border-radius: 99px; }
-.site-footer { margin-top: 4rem; padding: 1.5rem 0 2rem; border-top: 1px solid #e4e9e1; color: var(--muted); font-size: .85rem; }
-.button { display: inline-flex; justify-content: center; align-items: center; gap: .75rem; min-height: 3.2rem; padding: .8rem 1.25rem; border: 0; border-radius: .75rem; text-decoration: none; font-weight: 700; cursor: pointer; }
-.button-primary { background: var(--green); color: #fff; }
-.button-primary:hover { background: var(--green-dark); }
-.button-secondary { border: 1px solid #cbd9c9; background: #fff; color: var(--ink); }
-@media (max-width: 560px) { .site-header, .site-footer { width: min(100% - 2rem, 1120px); } .site-header nav { gap: .8rem; } .site-header nav a { font-size: .82rem; } .site-footer { align-items: start; flex-direction: column; gap: .7rem; } }
-</style>

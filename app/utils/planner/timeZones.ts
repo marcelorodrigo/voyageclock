@@ -1,5 +1,19 @@
 import { Temporal } from '@js-temporal/polyfill'
 import { AmbiguousLocalTime, InvalidTripInput, NonexistentLocalTime } from './errors'
+import type { PlanDirection } from '~/types/travel'
+
+export function calculateOffsetChangeHours(
+  departure: Temporal.ZonedDateTime,
+  arrival: Temporal.ZonedDateTime,
+): number {
+  return (arrival.offsetNanoseconds - departure.offsetNanoseconds) / 3_600_000_000_000
+}
+
+export function getPlanDirection(offsetChangeHours: number): PlanDirection {
+  if (Math.abs(offsetChangeHours) < 1) return 'minimal'
+  if (Math.abs(offsetChangeHours) >= 12) return 'uncertain'
+  return offsetChangeHours > 0 ? 'eastward' : 'westward'
+}
 
 export function resolveLocalDateTime(value: string, timeZone: string, field: string): Temporal.ZonedDateTime {
   let local: Temporal.PlainDateTime
