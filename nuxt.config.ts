@@ -1,11 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-const siteUrl = process.env.NUXT_SITE_URL || process.env.CF_PAGES_URL
+const siteUrl =
+  process.env.NUXT_SITE_URL ||
+  process.env.CF_PAGES_URL ||
+  'https://voyageclock.marcelorodrigo.com'
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   ssr: false,
   site: {
-    url: siteUrl || 'http://localhost:3000',
+    url: siteUrl,
     name: 'VoyageClock',
   },
   devtools: { enabled: true },
