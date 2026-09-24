@@ -15,6 +15,10 @@ export default defineNuxtConfig({
   },
   sitemap: {
     zeroRuntime: true,
+    exclude: [
+      '/plan/result',
+      ...['pt', 'es', 'fr', 'nl'].map(locale => `/${locale}/plan/result`),
+    ],
   },
   devtools: { enabled: true },
   modules: ['@nuxt/test-utils', '@nuxtjs/seo', '@nuxt/eslint', '@nuxtjs/i18n'],
@@ -25,11 +29,15 @@ export default defineNuxtConfig({
   ogImage: { enabled: false },
   nitro: {
     prerender: {
-      routes: ['pt', 'es', 'fr', 'nl'].flatMap(locale => [
-        `/${locale}`,
-        `/${locale}/plan`,
-        `/${locale}/science`,
-      ]),
+      routes: [
+        '/plan/result',
+        ...['pt', 'es', 'fr', 'nl'].flatMap(locale => [
+          `/${locale}`,
+          `/${locale}/plan`,
+          `/${locale}/plan/result`,
+          `/${locale}/science`,
+        ]),
+      ],
     },
   },
   i18n: {
