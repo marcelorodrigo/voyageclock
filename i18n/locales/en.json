@@ -5,7 +5,9 @@
     "science": "The science",
     "planTrip": "Plan your trip",
     "tagline": "Travel well. Arrive in rhythm.",
-    "language": "Language"
+    "language": "Language",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu"
   },
   "movements": {
     "earlier": "earlier",
@@ -48,6 +50,14 @@
     "lightTitle": "Why light timing matters",
     "lightDescription": "Light shifts your internal clock differently depending on when your body receives it. We’ll avoid precise light windows when we can’t estimate your biological timing with confidence.",
     "scienceLink": "Read about the science"
+  },
+  "resultPage": {
+    "title": "Your timezone adaptation plan — VoyageClock",
+    "description": "Your personal day-by-day sleep, light, and caffeine timeline for your trip.",
+    "eyebrow": "YOUR PERSONAL TRIP PLAN",
+    "heading": "Your plan is ready.",
+    "intro": "Use this day-by-day timeline to prepare for your timezone change.",
+    "planAnother": "Plan another trip"
   },
   "form": {
     "origin": "Where are you leaving from?",

@@ -1,13 +1,19 @@
-import { describe, expect, it } from 'vitest'
-import { mountSuspended } from '@nuxt/test-utils/runtime'
+import { describe, expect, it, vi } from 'vitest'
+import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime'
+import { flushPromises } from '@vue/test-utils'
 import { Temporal } from '@js-temporal/polyfill'
 import TripPlannerForm from '../../app/components/TripPlannerForm.vue'
 import PlanTimeline from '../../app/components/PlanTimeline.vue'
 import HomePage from '../../app/pages/index.vue'
 import PlanPage from '../../app/pages/plan.vue'
+import PlanResultPage from '../../app/pages/plan/result.vue'
 import SciencePage from '../../app/pages/science.vue'
+import { usePlannerState } from '../../app/composables/usePlannerState'
 import { generatePlan } from '../../app/utils/planner/generatePlan'
 import type { TripInput } from '../../app/types/travel'
+
+const { navigateToMock } = vi.hoisted(() => ({ navigateToMock: vi.fn() }))
+mockNuxtImport('navigateTo', () => navigateToMock)
 
 describe('planner form functional flow', () => {
   it('creates a trip plan and reports invalid trip input to travelers', async () => {
@@ -87,11 +93,55 @@ describe('planner form functional flow', () => {
     expect(component.text()).toContain('Start planning')
   })
 
-  it('renders the planner page with trip form and science context', async () => {
+  it('navigates to the separate result page after creating a plan', async () => {
+    navigateToMock.mockClear()
+    usePlannerState().value = undefined
+    const component = await mountSuspended(PlanPage, { route: '/plan' })
+
+    await component.get('form').trigger('submit')
+    await flushPromises()
+
+    expect(usePlannerState().value).toBeDefined()
+    expect(navigateToMock).toHaveBeenCalledWith('/plan/result')
+    expect(component.findComponent(PlanTimeline).exists()).toBe(false)
+  })
+
+  it('renders a generated plan on its own result page', async () => {
+    const plan = generatePlan({
+      originTimeZone: 'America/New_York',
+      destinationTimeZone: 'Asia/Tokyo',
+      departureLocal: '2027-06-10T09:00',
+      arrivalLocal: '2027-06-11T22:00',
+      usualBedtime: '23:00',
+      usualWakeTime: '07:00',
+      usesCaffeine: true,
+    }, Temporal.Instant.from('2027-06-01T12:00Z'))
+    usePlannerState().value = plan
+
+    const component = await mountSuspended(PlanResultPage, { route: '/plan/result' })
+
+    expect(component.text()).toContain('Your plan is ready.')
+    expect(component.text()).toContain('Preparation day 1')
+    expect(component.get('a[href="/plan"]').text()).toContain('Plan another trip')
+  })
+
+  it('returns to the planner when the result route has no in-memory plan', async () => {
+    navigateToMock.mockClear()
+    usePlannerState().value = undefined
+    const component = await mountSuspended(PlanResultPage, { route: '/plan/result' })
+
+    await flushPromises()
+
+    expect(navigateToMock).toHaveBeenCalledWith('/plan', { replace: true })
+    expect(component.findComponent(PlanTimeline).exists()).toBe(false)
+  })
+
+  it('renders the planner page with the trip form and science context', async () => {
     const component = await mountSuspended(PlanPage)
     expect(component.text()).toContain('A few details about your trip')
     expect(component.find('form').exists()).toBe(true)
     expect(component.text()).toContain('Why light timing matters')
+    expect(component.findComponent(PlanTimeline).exists()).toBe(false)
   })
 
   it('renders the science page with sources and limitations', async () => {

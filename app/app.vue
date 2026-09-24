@@ -20,14 +20,7 @@ useHead({
 <template>
   <div class="site-shell box-border min-h-screen [&_*]:box-border [&_a]:text-inherit [&_button]:font-[inherit] [&_input]:font-[inherit] [&_select]:font-[inherit]">
     <NuxtRouteAnnouncer />
-    <header class="mx-auto flex h-[78px] w-[min(1120px,calc(100%-3rem))] items-center justify-between max-[560px]:w-[min(calc(100%-2rem),1120px)]">
-      <NuxtLinkLocale class="inline-flex items-center gap-[.55rem] font-display text-[1.1rem] font-extrabold tracking-[-.04em] no-underline" to="/" :aria-label="$t('app.home')"><span class="grid size-[1.8rem] place-items-center rounded-full bg-[#e7efe4] text-green text-[1.2rem]">◷</span> voyageclock</NuxtLinkLocale>
-      <nav class="flex items-center gap-[1.2rem] max-[560px]:gap-[.6rem]" :aria-label="$t('app.navigation')">
-        <NuxtLinkLocale class="text-[.9rem] font-[650] no-underline hover:text-green max-[560px]:text-[.82rem]" to="/science">{{ $t('app.science') }}</NuxtLinkLocale>
-        <NuxtLinkLocale class="rounded-full border border-[#cbd9c9] px-4 py-[.65rem] text-[.9rem] font-[650] no-underline hover:text-green max-[560px]:text-[.82rem]" to="/plan">{{ $t('app.planTrip') }} <span aria-hidden="true">↗</span></NuxtLinkLocale>
-        <LanguageSwitcher />
-      </nav>
-    </header>
+    <SiteHeader />
     <main><NuxtPage /></main>
     <footer class="mx-auto mt-16 flex w-[min(1120px,calc(100%-3rem))] items-center justify-between border-t border-[#e4e9e1] py-6 pb-8 text-[.85rem] text-muted max-[560px]:w-[min(calc(100%-2rem),1120px)] max-[560px]:items-start max-[560px]:flex-col max-[560px]:gap-[.7rem]">
       <NuxtLinkLocale class="inline-flex items-center gap-[.55rem] font-display text-[1.1rem] font-extrabold tracking-[-.04em] text-ink no-underline hover:text-green" to="/"><span class="grid size-[1.8rem] place-items-center rounded-full bg-[#e7efe4] text-green text-[1.2rem]">◷</span> voyageclock</NuxtLinkLocale>
