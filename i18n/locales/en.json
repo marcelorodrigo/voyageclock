@@ -5,7 +5,9 @@
     "science": "The science",
     "planTrip": "Plan your trip",
     "tagline": "Travel well. Arrive in rhythm.",
-    "language": "Language"
+    "language": "Language",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu"
   },
   "movements": {
     "earlier": "earlier",
