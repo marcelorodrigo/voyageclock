@@ -7,15 +7,15 @@ useHead({
   bodyAttrs: {
     class: 'm-0 min-w-[320px] bg-paper font-sans text-ink [font-synthesis:none] [text-rendering:optimizeLegibility]',
   },
-  link: [
-    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap' },
-  ],
   htmlAttrs: {
     lang: () => localeHead.value.htmlAttrs.lang,
   },
-  link: () => localeHead.value.link,
+  link: () => [
+    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap' },
+    ...localeHead.value.link,
+  ],
   meta: () => localeHead.value.meta,
 })
 </script>
