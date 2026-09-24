@@ -15,6 +15,8 @@ describe('planner form functional flow', () => {
       props: { now: '2027-06-01T12:00:00Z' },
     })
 
+    await component.findAll('select')[0]!.setValue('UTC')
+    await component.findAll('select')[1]!.setValue('UTC')
     await component.findAll('input[type="datetime-local"]')[0]!.setValue('2027-05-01T09:00')
     await component.findAll('input[type="datetime-local"]')[1]!.setValue('2027-05-01T10:00')
     await component.get('form').trigger('submit')
