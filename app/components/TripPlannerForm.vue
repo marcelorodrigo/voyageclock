@@ -56,8 +56,8 @@ function submit(): void {
   try {
     const plan = generatePlan(input.value, Temporal.Instant.from(props.now ?? Temporal.Now.instant().toString()))
     emit('planned', plan)
-  } catch (caught) {
-    error.value = caught instanceof Error ? caught.message : 'We could not create this plan. Check your trip details.'
+  } catch (error_) {
+    error.value = error_ instanceof Error ? error_.message : 'We could not create this plan. Check your trip details.'
   }
 }
 </script>
