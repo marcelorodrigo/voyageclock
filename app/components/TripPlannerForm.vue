@@ -5,9 +5,7 @@ import type { AdaptationPlan, TripInput } from '~/types/travel'
 
 const props = defineProps<{ now?: string }>()
 const emit = defineEmits<{ planned: [plan: AdaptationPlan] }>()
-const detectedZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'
 const fallbackZones = [
-  detectedZone,
   'America/Los_Angeles',
   'America/New_York',
   'Europe/London',
@@ -15,31 +13,43 @@ const fallbackZones = [
   'Asia/Tokyo',
   'Australia/Sydney',
 ]
-const availableZones = typeof Intl.supportedValuesOf === 'function'
-  ? Intl.supportedValuesOf('timeZone')
-  : fallbackZones
-const timeZones = [...new Set([detectedZone, ...availableZones])]
-const dateAfter = Temporal.Now.plainDateISO().add({ days: 3 }).toString()
-const originTimeZone = detectedZone
-const destinationTimeZone = detectedZone === 'Europe/London' ? 'America/New_York' : 'Europe/London'
-const departureLocal = `${dateAfter}T09:00`
-const departureInstant = Temporal.PlainDateTime.from(departureLocal)
-  .toZonedDateTime(originTimeZone)
-  .toInstant()
-const arrivalLocal = departureInstant.add({ hours: 4 })
-  .toZonedDateTimeISO(destinationTimeZone)
-  .toPlainDateTime()
-  .toString({ smallestUnit: 'minute' })
+const timeZones = ref([...new Set(['UTC', ...fallbackZones])])
 const input = ref<TripInput>({
-  originTimeZone,
-  destinationTimeZone,
-  departureLocal,
-  arrivalLocal,
+  originTimeZone: 'UTC',
+  destinationTimeZone: 'Europe/London',
+  departureLocal: '',
+  arrivalLocal: '',
   usualBedtime: '23:00',
   usualWakeTime: '07:00',
   usesCaffeine: true,
 })
 const error = ref('')
+
+onMounted(() => {
+  const detectedZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'
+  const availableZones = typeof Intl.supportedValuesOf === 'function'
+    ? Intl.supportedValuesOf('timeZone')
+    : fallbackZones
+  timeZones.value = [...new Set([detectedZone, 'UTC', ...availableZones])]
+
+  const originTimeZone = detectedZone
+  const destinationTimeZone = detectedZone === 'Europe/London' ? 'America/New_York' : 'Europe/London'
+  const departureLocal = `${Temporal.Now.plainDateISO().add({ days: 3 }).toString()}T09:00`
+  const departureInstant = Temporal.PlainDateTime.from(departureLocal)
+    .toZonedDateTime(originTimeZone)
+    .toInstant()
+
+  input.value = {
+    ...input.value,
+    originTimeZone,
+    destinationTimeZone,
+    departureLocal,
+    arrivalLocal: departureInstant.add({ hours: 4 })
+      .toZonedDateTimeISO(destinationTimeZone)
+      .toPlainDateTime()
+      .toString({ smallestUnit: 'minute' }),
+  }
+})
 
 function submit(): void {
   error.value = ''
