@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import tailwindcss from '@tailwindcss/vite'
+
 const siteUrl =
   process.env.NUXT_SITE_URL ||
   process.env.CF_PAGES_URL ||
@@ -12,8 +14,11 @@ export default defineNuxtConfig({
     name: 'VoyageClock',
   },
   devtools: { enabled: true },
-  modules: ['@nuxt/test-utils', '@nuxtjs/seo', '@nuxtjs/tailwindcss', '@nuxt/eslint', '@nuxtjs/i18n'],
-  tailwindcss: { cssPath: '~/assets/css/tailwind.css' },
+  modules: ['@nuxt/test-utils', '@nuxtjs/seo', '@nuxt/eslint', '@nuxtjs/i18n'],
+  css: ['~/assets/css/tailwind.css'],
+  vite: {
+    plugins: [tailwindcss()],
+  },
   ogImage: { enabled: false },
   nitro: {
     prerender: {
