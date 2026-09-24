@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "test": "vitest",
+    "test": "vitest run --coverage",
+    "test:coverage": "vitest run --coverage",
     "test:watch": "vitest --watch",
     "test:unit": "vitest --project unit",
     "test:nuxt": "vitest --project nuxt"
@@ -27,6 +28,7 @@
     "@nuxt/eslint": "^1.17.0",
     "@nuxtjs/tailwindcss": "^6.14.0",
     "@vue/test-utils": "^2.5.1",
+    "@vitest/coverage-v8": "^5.0.1",
     "eslint": "^10.11.0",
     "happy-dom": "^20.14.5",
     "typescript": "^5.9.3",
