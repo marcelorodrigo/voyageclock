@@ -1,29 +1,31 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 useSeoMeta({
-  title: 'The science of timezone adaptation — VoyageClock',
-  description: 'Learn how circadian rhythms, light, sleep schedules, and caffeine relate to jet lag.',
+  title: () => t('science.title'),
+  description: () => t('science.description'),
 })
 </script>
 
 <template>
   <article class="mx-auto w-[min(760px,calc(100%_-_3rem))] py-12 pb-4 max-[560px]:w-[min(calc(100%_-_2rem),760px)] max-[560px]:pt-8">
-    <header class="mb-10"><p class="text-[.72rem] font-extrabold tracking-[.14em] text-green">A LITTLE SCIENCE, A LOT OF CONTEXT</p><h1 class="my-[.7rem] mb-4 font-display text-[clamp(2.5rem,6vw,4rem)] leading-[1.05] tracking-[-.045em]">Your body clock<br>runs on <em class="font-semibold text-green">light.</em></h1><p class="m-0 max-w-[650px] text-[1.1rem] leading-[1.7] text-[#596b60]">Jet lag is the mismatch between your internal rhythms and local time after crossing time zones. Light is a powerful cue for the body clock—but timing is the important part.</p></header>
-    <ScienceSection icon="☀" title="Light can shift your clock in either direction" tone="gold">
-      <p class="text-[.98rem] leading-[1.7] text-[#56665d] first:mt-0">Light exposure at different points in the circadian cycle can move the clock earlier or later. The effect depends on biological timing, not just what the clock on the wall says. Without measuring your circadian phase, a generic “get morning light” instruction can be too simplistic—particularly after a large timezone change.</p>
-      <p class="text-[.98rem] leading-[1.7] text-[#56665d]">That’s why VoyageClock keeps light advice practical and qualified. For larger or ambiguous shifts, it explains the uncertainty instead of claiming to know the perfect exposure window.</p>
+    <header class="mb-10"><p class="text-[.72rem] font-extrabold tracking-[.14em] text-green">{{ $t('science.eyebrow') }}</p><h1 class="my-[.7rem] mb-4 whitespace-pre-line font-display text-[clamp(2.5rem,6vw,4rem)] leading-[1.05] tracking-[-.045em]">{{ $t('science.headline') }} <em class="font-semibold text-green">{{ $t('science.headlineEmphasis') }}</em></h1><p class="m-0 max-w-[650px] text-[1.1rem] leading-[1.7] text-[#596b60]">{{ $t('science.intro') }}</p></header>
+    <ScienceSection icon="☀" :title="$t('science.lightTitle')" tone="gold">
+      <p class="text-[.98rem] leading-[1.7] text-[#56665d] first:mt-0">{{ $t('science.lightOne') }}</p>
+      <p class="text-[.98rem] leading-[1.7] text-[#56665d]">{{ $t('science.lightTwo') }}</p>
     </ScienceSection>
-    <ScienceSection icon="☾" title="Protect sleep while making gradual changes" tone="blue">
-      <p class="text-[.98rem] leading-[1.7] text-[#56665d] first:mt-0">Before travel, modest adjustments to bedtime and wake time may make the transition feel more manageable. Research has tested advancing schedules combined with timed bright light before eastward travel, but the studied protocol and participants are not identical to every traveler.</p>
-      <p class="text-[.98rem] leading-[1.7] text-[#56665d]">VoyageClock starts with small schedule steps and preserves your usual sleep opportunity. It does not make up for missed preparation days by asking you to abruptly shift or sleep less.</p>
+    <ScienceSection icon="☾" :title="$t('science.sleepTitle')" tone="blue">
+      <p class="text-[.98rem] leading-[1.7] text-[#56665d] first:mt-0">{{ $t('science.sleepOne') }}</p>
+      <p class="text-[.98rem] leading-[1.7] text-[#56665d]">{{ $t('science.sleepTwo') }}</p>
     </ScienceSection>
-    <ScienceSection icon="☕" title="Caffeine can trade alertness for sleep" tone="brown">
-      <p class="text-[.98rem] leading-[1.7] text-[#56665d] first:mt-0">Caffeine can help with alertness, but its effects can linger and interfere with sleep. A practical plan can suggest avoiding it in the hours before intended bedtime; individual sensitivity and caffeine metabolism vary.</p>
-      <p class="text-[.98rem] leading-[1.7] text-[#56665d]">VoyageClock’s eight-hour cutoff is a conservative sleep-planning rule based on general sleep guidance, not a personalized measurement of how your body processes caffeine.</p>
+    <ScienceSection icon="☕" :title="$t('science.caffeineTitle')" tone="brown">
+      <p class="text-[.98rem] leading-[1.7] text-[#56665d] first:mt-0">{{ $t('science.caffeineOne') }}</p>
+      <p class="text-[.98rem] leading-[1.7] text-[#56665d]">{{ $t('science.caffeineTwo') }}</p>
     </ScienceSection>
-    <aside class="my-10 rounded-2xl border border-[#e0e7dc] bg-white p-6"><h2 class="mt-0 mb-[.7rem] font-display text-[1.28rem] tracking-[-.03em]">What this plan can—and can’t—tell you</h2><ul class="pl-5 leading-[1.8] text-[#56665d]"><li>It uses the times and timezone information you provide to create a simple schedule.</li><li>It does not measure your circadian phase, predict exactly when jet lag symptoms will end, or guarantee a particular result.</li><li>It is general wellness information for adults, not a diagnosis or medical treatment.</li><li>For medical conditions, medication questions, pregnancy, or persistent sleep problems, consult a qualified health professional.</li></ul></aside>
-    <ScienceSection icon="↗" title="Sources to explore" tone="gold">
-      <ul class="mb-0 pl-5 leading-[1.8] text-[#56665d]"><li class="[&+li]:mt-[.45rem]"><a class="text-green-dark underline-offset-[3px]" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2082105/" target="_blank" rel="noreferrer">Sack et al. (2007), AASM review: circadian rhythm sleep disorders and jet lag</a></li><li class="[&+li]:mt-[.45rem]"><a class="text-green-dark underline-offset-[3px]" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1262683/" target="_blank" rel="noreferrer">Burgess et al. (2003), preflight adjustment to eastward travel</a></li><li class="[&+li]:mt-[.45rem]"><a class="text-green-dark underline-offset-[3px]" href="https://www.nhlbi.nih.gov/health/sleep-deprivation/healthy-sleep-habits" target="_blank" rel="noreferrer">National Heart, Lung, and Blood Institute: healthy sleep habits</a></li><li class="[&+li]:mt-[.45rem]"><a class="text-green-dark underline-offset-[3px]" href="https://www.nhs.uk/conditions/jet-lag/" target="_blank" rel="noreferrer">NHS: jet lag guidance</a></li></ul>
+    <aside class="my-10 rounded-2xl border border-[#e0e7dc] bg-white p-6"><h2 class="mt-0 mb-[.7rem] font-display text-[1.28rem] tracking-[-.03em]">{{ $t('science.limitationsTitle') }}</h2><ul class="pl-5 leading-[1.8] text-[#56665d]"><li>{{ $t('science.limitationOne') }}</li><li>{{ $t('science.limitationTwo') }}</li><li>{{ $t('science.limitationThree') }}</li><li>{{ $t('science.limitationFour') }}</li></ul></aside>
+    <ScienceSection icon="↗" :title="$t('science.sourcesTitle')" tone="gold">
+      <ul class="mb-0 pl-5 leading-[1.8] text-[#56665d]"><li class="[&+li]:mt-[.45rem]"><a class="text-green-dark underline-offset-[3px]" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2082105/" target="_blank" rel="noreferrer">{{ $t('science.sourceAasm') }}</a></li><li class="[&+li]:mt-[.45rem]"><a class="text-green-dark underline-offset-[3px]" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1262683/" target="_blank" rel="noreferrer">{{ $t('science.sourceBurgess') }}</a></li><li class="[&+li]:mt-[.45rem]"><a class="text-green-dark underline-offset-[3px]" href="https://www.nhlbi.nih.gov/health/sleep-deprivation/healthy-sleep-habits" target="_blank" rel="noreferrer">{{ $t('science.sourceNhlbi') }}</a></li><li class="[&+li]:mt-[.45rem]"><a class="text-green-dark underline-offset-[3px]" href="https://www.nhs.uk/conditions/jet-lag/" target="_blank" rel="noreferrer">{{ $t('science.sourceNhs') }}</a></li></ul>
     </ScienceSection>
-    <NuxtLink class="inline-flex min-h-[3.2rem] cursor-pointer items-center justify-center gap-3 rounded-xl border-0 bg-green px-5 py-[.8rem] font-bold text-white no-underline hover:bg-green-dark" to="/plan">Plan your next trip <span aria-hidden="true">→</span></NuxtLink>
+    <NuxtLinkLocale class="inline-flex min-h-[3.2rem] cursor-pointer items-center justify-center gap-3 rounded-xl border-0 bg-green px-5 py-[.8rem] font-bold text-white no-underline hover:bg-green-dark" to="/plan">{{ $t('science.planCta') }} <span aria-hidden="true">→</span></NuxtLinkLocale>
   </article>
 </template>

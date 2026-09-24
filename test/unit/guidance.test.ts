@@ -9,19 +9,19 @@ describe('createGuidance', () => {
     stage: 'preflight' as const,
     usesCaffeine: true,
     lightTimingUncertain: false,
-    explanation: 'Move gradually.',
+    explanation: { key: 'guidance.tripDirectional' },
   }
 
   it('provides directional preparation guidance and caffeine cutoff', () => {
     const guidance = createGuidance(base)
-    expect(guidance.sleep).toContain('earlier')
-    expect(guidance.light).toContain('After waking')
-    expect(guidance.caffeine).toContain('14:30')
-    expect(guidance.explanation).toBe('Move gradually.')
+    expect(guidance.sleep).toMatchObject({ key: 'guidance.sleepShift', params: { movement: { key: 'movements.earlier' } } })
+    expect(guidance.light.key).toBe('guidance.lightPreflightEast')
+    expect(guidance.caffeine).toMatchObject({ key: 'guidance.caffeine', params: { cutoff: '14:30' } })
+    expect(guidance.explanation).toEqual({ key: 'guidance.tripDirectional' })
   })
 
   it('qualifies light guidance when biological timing is uncertain', () => {
-    expect(createGuidance({ ...base, lightTimingUncertain: true }).light).toContain('Exact light timing is uncertain')
+    expect(createGuidance({ ...base, lightTimingUncertain: true }).light.key).toBe('guidance.lightUncertain')
   })
 
   it('does not show caffeine guidance to non-users', () => {
@@ -29,6 +29,6 @@ describe('createGuidance', () => {
   })
 
   it('offers local daytime guidance for a minimal shift', () => {
-    expect(createGuidance({ ...base, direction: 'minimal' }).light).toContain('local daytime')
+    expect(createGuidance({ ...base, direction: 'minimal' }).light.key).toBe('guidance.lightMinimal')
   })
 })

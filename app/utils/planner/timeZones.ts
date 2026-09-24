@@ -21,7 +21,7 @@ export function resolveLocalDateTime(value: string, timeZone: string, field: str
   try {
     local = Temporal.PlainDateTime.from(value)
   } catch {
-    throw new InvalidTripInput(`${field} must include a valid local date and time.`)
+    throw new InvalidTripInput('invalidDateTime', { field })
   }
 
   try {
@@ -34,7 +34,7 @@ export function resolveLocalDateTime(value: string, timeZone: string, field: str
         earlier = local.toZonedDateTime(timeZone, { disambiguation: 'earlier' })
         later = local.toZonedDateTime(timeZone, { disambiguation: 'later' })
       } catch {
-        throw new InvalidTripInput(`Choose a valid timezone for ${field}.`)
+        throw new InvalidTripInput('invalidTimezone', { field })
       }
 
       if (Temporal.PlainDateTime.compare(earlier.toPlainDateTime(), local) !== 0
@@ -46,7 +46,7 @@ export function resolveLocalDateTime(value: string, timeZone: string, field: str
         throw new AmbiguousLocalTime(field)
       }
 
-      throw new InvalidTripInput(`Choose a valid timezone for ${field}.`)
+      throw new InvalidTripInput('invalidTimezone', { field })
     }
 
     throw error
@@ -59,8 +59,8 @@ export function formatClockTime(time: string, shiftMinutes = 0): string {
   return `${String(Math.floor(shifted / 60)).padStart(2, '0')}:${String(shifted % 60).padStart(2, '0')}`
 }
 
-export function formatInTimeZone(instant: string, timeZone: string): string {
-  return new Intl.DateTimeFormat('en', {
+export function formatInTimeZone(instant: string, timeZone: string, locale = 'en'): string {
+  return new Intl.DateTimeFormat(locale, {
     year: 'numeric',
     month: 'short',
     day: 'numeric',

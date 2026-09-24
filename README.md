@@ -16,5 +16,6 @@ VoyageClock helps adult travelers prepare for a timezone change with a personali
 - **Timezone-aware trip details:** Set local departure and arrival times and choose from available timezones. VoyageClock accounts for the timezone change when building the plan.
 - **Science and limitations:** The [science page](/science) explains how circadian rhythms, light, sleep schedules, and caffeine inform the recommendations, with links to further reading.
 - **Private by design:** Plan generation runs in your browser. Trip details are not sent to a server, saved to an account, or persisted by VoyageClock.
+- **Five languages:** Use VoyageClock in English, Brazilian Portuguese, Spanish, French, or Dutch. Choose a language from the selector; localized pages are available at `/pt`, `/es`, `/fr`, and `/nl`.
 
 VoyageClock provides general wellness information for generally healthy adults. It does not measure your circadian phase, diagnose or treat a condition, provide medication dosing, predict when jet lag symptoms will end, or guarantee prevention of jet lag. Consult a qualified health professional about medical conditions, medication questions, pregnancy, or persistent sleep problems.

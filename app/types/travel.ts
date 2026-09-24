@@ -1,5 +1,9 @@
 export type PlanStage = 'preflight' | 'arrival' | 'postArrival'
 export type PlanDirection = 'eastward' | 'westward' | 'minimal' | 'uncertain'
+export interface MessageDescriptor {
+  key: string
+  params?: Record<string, string | number | MessageDescriptor>
+}
 
 export interface TripInput {
   originTimeZone: string
@@ -17,18 +21,18 @@ export interface ZonedMoment {
 }
 
 export interface PlanGuidance {
-  sleep: string
-  wake: string
-  light: string
-  caffeine?: string
-  explanation: string
+  sleep: MessageDescriptor
+  wake: MessageDescriptor
+  light: MessageDescriptor
+  caffeine?: MessageDescriptor
+  explanation: MessageDescriptor
 }
 
 export interface PlanDay {
   date: string
   timeZone: string
   stage: PlanStage
-  label: string
+  label: MessageDescriptor
   guidance: PlanGuidance
 }
 
@@ -40,5 +44,5 @@ export interface AdaptationPlan {
   direction: PlanDirection
   offsetChangeHours: number
   days: PlanDay[]
-  limitations: string[]
+  limitations: MessageDescriptor[]
 }

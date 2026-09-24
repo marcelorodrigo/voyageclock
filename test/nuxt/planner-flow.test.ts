@@ -29,6 +29,16 @@ describe('planner form functional flow', () => {
     expect(component.text()).not.toContain('Departure must be in the future.')
   })
 
+  it('shows a generic message when plan creation fails unexpectedly', async () => {
+    const component = await mountSuspended(TripPlannerForm, {
+      props: { now: 'not-an-instant' },
+    })
+
+    await component.get('form').trigger('submit')
+
+    expect(component.get('[role="alert"]').text()).toBe('We could not create this plan. Check your trip details.')
+  })
+
   it('offers IANA timezones beyond the initial popular destinations', async () => {
     const component = await mountSuspended(TripPlannerForm)
 
