@@ -30,7 +30,7 @@ onMounted(() => {
   const availableZones = typeof Intl.supportedValuesOf === 'function'
     ? Intl.supportedValuesOf('timeZone')
     : fallbackZones
-  timeZones.value = [...new Set([...availableZones, 'UTC'])].sort()
+  timeZones.value = [...new Set([...availableZones, 'UTC', detectedZone])].sort()
 
   const originTimeZone = detectedZone
   const destinationTimeZone = detectedZone === 'Europe/London' ? 'America/New_York' : 'Europe/London'

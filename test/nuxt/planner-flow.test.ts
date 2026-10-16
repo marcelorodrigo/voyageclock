@@ -61,6 +61,24 @@ describe('planner form functional flow', () => {
     expect(options).toContain('Europe/Amsterdam')
   })
 
+  it('selects the detected timezone as origin even when it is missing from the IANA list', async () => {
+    const supportedSpy = vi.spyOn(Intl, 'supportedValuesOf')
+      .mockReturnValue(['Africa/Abidjan', 'Europe/London'])
+    const resolvedSpy = vi.spyOn(Intl.DateTimeFormat.prototype, 'resolvedOptions')
+      .mockReturnValue({ timeZone: 'Europe/Kyiv' } as unknown as Intl.ResolvedDateTimeFormatOptions)
+
+    try {
+      const component = await mountSuspended(TripPlannerForm)
+      const originSelect = component.get('select')
+
+      expect(originSelect.find('option[value="Europe/Kyiv"]').exists()).toBe(true)
+      expect((originSelect.element as HTMLSelectElement).value).toBe('Europe/Kyiv')
+    } finally {
+      supportedSpy.mockRestore()
+      resolvedSpy.mockRestore()
+    }
+  })
+
   it('renders all requested day stages and plan cautions', async () => {
     const input: TripInput = {
       originTimeZone: 'America/New_York',
