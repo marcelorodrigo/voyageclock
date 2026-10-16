@@ -20,20 +20,20 @@
     "@js-temporal/polyfill": "^0.5.1",
     "@nuxt/test-utils": "^4.3.3",
     "@nuxtjs/seo": "^5.3.16",
-    "nuxt": "^4.5.2",
-    "vue": "^3.5.43",
+    "nuxt": "^4.6.1",
+    "vue": "^3.5.44",
     "vue-router": "^5.3.1"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.17.0",
     "@nuxtjs/i18n": "^10.6.0",
     "@tailwindcss/vite": "^4.3.3",
-    "@vitest/coverage-v8": "^5.0.3",
+    "@vitest/coverage-v8": "^5.0.4",
     "@vue/test-utils": "^2.5.1",
     "eslint": "^10.12.0",
     "happy-dom": "^21.0.1",
     "tailwindcss": "4.3.3",
     "typescript": "^6.0.3",
-    "vitest": "^5.0.3"
+    "vitest": "^5.0.4"
   }
 }
