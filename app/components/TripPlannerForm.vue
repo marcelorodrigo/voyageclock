@@ -13,7 +13,7 @@ const fallbackZones = [
   'Asia/Tokyo',
   'Australia/Sydney',
 ]
-const timeZones = ref([...new Set(['UTC', ...fallbackZones])])
+const timeZones = ref([...new Set([...fallbackZones, 'UTC'])].sort())
 const input = ref<TripInput>({
   originTimeZone: 'UTC',
   destinationTimeZone: 'Europe/London',
@@ -30,7 +30,7 @@ onMounted(() => {
   const availableZones = typeof Intl.supportedValuesOf === 'function'
     ? Intl.supportedValuesOf('timeZone')
     : fallbackZones
-  timeZones.value = [...new Set([detectedZone, 'UTC', ...availableZones])]
+  timeZones.value = [...new Set([...availableZones, 'UTC', detectedZone])].sort()
 
   const originTimeZone = detectedZone
   const destinationTimeZone = detectedZone === 'Europe/London' ? 'America/New_York' : 'Europe/London'
