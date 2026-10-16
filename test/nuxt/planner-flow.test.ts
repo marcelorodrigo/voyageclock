@@ -51,6 +51,16 @@ describe('planner form functional flow', () => {
     expect(component.get('select').find('option[value="Africa/Abidjan"]').exists()).toBe(true)
   })
 
+  it('lists timezones in alphabetical order', async () => {
+    const component = await mountSuspended(TripPlannerForm)
+
+    const options = component.get('select').findAll('option').map(option => option.element.value)
+
+    expect(options).toEqual([...options].sort())
+    expect(options[0]).toBe('Africa/Abidjan')
+    expect(options).toContain('Europe/Amsterdam')
+  })
+
   it('renders all requested day stages and plan cautions', async () => {
     const input: TripInput = {
       originTimeZone: 'America/New_York',
