@@ -1,4 +1,4 @@
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import {
   dismissedLanguageSuggestionStorageKey,
   findSupportedLocale,
@@ -87,6 +87,10 @@ export function useLanguagePreference() {
 
     if (browserLocale && browserLocale !== locale.value) suggestedLocale.value = browserLocale
     isReady.value = true
+  })
+
+  watch(locale, () => {
+    suggestedLocale.value = undefined
   })
 
   return {
