@@ -54,7 +54,7 @@ export function resolveLocalDateTime(value: string, timeZone: string, field: str
 }
 
 export function formatClockTime(time: string, shiftMinutes = 0): string {
-  const [hours, minutes] = time.split(':').map(Number)
+  const [hours = 0, minutes = 0] = time.split(':').map(Number)
   const shifted = (hours * 60 + minutes + shiftMinutes + 1440) % 1440
   return `${String(Math.floor(shifted / 60)).padStart(2, '0')}:${String(shifted % 60).padStart(2, '0')}`
 }
@@ -72,8 +72,8 @@ export function formatInTimeZone(instant: string, timeZone: string, locale = 'en
 }
 
 export function minutesBetweenTimes(start: string, end: string): number {
-  const [startHours, startMinutes] = start.split(':').map(Number)
-  const [endHours, endMinutes] = end.split(':').map(Number)
+  const [startHours = 0, startMinutes = 0] = start.split(':').map(Number)
+  const [endHours = 0, endMinutes = 0] = end.split(':').map(Number)
   const difference = (endHours * 60 + endMinutes - startHours * 60 - startMinutes + 1440) % 1440
   return difference || 1440
 }

@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises } from '@vue/test-utils'
 import { Temporal } from '@js-temporal/polyfill'
@@ -17,6 +17,12 @@ const { navigateToMock } = vi.hoisted(() => ({ navigateToMock: vi.fn() }))
 mockNuxtImport('navigateTo', () => navigateToMock)
 
 describe('planner form functional flow', () => {
+  // `usePlannerState` is backed by Nuxt's shared `useState`, which persists
+  // across tests in the nuxt environment. Reset it so test order never matters.
+  beforeEach(() => {
+    usePlannerState().value = undefined
+  })
+
   it('creates a trip plan and reports invalid trip input to travelers', async () => {
     const component = await mountSuspended(TripPlannerForm, {
       props: { now: '2027-06-01T12:00:00Z' },
@@ -124,7 +130,6 @@ describe('planner form functional flow', () => {
 
   it('navigates to the separate result page after creating a plan', async () => {
     navigateToMock.mockClear()
-    usePlannerState().value = undefined
     const component = await mountSuspended(PlanPage, { route: '/plan' })
 
     await component.get('form').trigger('submit')
@@ -175,7 +180,6 @@ describe('planner form functional flow', () => {
 
   it('returns to the planner when the result route has no in-memory plan', async () => {
     navigateToMock.mockClear()
-    usePlannerState().value = undefined
     const component = await mountSuspended(PlanResultPage, { route: '/plan/result' })
 
     await flushPromises()

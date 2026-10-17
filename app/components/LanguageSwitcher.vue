@@ -3,6 +3,7 @@ import { preferredLocaleStorageKey } from '~/utils/languagePreference'
 
 const { locale, locales } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
+type I18nLocale = Parameters<typeof switchLocalePath>[0]
 
 function changeLocale(targetLocale: string) {
   try {
@@ -12,7 +13,7 @@ function changeLocale(targetLocale: string) {
     // The language switch still works when browser storage is unavailable.
   }
 
-  return navigateTo(switchLocalePath(targetLocale))
+  return navigateTo(switchLocalePath(targetLocale as I18nLocale))
 }
 </script>
 

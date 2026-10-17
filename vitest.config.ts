@@ -25,7 +25,11 @@ export default defineConfig({
           setupFiles: ['./test/nuxt/setup.ts'],
           environmentOptions: {
             nuxt: {
+              // Point the Nuxt test environment at the project root explicitly
+              // so it does not depend on the current working directory.
               rootDir: fileURLToPath(new URL('.', import.meta.url)),
+              // jsdom is used instead of the default happy-dom because Nuxt 4.6's
+              // router prefetch scheduler throws on happy-dom's window.location.
               domEnvironment: 'jsdom',
             },
           },
