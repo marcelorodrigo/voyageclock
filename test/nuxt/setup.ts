@@ -1,9 +1,9 @@
 import { beforeAll } from 'vitest'
 
 // jsdom does not implement `window.matchMedia`, which components rely on
-// (e.g. SiteHeader's desktop breakpoint listener). happy-dom used to provide
-// it; the nuxt project now runs under jsdom to keep Nuxt 4.6's router
-// prefetch scheduler from throwing on an invalid `window.location`.
+// (e.g. SiteHeader's desktop breakpoint listener). The nuxt project runs under
+// jsdom rather than the default happy-dom to keep Nuxt 4.6's router prefetch
+// scheduler from throwing on an invalid `window.location`.
 beforeAll(() => {
   if (typeof window === 'undefined' || typeof window.matchMedia === 'function') return
 

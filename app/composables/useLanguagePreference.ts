@@ -11,6 +11,7 @@ import {
 export function useLanguagePreference() {
   const { locale, locales, defaultLocale } = useI18n()
   const switchLocalePath = useSwitchLocalePath()
+  type I18nLocale = Parameters<typeof switchLocalePath>[0]
   const suggestedLocale = ref<string>()
   const isReady = ref(false)
   const supportedLocales = computed<SupportedLocale[]>(() => locales.value.map((item) => {
@@ -47,7 +48,7 @@ export function useLanguagePreference() {
     writeStorage(preferredLocaleStorageKey, targetLocale)
     suggestedLocale.value = undefined
 
-    const targetPath = switchLocalePath(targetLocale)
+    const targetPath = switchLocalePath(targetLocale as I18nLocale)
     if (targetPath) await navigateTo(targetPath)
   }
 
@@ -69,7 +70,7 @@ export function useLanguagePreference() {
       )
 
       if (localeToApply) {
-        const targetPath = switchLocalePath(localeToApply)
+        const targetPath = switchLocalePath(localeToApply as I18nLocale)
         if (targetPath) await navigateTo(targetPath)
       }
 

@@ -31,7 +31,7 @@ describe('site header', () => {
     const menuButton = component.get('button[aria-controls="mobile-navigation"]')
     await menuButton.trigger('click')
     const scienceLink = component.get('#mobile-navigation a[href$="/science"]')
-    scienceLink.element.focus()
+    ;(scienceLink.element as HTMLElement).focus()
 
     expect(document.activeElement).toBe(scienceLink.element)
 

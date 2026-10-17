@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     ],
   },
   devtools: { enabled: true },
-  modules: ['@nuxt/test-utils', '@nuxtjs/seo', '@nuxt/eslint', '@nuxtjs/i18n'],
+  modules: ['@nuxt/test-utils/module', '@nuxtjs/seo', '@nuxt/eslint', '@nuxtjs/i18n'],
   css: ['~/assets/css/tailwind.css'],
   vite: {
     plugins: [tailwindcss()],

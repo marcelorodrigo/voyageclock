@@ -53,7 +53,7 @@ describe('language suggestion', () => {
     expect(component.get('button').text()).toBe('Switch to Español')
 
     await component.get('button').trigger('click')
-    await component.findAll('button')[1].trigger('click')
+    await component.findAll('button')[1]!.trigger('click')
 
     expect(component.emitted('accept')).toHaveLength(1)
     expect(component.emitted('dismiss')).toHaveLength(1)
@@ -78,7 +78,7 @@ describe('language suggestion', () => {
     const component = await mountSuspended(LanguagePreferenceHarness)
 
     expect(component.get('[data-testid="suggested-locale"]').text()).toBe('es')
-    await component.findAll('button')[1].trigger('click')
+    await component.findAll('button')[1]!.trigger('click')
 
     expect(localStorage.getItem(preferredLocaleStorageKey)).toBe('es')
     component.unmount()

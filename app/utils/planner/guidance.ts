@@ -12,7 +12,7 @@ export function createGuidance(options: {
 }): PlanGuidance {
   const { bedtime, wakeTime, direction, stage, usesCaffeine, lightTimingUncertain, explanation } = options
   const movement = direction === 'eastward' ? 'earlier' : 'later'
-  const sleep = stage === 'preflight' && (direction === 'eastward' || direction === 'westward')
+  const sleep: MessageDescriptor = stage === 'preflight' && (direction === 'eastward' || direction === 'westward')
     ? { key: 'guidance.sleepShift', params: { bedtime, wakeTime, movement: { key: `movements.${movement}` } } }
     : { key: 'guidance.sleepOpportunity', params: { bedtime, wakeTime } }
 

@@ -75,7 +75,7 @@ describe('presentation components', () => {
   it('renders the accessible home hero illustration', async () => {
     const component = await mountSuspended(HomeHeroIllustration)
 
-    expect(component.get('[aria-label="Illustration of a clock over a horizon"]').exists()).toBe(true)
+    expect(component.find('[aria-label="Illustration of a clock over a horizon"]').exists()).toBe(true)
     expect(component.text()).toContain('HOME TIME')
     expect(component.text()).toContain('YOUR NEXT CHAPTER')
   })
