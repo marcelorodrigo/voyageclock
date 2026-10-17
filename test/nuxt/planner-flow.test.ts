@@ -2,10 +2,11 @@ import { describe, expect, it, vi } from 'vitest'
 import { mockNuxtImport, mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises } from '@vue/test-utils'
 import { Temporal } from '@js-temporal/polyfill'
+import App from '../../app/app.vue'
 import TripPlannerForm from '../../app/components/TripPlannerForm.vue'
 import PlanTimeline from '../../app/components/PlanTimeline.vue'
 import HomePage from '../../app/pages/index.vue'
-import PlanPage from '../../app/pages/plan.vue'
+import PlanPage from '../../app/pages/plan/index.vue'
 import PlanResultPage from '../../app/pages/plan/result.vue'
 import SciencePage from '../../app/pages/science.vue'
 import { usePlannerState } from '../../app/composables/usePlannerState'
@@ -151,6 +152,25 @@ describe('planner form functional flow', () => {
     expect(component.text()).toContain('Your plan is ready.')
     expect(component.text()).toContain('Preparation day 1')
     expect(component.get('a[href="/plan"]').text()).toContain('Plan another trip')
+  })
+
+  it('renders the result page inside the app shell when the router reaches the result route', async () => {
+    const plan = generatePlan({
+      originTimeZone: 'America/New_York',
+      destinationTimeZone: 'Asia/Tokyo',
+      departureLocal: '2027-06-10T09:00',
+      arrivalLocal: '2027-06-11T22:00',
+      usualBedtime: '23:00',
+      usualWakeTime: '07:00',
+      usesCaffeine: true,
+    }, Temporal.Instant.from('2027-06-01T12:00Z'))
+    usePlannerState().value = plan
+
+    const component = await mountSuspended(App, { route: '/plan/result' })
+    await flushPromises()
+
+    expect(component.findComponent(PlanTimeline).exists()).toBe(true)
+    expect(component.findComponent(TripPlannerForm).exists()).toBe(false)
   })
 
   it('returns to the planner when the result route has no in-memory plan', async () => {
