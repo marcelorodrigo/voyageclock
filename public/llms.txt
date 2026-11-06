@@ -1,0 +1,26 @@
+# VoyageClock
+
+> VoyageClock builds a personalized, day-by-day sleep, light, and caffeine plan for adult travelers preparing for a timezone change.
+
+VoyageClock is a browser-based planner. It uses your departure and arrival times, origin and destination time zones, usual bedtime and wake time, and caffeine use to create guidance for the days before travel, arrival day, and the day after arrival. Plan generation runs in your browser; trip details are not sent to a server, saved to an account, or persisted by VoyageClock.
+
+VoyageClock is available in English, Brazilian Portuguese, Spanish, French, and Dutch.
+
+VoyageClock provides general wellness information for generally healthy adults. It does not measure your circadian phase, diagnose or treat a condition, provide medication dosing, predict when jet lag symptoms will end, or guarantee prevention of jet lag. Consult a qualified health professional about medical conditions, medication questions, pregnancy, or persistent sleep problems.
+
+## Core pages
+
+- [Home](https://voyageclock.marcelorodrigo.com/): What VoyageClock does and how the planner works.
+- [Plan your trip](https://voyageclock.marcelorodrigo.com/plan): Create a personalized sleep, light, and caffeine timeline for your trip.
+- [The science](https://voyageclock.marcelorodrigo.com/science): How circadian rhythms, light, sleep schedules, and caffeine relate to jet lag, with sources and limitations.
+
+## Languages
+
+- [Português (Brasil)](https://voyageclock.marcelorodrigo.com/pt): Portuguese home page.
+- [Español](https://voyageclock.marcelorodrigo.com/es): Spanish home page.
+- [Français](https://voyageclock.marcelorodrigo.com/fr): French home page.
+- [Nederlands](https://voyageclock.marcelorodrigo.com/nl): Dutch home page.
+
+## Optional
+
+- [Source code](https://github.com/marcelorodrigo/voyageclock): VoyageClock repository.
