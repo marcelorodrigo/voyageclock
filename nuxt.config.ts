@@ -27,6 +27,7 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   ogImage: { enabled: false },
+  aiReady: { llmsFullTxt: false },
   nitro: {
     prerender: {
       routes: [
