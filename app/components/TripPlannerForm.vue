@@ -3,6 +3,8 @@ import { Temporal } from '@js-temporal/polyfill'
 import { generatePlan } from '~/utils/planner/generatePlan'
 import type { AdaptationPlan, TripInput } from '~/types/travel'
 
+const compareZoneIds = (a: string, b: string): number => a.localeCompare(b)
+
 const props = defineProps<{ now?: string }>()
 const emit = defineEmits<{ planned: [plan: AdaptationPlan] }>()
 const fallbackZones = [
@@ -13,7 +15,7 @@ const fallbackZones = [
   'Asia/Tokyo',
   'Australia/Sydney',
 ]
-const timeZones = ref([...new Set([...fallbackZones, 'UTC'])].sort())
+const timeZones = ref([...new Set([...fallbackZones, 'UTC'])].sort(compareZoneIds))
 const input = ref<TripInput>({
   originTimeZone: 'UTC',
   destinationTimeZone: 'Europe/London',
@@ -30,7 +32,7 @@ onMounted(() => {
   const availableZones = typeof Intl.supportedValuesOf === 'function'
     ? Intl.supportedValuesOf('timeZone')
     : fallbackZones
-  timeZones.value = [...new Set([...availableZones, 'UTC', detectedZone])].sort()
+  timeZones.value = [...new Set([...availableZones, 'UTC', detectedZone])].sort(compareZoneIds)
 
   const originTimeZone = detectedZone
   const destinationTimeZone = detectedZone === 'Europe/London' ? 'America/New_York' : 'Europe/London'
