@@ -8,6 +8,24 @@ import {
   type SupportedLocale,
 } from '~/utils/languagePreference'
 
+function readStorage(key: string): string | null {
+  try {
+    return window.localStorage.getItem(key)
+  }
+  catch {
+    return null
+  }
+}
+
+function writeStorage(key: string, value: string): void {
+  try {
+    window.localStorage.setItem(key, value)
+  }
+  catch {
+    // Storage can be unavailable in privacy-restricted browser contexts.
+  }
+}
+
 export function useLanguagePreference() {
   const { locale, locales, defaultLocale } = useI18n()
   const switchLocalePath = useSwitchLocalePath()
@@ -23,24 +41,6 @@ export function useLanguagePreference() {
   const suggestedLocaleName = computed(() =>
     supportedLocales.value.find(item => item.code === suggestedLocale.value)?.name ?? suggestedLocale.value,
   )
-
-  function readStorage(key: string): string | null {
-    try {
-      return window.localStorage.getItem(key)
-    }
-    catch {
-      return null
-    }
-  }
-
-  function writeStorage(key: string, value: string): void {
-    try {
-      window.localStorage.setItem(key, value)
-    }
-    catch {
-      // Storage can be unavailable in privacy-restricted browser contexts.
-    }
-  }
 
   async function selectLocale(targetLocale: string): Promise<void> {
     if (!isSupportedLocale(targetLocale, supportedLocaleCodes.value)) return
