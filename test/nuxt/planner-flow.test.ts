@@ -63,7 +63,7 @@ describe('planner form functional flow', () => {
 
     const options = component.get('select').findAll('option').map(option => option.element.value)
 
-    expect(options).toEqual([...options].sort())
+    expect(options).toEqual([...options].sort((a, b) => a.localeCompare(b)))
     expect(options[0]).toBe('Africa/Abidjan')
     expect(options).toContain('Europe/Amsterdam')
   })
