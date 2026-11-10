@@ -1,10 +1,13 @@
 packages:
   - .
 
-onlyBuiltDependencies:
-  - esbuild
 allowBuilds:
   esbuild: true
   unrs-resolver: true
 minimumReleaseAgeExclude:
-  - '@nuxt/test-utils@4.3.4'
+  # vue-router@5.5.0 was published on 2026-11-10, inside pnpm's 24h
+  # minimumReleaseAge window. Remove this entry once it is older than 24h.
+  - 'vue-router@5.5.0'
+permissions:
+  '@nuxtjs/seo':
+    skills: false
