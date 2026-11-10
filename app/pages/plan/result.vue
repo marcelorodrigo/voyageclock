@@ -10,9 +10,9 @@ useSeoMeta({
   description: () => t('resultPage.description'),
 })
 
-onMounted(() => {
+onMounted(async () => {
   if (!plan.value) {
-    void navigateTo(localePath('/plan'), { replace: true })
+    await navigateTo(localePath('/plan'), { replace: true })
   }
 })
 </script>

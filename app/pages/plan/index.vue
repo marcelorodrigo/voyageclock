@@ -9,9 +9,9 @@ useSeoMeta({
 
 const plan = usePlannerState()
 
-function showPlan(result: NonNullable<typeof plan.value>): void {
+async function showPlan(result: NonNullable<typeof plan.value>): Promise<void> {
   plan.value = result
-  void navigateTo(localePath('/plan/result'))
+  await navigateTo(localePath('/plan/result'))
 }
 </script>
 
