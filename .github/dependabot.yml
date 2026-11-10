@@ -11,6 +11,13 @@ updates:
         update-types:
           - minor
           - patch
+    ignore:
+      # TypeScript 7 has no programmatic compiler API yet, so vue-tsc and
+      # `nuxt typecheck` cannot use it. Revisit once TypeScript 7.1 and the
+      # stable Vue language tools support the native compiler.
+      - dependency-name: typescript
+        update-types:
+          - version-update:semver-major
 
   - package-ecosystem: github-actions
     directory: /
